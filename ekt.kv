@@ -1,0 +1,56 @@
+#:import FadeTransition kivy.uix.screenmanager.FadeTransition
+
+MyScreenManager:
+    transition: FadeTransition()
+    HomeScreen
+    AddScreen
+    
+<HomeScreen>:
+    name: 'home'
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 10, 10
+        spacing: 10
+        canvas:
+            Color:
+                rgba: 0, 1, 0, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        Label:
+            center: self.parent.center
+            canvas.before:
+                Color:
+                    rgba: 0, 1, 1, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            font_size: 100
+            text: 'EKT'
+            size: self.texture_size
+            size_hint_y: None
+        Button:
+            center: self.parent.center
+            text: 'Add Entry'
+            font_size: 40
+            size: 200, 100
+            size_hint: None, None
+        Button:
+            text: 'Search'
+            font_size: 70
+            size: self.texture_size
+        Button:
+            text: 'View List'
+            font_size: 70
+            size: self.texture_size
+
+<AddScreen>:
+    name: 'add'
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            Button:
+                id: 'home_button_1'
+                text: 'Back'
+                font_size: 20
+                on_release: root.manager.current = 'home'
