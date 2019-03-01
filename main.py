@@ -30,7 +30,7 @@ ekt = Builder.load_file("ekt.kv")
 
 class MainApp(App):
     def build(self):
-        return ekt 
+        return ekt
 
 
 if __name__ == "__main__":

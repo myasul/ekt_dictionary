@@ -30,19 +30,17 @@ MyScreenManager:
             size: self.texture_size
             size_hint_y: None
         Button:
-            center: self.parent.center
             text: 'Add Entry'
             font_size: 40
-            size: 200, 100
-            size_hint: None, None
+            size_hint: 0.25, 0.1
         Button:
             text: 'Search'
-            font_size: 70
-            size: self.texture_size
+            font_size: 40
+            size_hint: 0.25, 0.1
         Button:
             text: 'View List'
-            font_size: 70
-            size: self.texture_size
+            font_size: 40
+            size_hint: 0.25, 0.1
 
 <AddScreen>:
     name: 'add'
