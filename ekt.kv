@@ -67,6 +67,76 @@ MyScreenManager:
     name: 'add'
     BoxLayout:
         orientation: 'vertical'
+        MyAnc:
+            anchor_x: 'center'
+            anchor_y: 'center'
+            GridLayout:
+                rows: 7
+                cols: 1
+                padding: 30, 30, 30, 30
+                Label:
+                    padding: 30, 30
+                    color: 1, 1, 1, 1
+                    font_size: 30
+                    text: 'Kapampangan'
+                    size: self.texture_size
+                    size_hint_y: None
+                MyAnc:
+                    size_hint_y: None
+                    height: 150
+                    DictInput:
+                        id: k_input
+                        font_size: 35
+                        size_hint: None, None
+                        width: 600
+                        height: 120
+                        on_text_validate: self.on_enter()
+                        multiline: True
+                Label:
+                    padding: 30, 30
+                    color: 1, 1, 1, 1
+                    font_size: 30
+                    text: 'Tagalog'
+                    size: self.texture_size
+                    size_hint_y: None
+                MyAnc:
+                    size_hint_y: None
+                    height: 150
+                    DictInput:
+                        id: t_input
+                        font_size: 35
+                        size_hint: None, None
+                        width: 600
+                        height: 120
+                        on_text_validate: self.on_enter()
+                        multiline: True 
+                Label:
+                    padding: 30, 30
+                    color: 1, 1, 1, 1
+                    font_size: 30
+                    text: 'English'
+                    size: self.texture_size
+                    size_hint_y: None
+                MyAnc:
+                    size_hint_y: None
+                    height: 150
+                    DictInput:
+                        id: e_input
+                        font_size: 35
+                        size_hint: None, None
+                        width: 600
+                        height: 120
+                        on_text_validate: self.on_enter()
+                        multiline: True
+                MyAnc:
+                    size_hint_y: None
+                    height: 150
+                    Button:
+                        id: 'add_to_dict'
+                        text: 'Save'
+                        font_size: 30
+                        size_hint: 0.3, 0.5
+                        on_release: root.add_entry()
         Label:
             Button:
                 id: 'home_button_1'
