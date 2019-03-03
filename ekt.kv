@@ -6,7 +6,11 @@ MyScreenManager:
     AddScreen
     SearchScreen
     ListScreen
-    
+
+<HomeScreenBtn@Button>:
+    font_size: 40
+    size_hint: 0.5, 0.5
+
 <HomeScreen>:
     name: 'home'
     BoxLayout:
@@ -45,90 +49,64 @@ MyScreenManager:
             size: self.texture_size
             size_hint_y: None
         AnchorLayout:            
-            Button:
+            HomeScreenBtn:
                 text: 'Add Entry'
-                font_size: 40
-                size_hint: 0.5, 0.5
                 on_release: root.manager.current = 'add'
         AnchorLayout: 
-            Button:
+            HomeScreenBtn:
                 text: 'Search'
-                font_size: 40
-                size_hint: 0.5, 0.5
                 on_release: root.manager.current = 'search'
         AnchorLayout: 
-            Button:
+            HomeScreenBtn:
                 text: 'View List'
-                font_size: 40
-                size_hint: 0.5, 0.5
                 on_release: root.manager.current = 'list'
+
+<DictInput@TextInput>:
+    font_size: 35
+    size_hint: None, None
+    width: 600
+    height: 120
+    on_text_validate: self.on_enter()
+    multiline: True
+
+<AddScreenLabel@Label>:
+    padding: 30, 30
+    color: 1, 1, 1, 1
+    font_size: 30
+    size: self.texture_size
+    size_hint_y: None
 
 <AddScreen>:
     name: 'add'
     BoxLayout:
         orientation: 'vertical'
-        MyAnc:
-            anchor_x: 'center'
-            anchor_y: 'center'
+        AnchorLayout:
             GridLayout:
                 rows: 7
                 cols: 1
                 padding: 30, 30, 30, 30
-                Label:
-                    padding: 30, 30
-                    color: 1, 1, 1, 1
-                    font_size: 30
+                AddScreenLabel:
                     text: 'Kapampangan'
-                    size: self.texture_size
-                    size_hint_y: None
-                MyAnc:
+                AnchorLayout:
                     size_hint_y: None
                     height: 150
                     DictInput:
                         id: k_input
-                        font_size: 35
-                        size_hint: None, None
-                        width: 600
-                        height: 120
-                        on_text_validate: self.on_enter()
-                        multiline: True
-                Label:
-                    padding: 30, 30
-                    color: 1, 1, 1, 1
-                    font_size: 30
+                AddScreenLabel:
                     text: 'Tagalog'
-                    size: self.texture_size
-                    size_hint_y: None
-                MyAnc:
+                AnchorLayout:
                     size_hint_y: None
                     height: 150
                     DictInput:
                         id: t_input
-                        font_size: 35
-                        size_hint: None, None
-                        width: 600
-                        height: 120
-                        on_text_validate: self.on_enter()
-                        multiline: True 
-                Label:
-                    padding: 30, 30
-                    color: 1, 1, 1, 1
-                    font_size: 30
+                AddScreenLabel:
                     text: 'English'
-                    size: self.texture_size
-                    size_hint_y: None
-                MyAnc:
+                AnchorLayout:
                     size_hint_y: None
                     height: 150
                     DictInput:
                         id: e_input
-                        font_size: 35
-                        size_hint: None, None
-                        width: 600
-                        height: 120
-                        on_text_validate: self.on_enter()
-                        multiline: True
-                MyAnc:
+                AnchorLayout:
                     size_hint_y: None
                     height: 150
                     Button:
