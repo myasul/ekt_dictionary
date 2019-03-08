@@ -1,5 +1,6 @@
 # Imports from SQLite library
-from sqlalchemy import create_engine, asc, func, select, exc
+from sqlalchemy import create_engine, asc, func, select
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import sessionmaker
 from database_setup import Dictionary, Base
 
@@ -8,6 +9,9 @@ from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.textinput import TextInput
 from kivy.uix.anchorlayout import AnchorLayout
+from kivy.uix.button import Button
+from kivy.uix.label import Label
+from kivy.uix.popup import Popup
 from kivy.lang import Builder
 from kivy.app import App
 from kivy.config import Config
@@ -22,26 +26,51 @@ session = DBSession()
 
 
 class AddScreen(Screen):
-    def print_add_values(self):
-        print("Tagalog entry: {}".format(self.ids.t_input.text))
-        print("English entry: {}".format(self.ids.e_input.text))
-        print("Kapampangan entry: {}".format(self.ids.k_input.text))
+    def clear_text_inputs(self):
+        self.ids.e_input.text = ''
+        self.ids.k_input.text = ''
+        self.ids.t_input.text = ''
 
     def add_entry(self):
-        new_dict_entry = Dictionary(tagalog=self.ids.t_input.text,
-                                    kapampangan=self.ids.k_input.text,
-                                    english=self.ids.e_input.text)
-        session.add(new_dict_entry)
-        session.commit()
+        # TODO :: Make the error message's box size dynamic
+        content = ErrorLabel(id='popup_message',
+                             text='',
+                             font_size=25,
+                             color=[1, 0, 0, 1])
+        content.bind(text=content.on_text)
+        popup = Popup(title='Error Message',
+                      content=content,
+                      size=[500, 300],
+                      size_hint=(None, None))
+
+        try:
+            if not self.are_fields_empty():
+                new_dict_entry = Dictionary(tagalog=self.ids.t_input.text,
+                                            kapampangan=self.ids.k_input.text,
+                                            english=self.ids.e_input.text)
+                session.add(new_dict_entry)
+                session.commit()
+            else:
+                content.text = 'All text fields should be populated.'
+                popup.open()
+        except IntegrityError:
+            popup.content.text = 'Entry already exists.'
+            popup.open()
+            session.rollback()
+            self.clear_text_inputs()
+
+    def are_fields_empty(self):
+        if not all([self.ids.e_input.text,
+                    self.ids.k_input.text,
+                    self.ids.t_input.text]):
+            return True
+        return False
 
 
-class DictInput(TextInput):
-    def on_enter(self):
-        print("The value of Tagalog Text Input: {}".format(self.text))
-
-
-class MyAnc(AnchorLayout):
-    pass
+class ErrorLabel(Label):
+    # TODO :: Make the error message's box size dynamic
+    def on_text(self, instance, value):
+        self.size = self.texture_size
 
 
 class SearchScreen(Screen):
