@@ -6,6 +6,7 @@ from database_setup import Dictionary, Base
 
 # Imports from Kivy library
 from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition
+from kivy.graphics import Rectangle, Color
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.textinput import TextInput
 from kivy.uix.anchorlayout import AnchorLayout
@@ -33,8 +34,7 @@ class AddScreen(Screen):
 
     def add_entry(self):
         # TODO :: Make the error message's box size dynamic
-        content = ErrorLabel(id='popup_message',
-                             text='',
+        content = ErrorLabel(text='',
                              font_size=25,
                              color=[1, 0, 0, 1])
         content.bind(text=content.on_text)
@@ -50,6 +50,10 @@ class AddScreen(Screen):
                                             english=self.ids.e_input.text)
                 session.add(new_dict_entry)
                 session.commit()
+                popup.title = 'Confirmation Message'
+                popup.content.text = 'Dictionary entry saved!'
+                popup.open()
+                self.clear_text_inputs()
             else:
                 content.text = 'All text fields should be populated.'
                 popup.open()
@@ -78,7 +82,55 @@ class SearchScreen(Screen):
 
 
 class ListScreen(Screen):
-    pass
+    def on_pre_enter(self):
+        count = 0
+        for entry in self.show_all_entries():
+            self.ids.list_box.add_widget(
+                DictEntry(
+                    text=entry.kapampangan,
+                    font_size=25,
+                )
+            )
+
+    def on_leave(self):
+        print("I'm leaving List Screen!")
+        delete_widgets = []
+        for widget in self.ids.list_box.children:
+            if isinstance(widget, DictEntry):
+                delete_widgets.append(widget)
+
+        for widget in delete_widgets:
+            self.ids.list_box.remove_widget(widget)
+
+    def show_all_entries(self):
+        try:
+            return session.query(Dictionary) \
+                .order_by(Dictionary.kapampangan.asc()) \
+                .all()
+        except IntegrityError:
+            # TODO :: Add logging
+            content = ErrorLabel(text='Error occured. Please report.',
+                                 font_size=25,
+                                 color=[1, 0, 0, 1])
+            popup = Popup(title='Error Message',
+                          content=content,
+                          size=[500, 300],
+                          size_hint=(None, None))
+            popup.open()
+            return None
+
+
+class DictEntry(Label):
+    def __init__(self, **kwargs):
+        super(DictEntry, self).__init__(**kwargs)
+
+        # with self.canvas.before:
+        #     Color(0, 1, 0, 1)
+        #     self.rect = Rectangle(pos=self.pos,
+        #                           size=self.size)
+
+    def on_touch_down(self, touch):
+        print("I am clicked!")
 
 
 class HomeScreen(Screen):
