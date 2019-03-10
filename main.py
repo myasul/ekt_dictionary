@@ -10,6 +10,7 @@ from kivy.graphics import Rectangle, Color
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.textinput import TextInput
 from kivy.uix.anchorlayout import AnchorLayout
+from kivy.uix.gridlayout import GridLayout
 from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.uix.popup import Popup
@@ -83,9 +84,12 @@ class SearchScreen(Screen):
 
 class ListScreen(Screen):
     def on_pre_enter(self):
-        count = 0
-        for entry in self.show_all_entries():
-            self.ids.list_box.add_widget(
+        all_entries = self.show_all_entries()
+        row_num = len(all_entries)
+
+        self.ids.list_grid.rows = row_num
+        for entry in all_entries:
+            self.ids.list_grid.add_widget(
                 DictEntry(
                     text=entry.kapampangan,
                     font_size=25,
@@ -93,14 +97,13 @@ class ListScreen(Screen):
             )
 
     def on_leave(self):
-        print("I'm leaving List Screen!")
         delete_widgets = []
-        for widget in self.ids.list_box.children:
+        for widget in self.ids.list_grid.children:
             if isinstance(widget, DictEntry):
                 delete_widgets.append(widget)
 
         for widget in delete_widgets:
-            self.ids.list_box.remove_widget(widget)
+            self.ids.list_grid.remove_widget(widget)
 
     def show_all_entries(self):
         try:
@@ -121,16 +124,10 @@ class ListScreen(Screen):
 
 
 class DictEntry(Label):
-    def __init__(self, **kwargs):
-        super(DictEntry, self).__init__(**kwargs)
-
-        # with self.canvas.before:
-        #     Color(0, 1, 0, 1)
-        #     self.rect = Rectangle(pos=self.pos,
-        #                           size=self.size)
 
     def on_touch_down(self, touch):
-        print("I am clicked!")
+        if self.collide_point(touch.x, touch.y):
+            print("{} clicked!".format(self.text))
 
 
 class HomeScreen(Screen):
