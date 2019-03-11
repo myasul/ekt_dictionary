@@ -147,14 +147,20 @@ class DictScreen(Screen):
         self.current_kapampangan = StringProperty()
 
     def on_pre_enter(self):
-        print("Current Kapampangan: {}".format(self.current_kapampangan))
+        # Populate the Labels with the data retrieved from database
+        entry = self.get_dict_entry()
+        self.ids.kapampangan_ds.text = "Kapampangan: {}".format(entry.kapampangan)
+        self.ids.tagalog_ds.text = "Tagalog: {}".format(entry.tagalog)
+        self.ids.english_ds.text = "English: {}".format(entry.english)
 
     def get_dict_entry(self):
-        try:
+        # Get dictionary data using the word selected by the user
+        # from the List Screen
+        if self.current_kapampangan:
             return session.query(Dictionary) \
                 .filter(Dictionary.kapampangan == self.current_kapampangan) \
                 .one()
-        except IntegrityError:
+        else:
             # TODO :: Add logging
             content = ErrorLabel(text='Error occured. Please report.',
                                  font_size=25,

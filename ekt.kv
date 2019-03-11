@@ -73,7 +73,7 @@ MyScreenManager:
     multiline: True
     write_tab: False
 
-<AddScreenLabel@Label>:
+<ASLabel@Label>:
     padding: 5, 5
     # padding: 30, 30
     color: 1, 1, 1, 1
@@ -91,21 +91,21 @@ MyScreenManager:
                 rows: 7
                 cols: 1
                 padding: 10, 10, 10, 10
-                AddScreenLabel:
+                ASLabel:
                     text: 'Kapampangan'
                 AnchorLayout:
                     size_hint_y: None
                     height: 150
                     DictInput:
                         id: k_input
-                AddScreenLabel:
+                ASLabel:
                     text: 'Tagalog'
                 AnchorLayout:
                     size_hint_y: None
                     height: 150
                     DictInput:
                         id: t_input
-                AddScreenLabel:
+                ASLabel:
                     text: 'English'
                 AnchorLayout:
                     size_hint_y: None
@@ -170,12 +170,33 @@ MyScreenManager:
                 font_size: 20
                 on_release: root.manager.current = 'home'
 
+<DSLabel@Label>:
+    padding: 5, 5
+    color: 1, 1, 1, 1
+    font_size: 25
+    size: self.texture_size
+    size_hint_y: None
+
 <DictScreen>:
     name: 'dict_entry'
     BoxLayout:
         orientation: 'vertical'
-        BoxLayout:
+        GridLayout:
+            orientation: 'vertical'
             size_hint: 1, .9
+            row_default_height: 100
+            cols: 1
+            rows: 3
+            DSLabel:
+                id: kapampangan_ds
+                text: ''
+            DSLabel:
+                id: tagalog_ds
+                text: ''
+            DSLabel:
+                id: english_ds
+                text: ''
+
         BoxLayout:
             size_hint: 1, .1
             orientation: 'vertical'
