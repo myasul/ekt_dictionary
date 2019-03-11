@@ -87,6 +87,7 @@ MyScreenManager:
     BoxLayout:
         orientation: 'vertical'
         AnchorLayout:
+            size_hint: 1, .9
             GridLayout:
                 rows: 7
                 cols: 1
@@ -122,9 +123,13 @@ MyScreenManager:
                         font_size: 30
                         size_hint: 0.3, 1
                         on_release: root.add_entry()
-        Label:
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: 1, .1
             Button:
-                id: home_button_1
+                size_hint: None, None
+                height: 50
+                id: home_button_2
                 text: 'Back'
                 font_size: 20
                 on_release: root.manager.current = 'home'
@@ -133,8 +138,15 @@ MyScreenManager:
     name: 'search'
     BoxLayout:
         orientation: 'vertical'
-        Label:
+        GridLayout:
+            orientation: 'vertical'
+            size_hint: 1, .9
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: 1, .1
             Button:
+                size_hint: None, None
+                height: 50
                 id: home_button_2
                 text: 'Back'
                 font_size: 20
