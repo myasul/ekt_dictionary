@@ -9,7 +9,10 @@ MyScreenManager:
     SearchScreen
     ListScreen
     DictScreen
+<<<<<<< HEAD
     EditScreen
+=======
+>>>>>>> Add Dict screen and functionality
 
 <HomeScreenBtn@Button>:
     font_size: 40
@@ -65,16 +68,27 @@ MyScreenManager:
                 text: 'View List'
                 on_release: root.manager.current = 'list'
 
+<<<<<<< HEAD
 <DictInput>:
+=======
+<DictInput@TextInput>:
+>>>>>>> Add Dict screen and functionality
     font_size: 20
     # font_size: 30
     size_hint: None, None
     width: 600
     height: 50
     # height: 120
+<<<<<<< HEAD
     write_tab: False
 
 <ASLabel@Label>:
+=======
+    multiline: True
+    write_tab: False
+
+<AddScreenLabel@Label>:
+>>>>>>> Add Dict screen and functionality
     padding: 5, 5
     # padding: 30, 30
     color: 1, 1, 1, 1
@@ -93,7 +107,11 @@ MyScreenManager:
                 rows: 7
                 cols: 1
                 padding: 10, 10, 10, 10
+<<<<<<< HEAD
                 ASLabel:
+=======
+                AddScreenLabel:
+>>>>>>> Add Dict screen and functionality
                     text: 'Kapampangan'
                 AnchorLayout:
                     size_hint_y: None
@@ -298,6 +316,7 @@ MyScreenManager:
     BoxLayout:
         id: list_box
         orientation: 'vertical'
+<<<<<<< HEAD
         AnchorLayout:
             size_hint_y: .1
             SearchTextInput:
@@ -315,6 +334,23 @@ MyScreenManager:
                     height: self.minimum_height
                     row_default_height: 100
                     cols: 1
+=======
+        ScrollView:
+            GridLayout:
+                size_hint: 1, .9
+                canvas:
+                    Color:
+                        rgba: 0, 0, 0, 1
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+                id: list_grid
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                row_default_height: 100
+                cols: 1
+>>>>>>> Add Dict screen and functionality
         BoxLayout:
             orientation: 'vertical'
             size_hint: 1, .1
@@ -325,6 +361,7 @@ MyScreenManager:
                 font_size: 20
                 on_release: root.manager.current = 'home'
 
+<<<<<<< HEAD
 <DSLabel@Label>:
     padding: 5, 5
     color: 1, 1, 1, 1
@@ -351,10 +388,13 @@ MyScreenManager:
             size: self.size
 
 
+=======
+>>>>>>> Add Dict screen and functionality
 <DictScreen>:
     name: 'dict_entry'
     BoxLayout:
         orientation: 'vertical'
+<<<<<<< HEAD
         GridLayout:
             orientation: 'vertical'
             size_hint: 1, .9
@@ -454,3 +494,16 @@ MyScreenManager:
     width: 600
     font_size: 20
     write_tab: False
+=======
+        BoxLayout:
+            size_hint: 1, .9
+        BoxLayout:
+            size_hint: 1, .1
+            orientation: 'vertical'
+            Button:
+                size_hint: None, None
+                height: 50
+                text: 'Back'
+                font_size: 20
+                on_release: root.manager.current = 'home'
+>>>>>>> Add Dict screen and functionality
