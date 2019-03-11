@@ -7,6 +7,7 @@ from database_setup import Dictionary, Base
 # Imports from Kivy library
 from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition
 from kivy.graphics import Rectangle, Color
+from kivy.properties import StringProperty
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.textinput import TextInput
 from kivy.uix.anchorlayout import AnchorLayout
@@ -17,7 +18,9 @@ from kivy.uix.popup import Popup
 from kivy.lang import Builder
 from kivy.app import App
 from kivy.config import Config
-Config.set('graphics', 'fullscreen', 0)
+Config.set('graphics', 'width', '700')
+Config.set('graphics', 'height', '2000')
+# Config.set('graphics', 'fullscreen', 0)
 
 
 # Connect to the database and create a database session
@@ -53,6 +56,7 @@ class AddScreen(Screen):
                 session.commit()
                 popup.title = 'Confirmation Message'
                 popup.content.text = 'Dictionary entry saved!'
+                popup.content.color = [0, 0, 1, 1]
                 popup.open()
                 self.clear_text_inputs()
             else:
@@ -127,15 +131,46 @@ class DictEntry(Label):
 
     def on_touch_down(self, touch):
         if self.collide_point(touch.x, touch.y):
-            print("{} clicked!".format(self.text))
+            screen_manager = App.get_running_app().root
+            dict_screen = screen_manager.get_screen('dict_entry')
+            dict_screen.current_kapampangan = self.text
+            screen_manager.current = 'dict_entry'
 
 
 class HomeScreen(Screen):
     pass
 
 
+class DictScreen(Screen):
+    def __init__(self, **kwargs):
+        super(DictScreen, self).__init__(**kwargs)
+        self.current_kapampangan = StringProperty()
+
+    def on_pre_enter(self):
+        print("Current Kapampangan: {}".format(self.current_kapampangan))
+
+    def get_dict_entry(self):
+        try:
+            return session.query(Dictionary) \
+                .filter(Dictionary.kapampangan == self.current_kapampangan) \
+                .one()
+        except IntegrityError:
+            # TODO :: Add logging
+            content = ErrorLabel(text='Error occured. Please report.',
+                                 font_size=25,
+                                 color=[1, 0, 0, 1])
+            popup = Popup(title='Error Message',
+                          content=content,
+                          size=[500, 300],
+                          size_hint=(None, None))
+            popup.open()
+            return None
+
+
 class MyScreenManager(ScreenManager):
-    pass
+    def __init__(self, **kwargs):
+        super(MyScreenManager, self).__init__(**kwargs)
+        self.id = 'dict_sm'
 
 
 ekt = Builder.load_file("ekt.kv")

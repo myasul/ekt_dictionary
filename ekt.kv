@@ -1,11 +1,13 @@
 #:import FadeTransition kivy.uix.screenmanager.FadeTransition
 
 MyScreenManager:
+    id: dict_sm
     transition: FadeTransition()
     HomeScreen
     AddScreen
     SearchScreen
     ListScreen
+    DictScreen
 
 <HomeScreenBtn@Button>:
     font_size: 40
@@ -48,31 +50,35 @@ MyScreenManager:
             text: 'English - Kapampangan - Tagalog Dictionary'
             size: self.texture_size
             size_hint_y: None
-        AnchorLayout:            
+        AnchorLayout:
             HomeScreenBtn:
                 text: 'Add Entry'
                 on_release: root.manager.current = 'add'
-        AnchorLayout: 
+        AnchorLayout:
             HomeScreenBtn:
                 text: 'Search'
                 on_release: root.manager.current = 'search'
-        AnchorLayout: 
+        AnchorLayout:
             HomeScreenBtn:
                 text: 'View List'
                 on_release: root.manager.current = 'list'
 
 <DictInput@TextInput>:
-    font_size: 35
+    font_size: 20
+    # font_size: 30
     size_hint: None, None
     width: 600
-    height: 120
+    height: 50
+    # height: 120
     multiline: True
     write_tab: False
 
 <AddScreenLabel@Label>:
-    padding: 30, 30
+    padding: 5, 5
+    # padding: 30, 30
     color: 1, 1, 1, 1
-    font_size: 30
+    font_size: 20
+    # font_size: 30
     size: self.texture_size
     size_hint_y: None
 
@@ -84,7 +90,7 @@ MyScreenManager:
             GridLayout:
                 rows: 7
                 cols: 1
-                padding: 30, 30, 30, 30
+                padding: 10, 10, 10, 10
                 AddScreenLabel:
                     text: 'Kapampangan'
                 AnchorLayout:
@@ -108,12 +114,13 @@ MyScreenManager:
                         id: e_input
                 AnchorLayout:
                     size_hint_y: None
-                    height: 150
+                    height: 70
+                    # height: 100
                     Button:
                         id: 'add_to_dict'
                         text: 'Save'
                         font_size: 30
-                        size_hint: 0.3, 0.5
+                        size_hint: 0.3, 1
                         on_release: root.add_entry()
         Label:
             Button:
@@ -138,14 +145,9 @@ MyScreenManager:
     BoxLayout:
         id: list_box
         orientation: 'vertical'
-        canvas:
-            Color:
-                rgba: 0, 1, 1, 1
-            Rectangle:
-                pos: self.pos
-                size: self.size
         ScrollView:
             GridLayout:
+                size_hint: 1, .9
                 canvas:
                     Color:
                         rgba: 0, 0, 0, 1
@@ -162,8 +164,24 @@ MyScreenManager:
             orientation: 'vertical'
             size_hint: 1, .1
             Button:
-                size_hint: .1, 1
-                id: home_button_3
+                size_hint: None, None
+                height: 50
+                text: 'Back'
+                font_size: 20
+                on_release: root.manager.current = 'home'
+
+<DictScreen>:
+    name: 'dict_entry'
+    BoxLayout:
+        orientation: 'vertical'
+        BoxLayout:
+            size_hint: 1, .9
+        BoxLayout:
+            size_hint: 1, .1
+            orientation: 'vertical'
+            Button:
+                size_hint: None, None
+                height: 50
                 text: 'Back'
                 font_size: 20
                 on_release: root.manager.current = 'home'
