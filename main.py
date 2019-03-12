@@ -145,10 +145,9 @@ class DictScreen(Screen):
     def on_pre_enter(self):
         # Populate the Labels with the data retrieved from database
         entry = self.get_entry()
-        self.ids.kapampangan_ds.text = "Kapampangan: {}".format(
-            entry.kapampangan)
-        self.ids.tagalog_ds.text = "Tagalog: {}".format(entry.tagalog)
-        self.ids.english_ds.text = "English: {}".format(entry.english)
+        self.ids.kapampangan_ds.text = entry.kapampangan
+        self.ids.tagalog_ds.text = entry.tagalog
+        self.ids.english_ds.text = entry.english
 
     def show_delete_popup(self):
         delete_popup = DeletePopup(self)
@@ -179,6 +178,12 @@ class DictScreen(Screen):
             # TODO :: Add logging
             self.popup('Error Message', 'Error occured. Please report.')
 
+    def on_edit_entry(self):
+        screen_manager = App.get_running_app().root
+        dict_screen = screen_manager.get_screen('edit_entry')
+        dict_screen.current_kapampangan = self.current_kapampangan
+        screen_manager.current = 'edit_entry'
+
     def go_to_list_screen(self, *args):
         self.manager.current = 'list'
 
@@ -203,6 +208,16 @@ class DictScreen(Screen):
                                  content=content,
                                  size_hint=(0.4, 0.2))
         popup.open()
+
+
+class EditScreen(Screen):
+    def __init__(self, **kwargs):
+        super(EditScreen, self).__init__(**kwargs)
+        self.current_kapampangan = StringProperty()
+
+    def on_pre_enter(self):
+        pass
+        
 
 
 class AutoDismissPopup(Popup):

@@ -9,6 +9,7 @@ MyScreenManager:
     SearchScreen
     ListScreen
     DictScreen
+    EditScreen
 
 <HomeScreenBtn@Button>:
     font_size: 40
@@ -190,23 +191,24 @@ MyScreenManager:
     size: self.texture_size
     size_hint_y: None
 
-<DictScreenButton@Button>:
+<DictScreenBtn@Button>:
     size_hint: None, None
-    width: 100
     height: 50
     font_size: 20
 
 <BorderLabel@Label+BorderBehavior>:
     borders: 2, 'solid', (1, 1, 1, 1)
     size_hint: None, None
-    height: 100
-    width: 300
+    height: 70
+    width: 600
+    font_size: 20
     canvas.before:
         Color:
-            rgba: 0, 0, 1, 1
+            rgba: 0, 0, 0, 1
         Rectangle:
             pos: self.pos
             size: self.size
+
 
 <DictScreen>:
     name: 'dict_entry'
@@ -217,32 +219,38 @@ MyScreenManager:
             size_hint: 1, .9
             row_default_height: 100
             cols: 1
-            rows: 4
+            rows: 6
             DSLabel:
-                id: kapampangan_ds
-                text: ''
+                text: 'Kapampangan'
+            AnchorLayout:
+                BorderLabel:
+                    id: kapampangan_ds
+                    text: 'Test Label'
             DSLabel:
-                id: tagalog_ds
-                text: ''
+                text: 'Tagalog'
+            AnchorLayout:
+                BorderLabel:
+                    id: tagalog_ds
+                    text: 'Test Label'
             DSLabel:
-                id: english_ds
-                text: ''
-            BorderLabel:
-                font_size: 20
-                text: 'Test Label'
+                text: 'English'
+            AnchorLayout:
+                BorderLabel:
+                    id: english_ds
+                    text: 'Test Label'
 
         BoxLayout:
             size_hint: 1, .1
             orientation: 'horizontal'
-            DictScreenButton:
+            DictScreenBtn:
                 text: 'Back'
                 on_release: root.manager.current = 'list'
             Widget:
-            DictScreenButton:
+            DictScreenBtn:
                 text: 'Edit'
-                # on_release: root.delete_entry
+                on_release: root.on_edit_entry()
             Widget:
-            DictScreenButton:
+            DictScreenBtn:
                 text: 'Delete'
                 on_release: root.show_delete_popup()
 
@@ -264,3 +272,48 @@ MyScreenManager:
                 size_hint_y: 0.5
                 text: 'Cancel'
                 on_release: root.dismiss()
+
+<BorderInput@TextInput>:
+    size_hint: None, None
+    height: 70
+    width: 600
+    font_size: 20
+    multiline: True
+    write_tab: False
+
+<EditScreen>:
+    name: 'edit_entry'
+    BoxLayout:
+        orientation: 'vertical'
+        GridLayout:
+            orientation: 'vertical'
+            size_hint: 1, .9
+            row_default_height: 100
+            cols: 1
+            rows: 6
+            DSLabel:
+                text: 'Kapampangan'
+            AnchorLayout:
+                BorderInput:
+                    id: kapampangan_ds
+            DSLabel:
+                text: 'Tagalog'
+            AnchorLayout:
+                BorderInput:
+                    id: tagalog_ds
+            DSLabel:
+                text: 'English'
+            AnchorLayout:
+                BorderInput:
+                    id: english_ds
+
+        BoxLayout:
+            size_hint: 1, .1
+            orientation: 'horizontal'
+            DictScreenBtn:
+                text: 'Back'
+                on_release: root.manager.current = 'dict_entry'
+            Widget:
+            DictScreenBtn:
+                text: 'Save'
+                on_release: root.delete_entry
