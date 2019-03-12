@@ -211,10 +211,27 @@ MyScreenManager:
 
         BoxLayout:
             size_hint: 1, .1
-            orientation: 'vertical'
+            orientation: 'horizontal'
             Button:
                 size_hint: None, None
+                width: 100
                 height: 50
                 text: 'Back'
                 font_size: 20
                 on_release: root.manager.current = 'home'
+            Widget:
+            Button:
+                size_hint: None, None
+                width: 100
+                height: 50
+                text: 'Edit'
+                font_size: 20
+                # on_release: root.manager.current = 'home'
+            Widget:
+            Button:
+                size_hint: None, None
+                width: 100
+                height: 50
+                text: 'Delete'
+                font_size: 20
+                # on_release: root.manager.current = 'home'
