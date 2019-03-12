@@ -23,9 +23,15 @@ from kivy.lang import Builder
 from kivy.app import App
 from kivy.config import Config
 from borderbehaviour import BorderBehavior
+<<<<<<< HEAD
 Config.set('graphics', 'width', '500')
 Config.set('graphics', 'height', '1000')
 Config.set('graphics', 'fullscreen', 0)
+=======
+Config.set('graphics', 'width', '700')
+Config.set('graphics', 'height', '1500')
+# Config.set('graphics', 'fullscreen', 0)
+>>>>>>> Add BorderBehavior
 
 
 class DictTextInput(TextInput):
@@ -67,12 +73,17 @@ class AddScreen(Screen):
                         color=[1, 1, 1, 1])
         popup = AutoDismissPopup(title=title,
 <<<<<<< HEAD
+<<<<<<< HEAD
                                  content=content,
                                  size_hint=(0.4, 0.2))
 =======
                       content=content,
                       size_hint=(0.4, 0.2))
 >>>>>>> Refactor Popup widget
+=======
+                                 content=content,
+                                 size_hint=(0.4, 0.2))
+>>>>>>> Add BorderBehavior
         popup.open()
 
     def has_no_empty_fields(self):
@@ -452,19 +463,22 @@ class FilterPopup(Popup):
                         font_size=20,
                         color=[1, 1, 1, 1])
         popup = AutoDismissPopup(title=title,
-                      content=content,
-                      size_hint=(0.4, 0.2))
+                                 content=content,
+                                 size_hint=(0.4, 0.2))
         popup.open()
+
 
 class AutoDismissPopup(Popup):
     def __init__(self, **kwargs):
         super(AutoDismissPopup, self).__init__(**kwargs)
         Clock.schedule_once(self.dismiss, 1)
 
+
 class DeletePopup(Popup):
     def __init__(self, screen, **kwargs):
         super(DeletePopup, self).__init__(**kwargs)
         self.screen = screen
+
 
 class MyScreenManager(ScreenManager):
     def __init__(self, **kwargs):

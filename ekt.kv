@@ -359,7 +359,22 @@ MyScreenManager:
     height: 50
     font_size: 20
 
+<<<<<<< HEAD
 >>>>>>> Add delete functionality in Dictionary screen
+=======
+<BorderLabel@Label+BorderBehavior>:
+    borders: 2, 'solid', (1, 1, 1, 1)
+    size_hint: None, None
+    height: 100
+    width: 300
+    canvas.before:
+        Color:
+            rgba: 0, 0, 1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+>>>>>>> Add BorderBehavior
 <DictScreen>:
     name: 'dict_entry'
     BoxLayout:
@@ -369,7 +384,11 @@ MyScreenManager:
             size_hint: 1, .9
             row_default_height: 100
             cols: 1
+<<<<<<< HEAD
             rows: 6
+=======
+            rows: 4
+>>>>>>> Add BorderBehavior
             DSLabel:
                 text: 'Kapampangan'
             AnchorLayout:
@@ -381,10 +400,18 @@ MyScreenManager:
                 BorderLabel:
                     id: tagalog_ds
             DSLabel:
+<<<<<<< HEAD
                 text: 'English'
             AnchorLayout:
                 BorderLabel:
                     id: english_ds
+=======
+                id: english_ds
+                text: ''
+            BorderLabel:
+                font_size: 20
+                text: 'Test Label'
+>>>>>>> Add BorderBehavior
 
         BoxLayout:
             size_hint: 1, .1
