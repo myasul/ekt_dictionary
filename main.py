@@ -23,15 +23,9 @@ from kivy.lang import Builder
 from kivy.app import App
 from kivy.config import Config
 from borderbehaviour import BorderBehavior
-<<<<<<< HEAD
 Config.set('graphics', 'width', '500')
 Config.set('graphics', 'height', '1000')
 Config.set('graphics', 'fullscreen', 0)
-=======
-Config.set('graphics', 'width', '700')
-Config.set('graphics', 'height', '1500')
-# Config.set('graphics', 'fullscreen', 0)
->>>>>>> Add BorderBehavior
 
 
 class DictTextInput(TextInput):
@@ -278,6 +272,7 @@ class DictScreen(Screen):
 
     def on_pre_enter(self):
         # Populate the Labels with the data retrieved from database
+<<<<<<< HEAD
         if self.kapampangan:
             print("ENTERED DICT SCREEN!")
             entry = self.get_entry()
@@ -292,6 +287,12 @@ class DictScreen(Screen):
         else:
             # TODO :: Add logging
             self.popup('Error Message', 'Error occured. Please report.')
+=======
+        entry = self.get_entry()
+        self.ids.kapampangan_ds.text = entry.kapampangan
+        self.ids.tagalog_ds.text = entry.tagalog
+        self.ids.english_ds.text = entry.english
+>>>>>>> Add Edit Screen
 
     def show_delete_popup(self):
         delete_popup = DeletePopup(self)
@@ -324,6 +325,7 @@ class DictScreen(Screen):
             self.popup('Error Message', 'Error occured. Please report.')
 
     def on_edit_entry(self):
+<<<<<<< HEAD
         # Retrieve Edit Screen
         screen_manager = App.get_running_app().root
         edit_entry = screen_manager.get_screen('edit_entry')
@@ -335,6 +337,11 @@ class DictScreen(Screen):
         edit_entry.db_object = self.db_object
 
         # Redirect to Edit Screen
+=======
+        screen_manager = App.get_running_app().root
+        dict_screen = screen_manager.get_screen('edit_entry')
+        dict_screen.current_kapampangan = self.current_kapampangan
+>>>>>>> Add Edit Screen
         screen_manager.current = 'edit_entry'
 
     def go_to_list_screen(self, *args):
@@ -466,6 +473,16 @@ class FilterPopup(Popup):
                                  content=content,
                                  size_hint=(0.4, 0.2))
         popup.open()
+
+
+class EditScreen(Screen):
+    def __init__(self, **kwargs):
+        super(EditScreen, self).__init__(**kwargs)
+        self.current_kapampangan = StringProperty()
+
+    def on_pre_enter(self):
+        pass
+        
 
 
 class AutoDismissPopup(Popup):
