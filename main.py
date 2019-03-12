@@ -38,15 +38,6 @@ class AddScreen(Screen):
 
     def add_entry(self):
         # TODO :: Make the error message's box size dynamic
-        content = ErrorLabel(text='',
-                             font_size=25,
-                             color=[1, 0, 0, 1])
-        content.bind(text=content.on_text)
-        popup = Popup(title='Error Message',
-                      content=content,
-                      size=[500, 300],
-                      size_hint=(None, None))
-
         try:
             if not self.are_fields_empty():
                 new_dict_entry = Dictionary(tagalog=self.ids.t_input.text,
@@ -54,19 +45,23 @@ class AddScreen(Screen):
                                             english=self.ids.e_input.text)
                 session.add(new_dict_entry)
                 session.commit()
-                popup.title = 'Confirmation Message'
-                popup.content.text = 'Dictionary entry saved!'
-                popup.content.color = [0, 0, 1, 1]
-                popup.open()
+                self.popup('Confirmation Message', 'Dictionary entry saved!')
                 self.clear_text_inputs()
             else:
-                content.text = 'All text fields should be populated.'
-                popup.open()
+                self.popup('Error Message', 'Entry already exists!')
         except IntegrityError:
-            popup.content.text = 'Entry already exists.'
-            popup.open()
+            self.popup('Error Message', 'Entry already exists!')
             session.rollback()
             self.clear_text_inputs()
+
+    def popup(self, title, message):
+        content = Label(text=message,
+                        font_size=20,
+                        color=[1, 1, 1, 1])
+        popup = Popup(title=title,
+                      content=content,
+                      size_hint=(0.4, 0.2))
+        popup.open()
 
     def are_fields_empty(self):
         if not all([self.ids.e_input.text,
@@ -74,12 +69,6 @@ class AddScreen(Screen):
                     self.ids.t_input.text]):
             return True
         return False
-
-
-class ErrorLabel(Label):
-    # TODO :: Make the error message's box size dynamic
-    def on_text(self, instance, value):
-        self.size = self.texture_size
 
 
 class SearchScreen(Screen):
@@ -116,15 +105,18 @@ class ListScreen(Screen):
                 .all()
         except IntegrityError:
             # TODO :: Add logging
-            content = ErrorLabel(text='Error occured. Please report.',
-                                 font_size=25,
-                                 color=[1, 0, 0, 1])
-            popup = Popup(title='Error Message',
-                          content=content,
-                          size=[500, 300],
-                          size_hint=(None, None))
+            self.popup('Error Message', 'Error Occured. Please report.')
             popup.open()
             return None
+
+    def popup(self, title, message):
+        content = Label(text=message,
+                        font_size=20,
+                        color=[1, 1, 1, 1])
+        popup = Popup(title=title,
+                      content=content,
+                      size_hint=(0.4, 0.2))
+        popup.open()
 
 
 class DictEntry(Label):
@@ -149,7 +141,8 @@ class DictScreen(Screen):
     def on_pre_enter(self):
         # Populate the Labels with the data retrieved from database
         entry = self.get_dict_entry()
-        self.ids.kapampangan_ds.text = "Kapampangan: {}".format(entry.kapampangan)
+        self.ids.kapampangan_ds.text = "Kapampangan: {}".format(
+            entry.kapampangan)
         self.ids.tagalog_ds.text = "Tagalog: {}".format(entry.tagalog)
         self.ids.english_ds.text = "English: {}".format(entry.english)
 
