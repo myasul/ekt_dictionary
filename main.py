@@ -66,8 +66,13 @@ class AddScreen(Screen):
                         font_size=20,
                         color=[1, 1, 1, 1])
         popup = AutoDismissPopup(title=title,
+<<<<<<< HEAD
                                  content=content,
                                  size_hint=(0.4, 0.2))
+=======
+                      content=content,
+                      size_hint=(0.4, 0.2))
+>>>>>>> Refactor Popup widget
         popup.open()
 
     def has_no_empty_fields(self):
@@ -446,17 +451,14 @@ class FilterPopup(Popup):
         content = Label(text=message,
                         font_size=20,
                         color=[1, 1, 1, 1])
-        popup = CustomPopup(title=title,
+        popup = AutoDismissPopup(title=title,
                       content=content,
                       size_hint=(0.4, 0.2))
         popup.open()
-        return popup
 
-    def delete_popup(self):
-        pass
-
-class CustomPopup(Popup):
-    def delayed_dismiss(self):
+class AutoDismissPopup(Popup):
+    def __init__(self, **kwargs):
+        super(AutoDismissPopup, self).__init__(**kwargs)
         Clock.schedule_once(self.dismiss, 1)
 
 class DeletePopup(Popup):
