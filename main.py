@@ -106,7 +106,6 @@ class ListScreen(Screen):
         except IntegrityError:
             # TODO :: Add logging
             self.popup('Error Message', 'Error Occured. Please report.')
-            popup.open()
             return None
 
     def popup(self, title, message):
@@ -155,15 +154,17 @@ class DictScreen(Screen):
                 .one()
         else:
             # TODO :: Add logging
-            content = ErrorLabel(text='Error occured. Please report.',
-                                 font_size=25,
-                                 color=[1, 0, 0, 1])
-            popup = Popup(title='Error Message',
-                          content=content,
-                          size=[500, 300],
-                          size_hint=(None, None))
-            popup.open()
+            self.popup('Error Message', 'Error occured. Please report.')
             return None
+
+    def popup(self, title, message):
+        content = Label(text=message,
+                        font_size=20,
+                        color=[1, 1, 1, 1])
+        popup = Popup(title=title,
+                      content=content,
+                      size_hint=(0.4, 0.2))
+        popup.open()
 
 
 class MyScreenManager(ScreenManager):
