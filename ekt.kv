@@ -332,6 +332,7 @@ MyScreenManager:
     size: self.texture_size
     size_hint_y: None
 
+<<<<<<< HEAD
 <DictScreenBtn@Button>:
     size_hint: None, None
     height: 50
@@ -351,6 +352,14 @@ MyScreenManager:
             size: self.size
 
 
+=======
+<DictScreenButton@Button>:
+    size_hint: None, None
+    width: 100
+    height: 50
+    font_size: 20
+
+>>>>>>> Add delete functionality in Dictionary screen
 <DictScreen>:
     name: 'dict_entry'
     BoxLayout:
@@ -380,6 +389,7 @@ MyScreenManager:
         BoxLayout:
             size_hint: 1, .1
             orientation: 'horizontal'
+<<<<<<< HEAD
             DictScreenBtn:
                 text: 'Back'
                 on_release: root.manager.current = 'list'
@@ -389,6 +399,17 @@ MyScreenManager:
                 on_release: root.on_edit_entry()
             Widget:
             DictScreenBtn:
+=======
+            DictScreenButton:
+                text: 'Back'
+                on_release: root.manager.current = 'list'
+            Widget:
+            DictScreenButton:
+                text: 'Edit'
+                # on_release: root.delete_entry
+            Widget:
+            DictScreenButton:
+>>>>>>> Add delete functionality in Dictionary screen
                 text: 'Delete'
                 on_release: root.show_delete_popup()
 
@@ -409,6 +430,7 @@ MyScreenManager:
             Button:
                 size_hint_y: 0.5
                 text: 'Cancel'
+<<<<<<< HEAD
                 on_release: root.dismiss()
 
 <EditScreen>:
@@ -454,3 +476,6 @@ MyScreenManager:
     width: 600
     font_size: 20
     write_tab: False
+=======
+                on_release: root.dismiss()
+>>>>>>> Add delete functionality in Dictionary screen

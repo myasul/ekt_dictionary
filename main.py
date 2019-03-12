@@ -156,7 +156,6 @@ class ListScreen(Screen):
         if error:
             # TODO :: Add logging
             self.popup('Error Message', 'Error Occured. Please report.')
-<<<<<<< HEAD
         return entries
 
     def do_search(self, search_str):
@@ -212,9 +211,6 @@ class SearchTextInput(DictTextInput):
         screen_manager = App.get_running_app().root
         list_screen = screen_manager.get_screen('list')
         list_screen.do_search(self.text)
-=======
-            return None
->>>>>>> Refactor popup widget
 
     def popup(self, title, message):
         content = Label(text=message,
@@ -446,14 +442,27 @@ class FilterPopup(Popup):
         self.screen = screen
 
     def popup(self, title, message):
+        # Generic popup for error and confirmation messages
         content = Label(text=message,
                         font_size=20,
                         color=[1, 1, 1, 1])
-        popup = Popup(title=title,
+        popup = CustomPopup(title=title,
                       content=content,
                       size_hint=(0.4, 0.2))
         popup.open()
+        return popup
 
+    def delete_popup(self):
+        pass
+
+class CustomPopup(Popup):
+    def delayed_dismiss(self):
+        Clock.schedule_once(self.dismiss, 1)
+
+class DeletePopup(Popup):
+    def __init__(self, screen, **kwargs):
+        super(DeletePopup, self).__init__(**kwargs)
+        self.screen = screen
 
 class MyScreenManager(ScreenManager):
     def __init__(self, **kwargs):
