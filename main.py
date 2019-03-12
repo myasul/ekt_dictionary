@@ -22,6 +22,7 @@ from kivy.clock import Clock
 from kivy.lang import Builder
 from kivy.app import App
 from kivy.config import Config
+from borderbehaviour import BorderBehavior
 Config.set('graphics', 'width', '700')
 Config.set('graphics', 'height', '1500')
 # Config.set('graphics', 'fullscreen', 0)
@@ -63,8 +64,8 @@ class AddScreen(Screen):
                         font_size=20,
                         color=[1, 1, 1, 1])
         popup = AutoDismissPopup(title=title,
-                      content=content,
-                      size_hint=(0.4, 0.2))
+                                 content=content,
+                                 size_hint=(0.4, 0.2))
         popup.open()
 
     def are_fields_empty(self):
@@ -199,19 +200,22 @@ class DictScreen(Screen):
                         font_size=20,
                         color=[1, 1, 1, 1])
         popup = AutoDismissPopup(title=title,
-                      content=content,
-                      size_hint=(0.4, 0.2))
+                                 content=content,
+                                 size_hint=(0.4, 0.2))
         popup.open()
+
 
 class AutoDismissPopup(Popup):
     def __init__(self, **kwargs):
         super(AutoDismissPopup, self).__init__(**kwargs)
         Clock.schedule_once(self.dismiss, 1)
 
+
 class DeletePopup(Popup):
     def __init__(self, screen, **kwargs):
         super(DeletePopup, self).__init__(**kwargs)
         self.screen = screen
+
 
 class MyScreenManager(ScreenManager):
     def __init__(self, **kwargs):

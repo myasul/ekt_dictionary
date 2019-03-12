@@ -1,4 +1,5 @@
 #:import FadeTransition kivy.uix.screenmanager.FadeTransition
+#:import BorderBehavior borderbehaviour
 
 MyScreenManager:
     id: dict_sm
@@ -195,6 +196,18 @@ MyScreenManager:
     height: 50
     font_size: 20
 
+<BorderLabel@Label+BorderBehavior>:
+    borders: 2, 'solid', (1, 1, 1, 1)
+    size_hint: None, None
+    height: 100
+    width: 300
+    canvas.before:
+        Color:
+            rgba: 0, 0, 1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
 <DictScreen>:
     name: 'dict_entry'
     BoxLayout:
@@ -204,7 +217,7 @@ MyScreenManager:
             size_hint: 1, .9
             row_default_height: 100
             cols: 1
-            rows: 3
+            rows: 4
             DSLabel:
                 id: kapampangan_ds
                 text: ''
@@ -214,6 +227,9 @@ MyScreenManager:
             DSLabel:
                 id: english_ds
                 text: ''
+            BorderLabel:
+                font_size: 20
+                text: 'Test Label'
 
         BoxLayout:
             size_hint: 1, .1
