@@ -189,6 +189,12 @@ MyScreenManager:
     size: self.texture_size
     size_hint_y: None
 
+<DictScreenButton@Button>:
+    size_hint: None, None
+    width: 100
+    height: 50
+    font_size: 20
+
 <DictScreen>:
     name: 'dict_entry'
     BoxLayout:
@@ -212,26 +218,33 @@ MyScreenManager:
         BoxLayout:
             size_hint: 1, .1
             orientation: 'horizontal'
-            Button:
-                size_hint: None, None
-                width: 100
-                height: 50
+            DictScreenButton:
                 text: 'Back'
-                font_size: 20
-                on_release: root.manager.current = 'home'
+                on_release: root.manager.current = 'list'
             Widget:
-            Button:
-                size_hint: None, None
-                width: 100
-                height: 50
+            DictScreenButton:
                 text: 'Edit'
-                font_size: 20
-                # on_release: root.manager.current = 'home'
+                # on_release: root.delete_entry
             Widget:
-            Button:
-                size_hint: None, None
-                width: 100
-                height: 50
+            DictScreenButton:
                 text: 'Delete'
-                font_size: 20
-                # on_release: root.manager.current = 'home'
+                on_release: root.show_delete_popup()
+
+<DeletePopup>:
+    size_hint: 0.4, 0.2
+    title: 'Delete confirmation'
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            id: delete_label
+            text: 'Are you sure to delete this entry?'
+        BoxLayout:
+            orientation:'horizontal'
+            Button:
+                size_hint_y: 0.5
+                text: 'Delete'
+                on_release: root.screen.on_confirm_delete(root)            
+            Button:
+                size_hint_y: 0.5
+                text: 'Cancel'
+                on_release: root.dismiss()
