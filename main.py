@@ -212,6 +212,15 @@ class SearchTextInput(DictTextInput):
         list_screen = screen_manager.get_screen('list')
         list_screen.do_search(self.text)
 
+    def popup(self, title, message):
+        content = Label(text=message,
+                        font_size=20,
+                        color=[1, 1, 1, 1])
+        popup = Popup(title=title,
+                      content=content,
+                      size_hint=(0.4, 0.2))
+        popup.open()
+
 
 class DictEntry(Label):
     kapampangan = StringProperty()
