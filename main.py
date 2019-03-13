@@ -129,7 +129,7 @@ class DictEntry(Label):
         if self.collide_point(touch.x, touch.y):
             screen_manager = App.get_running_app().root
             dict_screen = screen_manager.get_screen('dict_entry')
-            dict_screen.current_kapampangan = self.text
+            dict_screen.kapampangan = self.text
             screen_manager.current = 'dict_entry'
 
 
@@ -140,14 +140,23 @@ class HomeScreen(Screen):
 class DictScreen(Screen):
     def __init__(self, **kwargs):
         super(DictScreen, self).__init__(**kwargs)
-        self.current_kapampangan = StringProperty()
+        self.kapampangan = StringProperty()
+        self.tagalog = StringProperty()
+        self.english = StringProperty()
+
+    def set_dict_entry(self, entry):
+        self.kapampangan = entry.kapampangan
+        self.tagalog = entry.tagalog
+        self.english = entry.english
 
     def on_pre_enter(self):
         # Populate the Labels with the data retrieved from database
+        print("Entering Dictionary Screen")
         entry = self.get_entry()
-        self.ids.kapampangan_ds.text = entry.kapampangan
-        self.ids.tagalog_ds.text = entry.tagalog
-        self.ids.english_ds.text = entry.english
+        self.set_dict_entry(entry)
+        self.ids.kapampangan_ds.text = self.kapampangan
+        self.ids.tagalog_ds.text = self.tagalog
+        self.ids.english_ds.text = self.english
 
     def show_delete_popup(self):
         delete_popup = DeletePopup(self)
@@ -160,7 +169,7 @@ class DictScreen(Screen):
     def delete_entry(self):
         # Deletes this specific dictionary entry.
         # User will also be redirected to the List screen.
-        if self.current_kapampangan:
+        if self.kapampangan:
             entry = self.get_entry()
             session.delete(entry)
             try:
@@ -180,8 +189,10 @@ class DictScreen(Screen):
 
     def on_edit_entry(self):
         screen_manager = App.get_running_app().root
-        dict_screen = screen_manager.get_screen('edit_entry')
-        dict_screen.current_kapampangan = self.current_kapampangan
+        edit_entry = screen_manager.get_screen('edit_entry')
+        edit_entry.kapampangan = self.kapampangan
+        edit_entry.tagalog = self.tagalog
+        edit_entry.english = self.english
         screen_manager.current = 'edit_entry'
 
     def go_to_list_screen(self, *args):
@@ -190,9 +201,9 @@ class DictScreen(Screen):
     def get_entry(self):
         # Get dictionary data using the word selected
         # by the user from the List Screen
-        if self.current_kapampangan:
+        if self.kapampangan:
             return session.query(Dictionary) \
-                .filter(Dictionary.kapampangan == self.current_kapampangan) \
+                .filter(Dictionary.kapampangan == self.kapampangan) \
                 .one()
         else:
             # TODO :: Add logging
@@ -213,11 +224,66 @@ class DictScreen(Screen):
 class EditScreen(Screen):
     def __init__(self, **kwargs):
         super(EditScreen, self).__init__(**kwargs)
-        self.current_kapampangan = StringProperty()
+        self.kapampangan = StringProperty()
+        self.tagalog = StringProperty()
+        self.english = StringProperty()
 
     def on_pre_enter(self):
-        pass
-        
+        self.set_text_from_dict_val()
+
+    def set_text_from_dict_val(self):
+        self.ids.kapampangan_es.text = self.kapampangan
+        self.ids.tagalog_es.text = self.tagalog
+        self.ids.english_es.text = self.english
+
+    def set_dict_val_from_text(self):
+        self.kapampangan = self.ids.kapampangan_es.text
+        self.tagalog = self.ids.tagalog_es.text
+        self.english = self.ids.english_es.text
+
+    def on_save(self):
+        try:
+            entry = self.get_entry()
+            self.set_dict_val_from_text()
+            entry.kapampangan = self.kapampangan
+            entry.tagalog = self.tagalog
+            entry.english = self.english
+            session.add(entry)
+            session.commit()
+            self.go_to_dict_screen()
+        except SQLAlchemyError as e:
+            # TODO :: Add logging
+            print("Error: {}".format(e))
+            self.popup('Error Message', 'Error occured. Please report.')
+
+    def go_to_dict_screen(self):
+        self.update_dict_screen()
+        self.manager.current = 'dict_entry'
+
+    def update_dict_screen(self):
+        screen_manager = App.get_running_app().root
+        dict_entry = screen_manager.get_screen('dict_entry')
+        dict_entry.kapampangan = self.kapampangan
+        dict_entry.tagalog = self.tagalog
+        dict_entry.english = self.english
+
+    def get_entry(self):
+        # Get dictionary data using the word selected
+        # by the user from the List Screen
+        if self.kapampangan:
+            return session.query(Dictionary) \
+                .filter(Dictionary.kapampangan == self.kapampangan) \
+                .one()
+
+    def popup(self, title, message):
+        # Generic popup for error and confirmation messages
+        content = Label(text=message,
+                        font_size=20,
+                        color=[1, 1, 1, 1])
+        popup = AutoDismissPopup(title=title,
+                                 content=content,
+                                 size_hint=(0.4, 0.2))
+        popup.open()
 
 
 class AutoDismissPopup(Popup):

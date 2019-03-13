@@ -295,17 +295,17 @@ MyScreenManager:
                 text: 'Kapampangan'
             AnchorLayout:
                 BorderInput:
-                    id: kapampangan_ds
+                    id: kapampangan_es
             DSLabel:
                 text: 'Tagalog'
             AnchorLayout:
                 BorderInput:
-                    id: tagalog_ds
+                    id: tagalog_es
             DSLabel:
                 text: 'English'
             AnchorLayout:
                 BorderInput:
-                    id: english_ds
+                    id: english_es
 
         BoxLayout:
             size_hint: 1, .1
@@ -316,4 +316,4 @@ MyScreenManager:
             Widget:
             DictScreenBtn:
                 text: 'Save'
-                on_release: root.delete_entry
+                on_release: root.on_save()
