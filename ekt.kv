@@ -6,14 +6,13 @@ MyScreenManager:
     transition: FadeTransition()
     HomeScreen
     AddScreen
-    SearchScreen
     ListScreen
     DictScreen
     EditScreen
 
 <HomeScreenBtn@Button>:
     font_size: 40
-    size_hint: 0.5, 0.5
+    size_hint: 0.5, 0.2
 
 <HomeScreen>:
     name: 'home'
@@ -56,10 +55,6 @@ MyScreenManager:
             HomeScreenBtn:
                 text: 'Add Entry'
                 on_release: root.manager.current = 'add'
-        AnchorLayout:
-            HomeScreenBtn:
-                text: 'Search'
-                on_release: root.manager.current = 'search'
         AnchorLayout:
             HomeScreenBtn:
                 text: 'View List'
@@ -135,6 +130,7 @@ MyScreenManager:
                 font_size: 20
                 on_release: root.manager.current = 'home'
 
+<<<<<<< HEAD
 <SearchInput@TextInput>:
     size_hint_x: 0.8
     size_hint_y: None
@@ -293,6 +289,8 @@ MyScreenManager:
 <ListScroll@ScrollView+BorderBehavior>:
     borders: 2, 'solid', (1, 1, 1, 1)
 
+=======
+>>>>>>> Remove Search Screen
 <ListScreen>:
     name: 'list'
     BoxLayout:

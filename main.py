@@ -77,7 +77,6 @@ class AddScreen(Screen):
             return True
         return False
 
-
 class DictInput(DictTextInput):
     pass
 
