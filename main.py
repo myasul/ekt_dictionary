@@ -27,6 +27,7 @@ Config.set('graphics', 'width', '700')
 Config.set('graphics', 'height', '1500')
 # Config.set('graphics', 'fullscreen', 0)
 
+import re
 
 # Connect to the database and create a database session
 engine = create_engine('sqlite:///ekt_dictionary.db')
@@ -78,8 +79,9 @@ class AddScreen(Screen):
 class DictInput(TextInput):
 
     def insert_text(self, substring, from_undo=False):
-        transform_str = ''
-        return super(DictInput, self).insert_text(transform_str, from_undo=from_undo)
+        dict_regex = re.compile(r"^[-'\sa-z]+$", re.I | re.M)
+        if dict_regex.search(substring):
+            return super(DictInput, self).insert_text(substring, from_undo=from_undo)
 
 
 class ListScreen(Screen):
@@ -154,6 +156,11 @@ class ListScreen(Screen):
 class SearchTextInput(TextInput):
     def __init__(self, **kwargs):
         super(SearchTextInput, self).__init__(**kwargs)
+
+    def insert_text(self, substring, from_undo=False):
+        dict_regex = re.compile(r"^[-'\sa-z]+$", re.I | re.M)
+        if dict_regex.search(substring):
+            return super(SearchTextInput, self).insert_text(substring, from_undo=from_undo)
 
     def keyboard_on_key_up(self, window, keycode):
         print("Search Text: {}".format(self.text))
@@ -328,6 +335,13 @@ class EditScreen(Screen):
                                  size_hint=(0.4, 0.2))
         popup.open()
 
+
+class EditInput(TextInput):
+    def insert_text(self, substring, from_undo=False):
+        dict_regex = re.compile(r"^[-'\sa-z]+$", re.I | re.M)
+        if dict_regex.search(substring):
+            return super(EditInput, self).insert_text(substring, from_undo=from_undo)
+    
 
 class AutoDismissPopup(Popup):
     def __init__(self, **kwargs):

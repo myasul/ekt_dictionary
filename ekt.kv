@@ -67,7 +67,6 @@ MyScreenManager:
     width: 600
     height: 50
     # height: 120
-    multiline: True
     write_tab: False
 
 <ASLabel@Label>:
@@ -141,7 +140,7 @@ MyScreenManager:
             SearchTextInput:
                 font_size: 25
                 size_hint: .8, .5
-                multiline: True
+        
         ScrollView:
             size_hint: 1, .8
             GridLayout:
@@ -250,12 +249,11 @@ MyScreenManager:
                 text: 'Cancel'
                 on_release: root.dismiss()
 
-<BorderInput@TextInput>:
+<EditInput>:
     size_hint: None, None
     height: 70
     width: 600
     font_size: 20
-    multiline: True
     write_tab: False
 
 <EditScreen>:
@@ -271,17 +269,17 @@ MyScreenManager:
             DSLabel:
                 text: 'Kapampangan'
             AnchorLayout:
-                BorderInput:
+                EditInput:
                     id: kapampangan_es
             DSLabel:
                 text: 'Tagalog'
             AnchorLayout:
-                BorderInput:
+                EditInput:
                     id: tagalog_es
             DSLabel:
                 text: 'English'
             AnchorLayout:
-                BorderInput:
+                EditInput:
                     id: english_es
 
         BoxLayout:
