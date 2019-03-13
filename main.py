@@ -27,6 +27,7 @@ Config.set('graphics', 'width', '500')
 Config.set('graphics', 'height', '1000')
 Config.set('graphics', 'fullscreen', 0)
 
+import re
 
 class DictTextInput(TextInput):
     def insert_text(self, substring, from_undo=False):
@@ -80,6 +81,7 @@ class AddScreen(Screen):
 class DictInput(DictTextInput):
     pass
 
+<<<<<<< HEAD
 
 class SearchScreen(Screen):
     def __init__(self, **kwargs):
@@ -130,6 +132,12 @@ class FilterToggleBtn(ToggleButton):
     def __init__(self, **kwargs):
         super(FilterToggleBtn, self).__init__(**kwargs)
         self.value = StringProperty(False)
+=======
+    def insert_text(self, substring, from_undo=False):
+        dict_regex = re.compile(r"^[-'\sa-z]+$", re.I | re.M)
+        if dict_regex.search(substring):
+            return super(DictInput, self).insert_text(substring, from_undo=from_undo)
+>>>>>>> Only accept letters, dash, spaces and apostrophe
 
 
 class ListScreen(Screen):
@@ -233,6 +241,11 @@ class ListScreen(Screen):
 class SearchTextInput(TextInput):
     def __init__(self, **kwargs):
         super(SearchTextInput, self).__init__(**kwargs)
+
+    def insert_text(self, substring, from_undo=False):
+        dict_regex = re.compile(r"^[-'\sa-z]+$", re.I | re.M)
+        if dict_regex.search(substring):
+            return super(SearchTextInput, self).insert_text(substring, from_undo=from_undo)
 
     def keyboard_on_key_up(self, window, keycode):
         print("Search Text: {}".format(self.text))
@@ -457,9 +470,18 @@ class EditScreen(Screen):
         popup.open()
 
 
+<<<<<<< HEAD
 class EditInput(DictTextInput):
     pass
 
+=======
+class EditInput(TextInput):
+    def insert_text(self, substring, from_undo=False):
+        dict_regex = re.compile(r"^[-'\sa-z]+$", re.I | re.M)
+        if dict_regex.search(substring):
+            return super(EditInput, self).insert_text(substring, from_undo=from_undo)
+    
+>>>>>>> Only accept letters, dash, spaces and apostrophe
 
 class AutoDismissPopup(Popup):
     def __init__(self, **kwargs):
