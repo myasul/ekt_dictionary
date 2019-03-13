@@ -75,9 +75,11 @@ class AddScreen(Screen):
             return True
         return False
 
+class DictInput(TextInput):
 
-class SearchScreen(Screen):
-    pass
+    def insert_text(self, substring, from_undo=False):
+        transform_str = ''
+        return super(DictInput, self).insert_text(transform_str, from_undo=from_undo)
 
 
 class ListScreen(Screen):

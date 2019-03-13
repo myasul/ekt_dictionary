@@ -6,14 +6,13 @@ MyScreenManager:
     transition: FadeTransition()
     HomeScreen
     AddScreen
-    SearchScreen
     ListScreen
     DictScreen
     EditScreen
 
 <HomeScreenBtn@Button>:
     font_size: 40
-    size_hint: 0.5, 0.5
+    size_hint: 0.5, 0.2
 
 <HomeScreen>:
     name: 'home'
@@ -58,14 +57,10 @@ MyScreenManager:
                 on_release: root.manager.current = 'add'
         AnchorLayout:
             HomeScreenBtn:
-                text: 'Search'
-                on_release: root.manager.current = 'search'
-        AnchorLayout:
-            HomeScreenBtn:
                 text: 'View List'
                 on_release: root.manager.current = 'list'
 
-<DictInput@TextInput>:
+<DictInput>:
     font_size: 20
     # font_size: 30
     size_hint: None, None
@@ -125,24 +120,6 @@ MyScreenManager:
                         font_size: 30
                         size_hint: 0.3, 1
                         on_release: root.add_entry()
-        BoxLayout:
-            orientation: 'vertical'
-            size_hint: 1, .1
-            Button:
-                size_hint: None, None
-                height: 50
-                id: home_button_2
-                text: 'Back'
-                font_size: 20
-                on_release: root.manager.current = 'home'
-
-<SearchScreen>:
-    name: 'search'
-    BoxLayout:
-        orientation: 'vertical'
-        GridLayout:
-            orientation: 'vertical'
-            size_hint: 1, .9
         BoxLayout:
             orientation: 'vertical'
             size_hint: 1, .1
