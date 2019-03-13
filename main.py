@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 # Imports from SQLite library
+import re
 import time
 from sqlalchemy import create_engine, asc, func, select
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
@@ -27,13 +28,19 @@ Config.set('graphics', 'width', '700')
 Config.set('graphics', 'height', '1500')
 # Config.set('graphics', 'fullscreen', 0)
 
-import re
 
 # Connect to the database and create a database session
 engine = create_engine('sqlite:///ekt_dictionary.db')
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine, autoflush=True)
 session = DBSession()
+
+
+class DictTextInput(TextInput):
+    def insert_text(self, substring, from_undo=False):
+        dict_regex = re.compile(r"^[-'\sa-z]+$", re.I | re.M)
+        if dict_regex.search(substring) and len(self.text) <= 49:
+            return super(DictTextInput, self).insert_text(substring, from_undo=from_undo)
 
 
 class AddScreen(Screen):
@@ -76,12 +83,9 @@ class AddScreen(Screen):
             return True
         return False
 
-class DictInput(TextInput):
 
-    def insert_text(self, substring, from_undo=False):
-        dict_regex = re.compile(r"^[-'\sa-z]+$", re.I | re.M)
-        if dict_regex.search(substring):
-            return super(DictInput, self).insert_text(substring, from_undo=from_undo)
+class DictInput(DictTextInput):
+    pass
 
 
 class ListScreen(Screen):
@@ -100,7 +104,6 @@ class ListScreen(Screen):
 
         for widget in delete_widgets:
             self.ids.list_grid.remove_widget(widget)
-
 
     def show_all_entries(self):
         try:
@@ -142,7 +145,7 @@ class ListScreen(Screen):
                     text=entry.kapampangan,
                     font_size=25,
                 )
-            )        
+            )
 
     def popup(self, title, message):
         content = Label(text=message,
@@ -153,14 +156,10 @@ class ListScreen(Screen):
                       size_hint=(0.4, 0.2))
         popup.open()
 
-class SearchTextInput(TextInput):
+
+class SearchTextInput(DictTextInput):
     def __init__(self, **kwargs):
         super(SearchTextInput, self).__init__(**kwargs)
-
-    def insert_text(self, substring, from_undo=False):
-        dict_regex = re.compile(r"^[-'\sa-z]+$", re.I | re.M)
-        if dict_regex.search(substring):
-            return super(SearchTextInput, self).insert_text(substring, from_undo=from_undo)
 
     def keyboard_on_key_up(self, window, keycode):
         print("Search Text: {}".format(self.text))
@@ -336,12 +335,9 @@ class EditScreen(Screen):
         popup.open()
 
 
-class EditInput(TextInput):
-    def insert_text(self, substring, from_undo=False):
-        dict_regex = re.compile(r"^[-'\sa-z]+$", re.I | re.M)
-        if dict_regex.search(substring):
-            return super(EditInput, self).insert_text(substring, from_undo=from_undo)
-    
+class EditInput(DictTextInput):
+    pass
+
 
 class AutoDismissPopup(Popup):
     def __init__(self, **kwargs):
