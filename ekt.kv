@@ -159,15 +159,15 @@ MyScreenManager:
     BoxLayout:
         id: list_box
         orientation: 'vertical'
+        AnchorLayout:
+            size_hint_y: .1
+            SearchTextInput:
+                font_size: 25
+                size_hint: .8, .5
+                multiline: True
         ScrollView:
+            size_hint: 1, .8
             GridLayout:
-                size_hint: 1, .9
-                canvas:
-                    Color:
-                        rgba: 0, 0, 0, 1
-                    Rectangle:
-                        pos: self.pos
-                        size: self.size
                 id: list_grid
                 orientation: 'vertical'
                 size_hint_y: None
