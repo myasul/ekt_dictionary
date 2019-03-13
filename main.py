@@ -81,7 +81,6 @@ class AddScreen(Screen):
 class DictInput(DictTextInput):
     pass
 
-<<<<<<< HEAD
 
 class SearchScreen(Screen):
     def __init__(self, **kwargs):
@@ -132,12 +131,6 @@ class FilterToggleBtn(ToggleButton):
     def __init__(self, **kwargs):
         super(FilterToggleBtn, self).__init__(**kwargs)
         self.value = StringProperty(False)
-=======
-    def insert_text(self, substring, from_undo=False):
-        dict_regex = re.compile(r"^[-'\sa-z]+$", re.I | re.M)
-        if dict_regex.search(substring):
-            return super(DictInput, self).insert_text(substring, from_undo=from_undo)
->>>>>>> Only accept letters, dash, spaces and apostrophe
 
 
 class ListScreen(Screen):
@@ -470,18 +463,9 @@ class EditScreen(Screen):
         popup.open()
 
 
-<<<<<<< HEAD
 class EditInput(DictTextInput):
     pass
 
-=======
-class EditInput(TextInput):
-    def insert_text(self, substring, from_undo=False):
-        dict_regex = re.compile(r"^[-'\sa-z]+$", re.I | re.M)
-        if dict_regex.search(substring):
-            return super(EditInput, self).insert_text(substring, from_undo=from_undo)
-    
->>>>>>> Only accept letters, dash, spaces and apostrophe
 
 class AutoDismissPopup(Popup):
     def __init__(self, **kwargs):
