@@ -66,18 +66,8 @@ class AddScreen(Screen):
                         font_size=20,
                         color=[1, 1, 1, 1])
         popup = AutoDismissPopup(title=title,
-<<<<<<< HEAD
-<<<<<<< HEAD
                                  content=content,
                                  size_hint=(0.4, 0.2))
-=======
-                      content=content,
-                      size_hint=(0.4, 0.2))
->>>>>>> Refactor Popup widget
-=======
-                                 content=content,
-                                 size_hint=(0.4, 0.2))
->>>>>>> Add BorderBehavior
         popup.open()
 
     def has_no_empty_fields(self):
@@ -222,15 +212,6 @@ class SearchTextInput(DictTextInput):
         list_screen = screen_manager.get_screen('list')
         list_screen.do_search(self.text)
 
-    def popup(self, title, message):
-        content = Label(text=message,
-                        font_size=20,
-                        color=[1, 1, 1, 1])
-        popup = Popup(title=title,
-                      content=content,
-                      size_hint=(0.4, 0.2))
-        popup.open()
-
 
 class DictEntry(Label):
     kapampangan = StringProperty()
@@ -272,7 +253,6 @@ class DictScreen(Screen):
 
     def on_pre_enter(self):
         # Populate the Labels with the data retrieved from database
-<<<<<<< HEAD
         if self.kapampangan:
             print("ENTERED DICT SCREEN!")
             entry = self.get_entry()
@@ -287,12 +267,6 @@ class DictScreen(Screen):
         else:
             # TODO :: Add logging
             self.popup('Error Message', 'Error occured. Please report.')
-=======
-        entry = self.get_entry()
-        self.ids.kapampangan_ds.text = entry.kapampangan
-        self.ids.tagalog_ds.text = entry.tagalog
-        self.ids.english_ds.text = entry.english
->>>>>>> Add Edit Screen
 
     def show_delete_popup(self):
         delete_popup = DeletePopup(self)
@@ -325,7 +299,6 @@ class DictScreen(Screen):
             self.popup('Error Message', 'Error occured. Please report.')
 
     def on_edit_entry(self):
-<<<<<<< HEAD
         # Retrieve Edit Screen
         screen_manager = App.get_running_app().root
         edit_entry = screen_manager.get_screen('edit_entry')
@@ -337,11 +310,6 @@ class DictScreen(Screen):
         edit_entry.db_object = self.db_object
 
         # Redirect to Edit Screen
-=======
-        screen_manager = App.get_running_app().root
-        dict_screen = screen_manager.get_screen('edit_entry')
-        dict_screen.current_kapampangan = self.current_kapampangan
->>>>>>> Add Edit Screen
         screen_manager.current = 'edit_entry'
 
     def go_to_list_screen(self, *args):
@@ -462,38 +430,6 @@ class DeletePopup(Popup):
 class FilterPopup(Popup):
     def __init__(self, screen, **kwargs):
         super(FilterPopup, self).__init__(**kwargs)
-        self.screen = screen
-
-    def popup(self, title, message):
-        # Generic popup for error and confirmation messages
-        content = Label(text=message,
-                        font_size=20,
-                        color=[1, 1, 1, 1])
-        popup = AutoDismissPopup(title=title,
-                                 content=content,
-                                 size_hint=(0.4, 0.2))
-        popup.open()
-
-
-class EditScreen(Screen):
-    def __init__(self, **kwargs):
-        super(EditScreen, self).__init__(**kwargs)
-        self.current_kapampangan = StringProperty()
-
-    def on_pre_enter(self):
-        pass
-        
-
-
-class AutoDismissPopup(Popup):
-    def __init__(self, **kwargs):
-        super(AutoDismissPopup, self).__init__(**kwargs)
-        Clock.schedule_once(self.dismiss, 1)
-
-
-class DeletePopup(Popup):
-    def __init__(self, screen, **kwargs):
-        super(DeletePopup, self).__init__(**kwargs)
         self.screen = screen
 
 
