@@ -1,2 +1,6 @@
 # Dictionary of EKT
 ekt_dictionary.db
+
+# Pipenv files
+Pipfile.lock
+Pipfile
