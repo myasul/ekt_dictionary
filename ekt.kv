@@ -6,13 +6,14 @@ MyScreenManager:
     transition: FadeTransition()
     HomeScreen
     AddScreen
+    SearchScreen
     ListScreen
     DictScreen
     EditScreen
 
 <HomeScreenBtn@Button>:
     font_size: 40
-    size_hint: 0.5, 0.2
+    size_hint: 0.5, 0.5
 
 <HomeScreen>:
     name: 'home'
@@ -55,6 +56,10 @@ MyScreenManager:
             HomeScreenBtn:
                 text: 'Add Entry'
                 on_release: root.manager.current = 'add'
+        AnchorLayout:
+            HomeScreenBtn:
+                text: 'Search'
+                on_release: root.manager.current = 'search'
         AnchorLayout:
             HomeScreenBtn:
                 text: 'View List'
