@@ -6,13 +6,14 @@ MyScreenManager:
     transition: FadeTransition()
     HomeScreen
     AddScreen
+    SearchScreen
     ListScreen
     DictScreen
     EditScreen
 
 <HomeScreenBtn@Button>:
     font_size: 40
-    size_hint: 0.5, 0.2
+    size_hint: 0.5, 0.5
 
 <HomeScreen>:
     name: 'home'
@@ -55,6 +56,10 @@ MyScreenManager:
             HomeScreenBtn:
                 text: 'Add Entry'
                 on_release: root.manager.current = 'add'
+        AnchorLayout:
+            HomeScreenBtn:
+                text: 'Search'
+                on_release: root.manager.current = 'search'
         AnchorLayout:
             HomeScreenBtn:
                 text: 'View List'
@@ -122,6 +127,63 @@ MyScreenManager:
         BoxLayout:
             orientation: 'vertical'
             size_hint: 1, .1
+            Button:
+                size_hint: None, None
+                height: 50
+                id: home_button_2
+                text: 'Back'
+                font_size: 20
+                on_release: root.manager.current = 'home'
+
+<SearchInput@TextInput>:
+    size_hint_x: 0.8
+    size_hint_y: None
+    height: 70
+    font_size: 40
+    write_tab: False
+
+<SearchBox@BoxLayout+BorderBehavior>:
+    borders: 2, 'solid', (1, 1, 1, 1)
+
+<SearchScreen>:
+    name: 'search'
+    BoxLayout:
+        orientation: 'vertical'
+        SearchBox:
+            size_hint_y: 0.2
+            orientation: 'vertical'
+            AnchorLayout:
+                size_hint_y: 0.70
+                SearchInput:
+            AnchorLayout:
+                size_hint_y: 0.20
+                BoxLayout:
+                    size_hint_x: 0.8
+                    spacing: 100
+                    Button:
+                        text: 'Filter'
+                    Button:
+                        text: 'Search'
+            Widget:
+                size_hint_y: 0.1
+            # BoxLayout:
+            #     size_hint_y: .1
+            #     spacing: 20
+            #     padding: 30, 20
+            #     ToggleButton:
+            #         text: 'Kapampangan'
+            #         group: 'language'
+            #     ToggleButton:
+            #         text: 'Tagalog'
+            #         group: 'language'
+            #     ToggleButton:
+            #         text: 'English'
+            #         group: 'language'
+        Widget:       
+            size_hint_y: 0.7   
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_y: 0.1
             Button:
                 size_hint: None, None
                 height: 50
@@ -249,13 +311,6 @@ MyScreenManager:
                 text: 'Cancel'
                 on_release: root.dismiss()
 
-<EditInput>:
-    size_hint: None, None
-    height: 70
-    width: 600
-    font_size: 20
-    write_tab: False
-
 <EditScreen>:
     name: 'edit_entry'
     BoxLayout:
@@ -292,3 +347,10 @@ MyScreenManager:
             DictScreenBtn:
                 text: 'Save'
                 on_release: root.on_save()
+
+<EditInput>:
+    size_hint: None, None
+    height: 70
+    width: 600
+    font_size: 20
+    write_tab: False

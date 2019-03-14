@@ -87,7 +87,9 @@ class AddScreen(Screen):
 class DictInput(DictTextInput):
     pass
 
-
+class SearchScreen(Screen):
+    pass
+    
 class ListScreen(Screen):
     def on_pre_enter(self):
         all_entries = self.show_all_entries()
