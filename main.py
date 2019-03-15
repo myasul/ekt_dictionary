@@ -88,8 +88,19 @@ class DictInput(DictTextInput):
     pass
 
 class SearchScreen(Screen):
-    pass
-    
+
+    def show_filter_popup(self):
+        FilterPopup().open()
+
+    def popup(self, title, message):
+        content = Label(text=message,
+                        font_size=20,
+                        color=[1, 1, 1, 1])
+        popup = Popup(title=title,
+                      content=content,
+                      size_hint=(0.4, 0.2))
+        popup.open()
+
 class ListScreen(Screen):
     def on_pre_enter(self):
         all_entries = self.show_all_entries()
@@ -351,6 +362,9 @@ class DeletePopup(Popup):
     def __init__(self, screen, **kwargs):
         super(DeletePopup, self).__init__(**kwargs)
         self.screen = screen
+
+class FilterPopup(Popup):
+    pass
 
 
 class MyScreenManager(ScreenManager):

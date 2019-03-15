@@ -161,24 +161,12 @@ MyScreenManager:
                     size_hint_x: 0.8
                     spacing: 100
                     Button:
-                        text: 'Filter'
+                        text: 'Filters'
+                        on_release: root.show_filter_popup()
                     Button:
                         text: 'Search'
             Widget:
                 size_hint_y: 0.1
-            # BoxLayout:
-            #     size_hint_y: .1
-            #     spacing: 20
-            #     padding: 30, 20
-            #     ToggleButton:
-            #         text: 'Kapampangan'
-            #         group: 'language'
-            #     ToggleButton:
-            #         text: 'Tagalog'
-            #         group: 'language'
-            #     ToggleButton:
-            #         text: 'English'
-            #         group: 'language'
         Widget:       
             size_hint_y: 0.7   
         BoxLayout:
@@ -191,6 +179,46 @@ MyScreenManager:
                 text: 'Back'
                 font_size: 20
                 on_release: root.manager.current = 'home'
+
+<FilterLabel@Label+BorderBehavior>:
+    borders: 2, 'solid', (1, 1, 1, 1)
+
+<FilterPopup>:
+    id: filter_popup
+    size_hint: 0.4, 0.25
+    title: 'Filters'
+    BoxLayout:
+        orientation: 'vertical'
+        BoxLayout:
+            size_hint_y: 0.3
+            CheckBox:
+                size_hint_x: 0.2
+                active: False
+            Label:
+                size_hint_x: 0.3
+                id: match_checkbox
+                text: 'Exact match'
+                font_size: 15
+                halign: 'left'
+                valign: 'middle'
+            Label:
+                size_hint_x: 0.5
+        AnchorLayout:
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_x: 0.6
+                spacing: 20
+                ToggleButton:
+                    text: 'Kapampangan'
+                    group: 'language'
+                ToggleButton:
+                    text: 'Tagalog'
+                    group: 'language'
+                ToggleButton:
+                    text: 'English'
+                    group: 'language'
+        Widget:
+            size_hint_y: 0.1
 
 <ListScreen>:
     name: 'list'
