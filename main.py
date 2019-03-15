@@ -126,12 +126,10 @@ class SearchScreen(Screen):
                       size_hint=(0.4, 0.2))
         popup.open()
 
-
 class FilterToggleBtn(ToggleButton):
     def __init__(self, **kwargs):
         super(FilterToggleBtn, self).__init__(**kwargs)
         self.value = StringProperty(False)
-
 
 class ListScreen(Screen):
     def on_pre_enter(self):
