@@ -11,12 +11,13 @@ from database_setup import Dictionary, Base
 # Imports from Kivy library
 from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition
 from kivy.graphics import Rectangle, Color
-from kivy.properties import StringProperty
+from kivy.properties import StringProperty, BooleanProperty
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.textinput import TextInput
 from kivy.uix.anchorlayout import AnchorLayout
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.button import Button
+from kivy.uix.togglebutton import ToggleButton
 from kivy.uix.label import Label
 from kivy.uix.popup import Popup
 from kivy.clock import Clock
@@ -88,9 +89,20 @@ class DictInput(DictTextInput):
     pass
 
 class SearchScreen(Screen):
+    def __init__(self, **kwargs):
+        super(SearchScreen, self).__init__(**kwargs)
+        self.exact_match = BooleanProperty(False)
+        self.language = StringProperty()
 
     def show_filter_popup(self):
-        FilterPopup().open()
+        filter_popup = FilterPopup()
+        print(filter_popup.ids)
+
+    def set_language(self, value):
+        self.language = value
+
+    def set_exact_match(self, match):
+        self.exact_match = match
 
     def popup(self, title, message):
         content = Label(text=message,
@@ -100,6 +112,11 @@ class SearchScreen(Screen):
                       content=content,
                       size_hint=(0.4, 0.2))
         popup.open()
+
+class FilterToggleBtn(ToggleButton):
+    def __init__(self, **kwargs):
+        super(FilterToggleBtn, self).__init__(**kwargs)
+        self.value = StringProperty(False)
 
 class ListScreen(Screen):
     def on_pre_enter(self):

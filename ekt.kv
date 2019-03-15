@@ -192,8 +192,10 @@ MyScreenManager:
         BoxLayout:
             size_hint_y: 0.3
             CheckBox:
+                id: filter_checkbox
                 size_hint_x: 0.2
                 active: False
+                on_release: root.set_exact_match(self.active)
             Label:
                 size_hint_x: 0.3
                 id: match_checkbox
@@ -208,15 +210,24 @@ MyScreenManager:
                 orientation: 'vertical'
                 size_hint_x: 0.6
                 spacing: 20
-                ToggleButton:
+                FilterToggleBtn:
+                    id: kapampangan_btn
                     text: 'Kapampangan'
                     group: 'language'
-                ToggleButton:
+                    value: 'kapampangan'
+                    on_release: root.set_language(self.value)
+                FilterToggleBtn:
+                    id: tagalog_btn
                     text: 'Tagalog'
                     group: 'language'
-                ToggleButton:
+                    value: 'tagalog'
+                    on_release: root.set_language(self.value)
+                FilterToggleBtn:
+                    id: english_btn
                     text: 'English'
                     group: 'language'
+                    value: 'english'
+                    on_release: root.set_language(self.value)
         Widget:
             size_hint_y: 0.1
 
