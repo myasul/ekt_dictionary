@@ -478,6 +478,9 @@ class DeletePopup(Popup):
         super(DeletePopup, self).__init__(**kwargs)
         self.screen = screen
 
+class FilterPopup(Popup):
+    pass
+
 
 class FilterPopup(Popup):
     def __init__(self, screen, **kwargs):
