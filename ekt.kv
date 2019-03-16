@@ -1,11 +1,15 @@
 #:import FadeTransition kivy.uix.screenmanager.FadeTransition
+#:import BorderBehavior borderbehaviour
 
 MyScreenManager:
+    id: dict_sm
     transition: FadeTransition()
     HomeScreen
     AddScreen
     SearchScreen
     ListScreen
+    DictScreen
+    EditScreen
 
 <HomeScreenBtn@Button>:
     font_size: 40
@@ -48,31 +52,34 @@ MyScreenManager:
             text: 'English - Kapampangan - Tagalog Dictionary'
             size: self.texture_size
             size_hint_y: None
-        AnchorLayout:            
+        AnchorLayout:
             HomeScreenBtn:
                 text: 'Add Entry'
                 on_release: root.manager.current = 'add'
-        AnchorLayout: 
+        AnchorLayout:
             HomeScreenBtn:
                 text: 'Search'
                 on_release: root.manager.current = 'search'
-        AnchorLayout: 
+        AnchorLayout:
             HomeScreenBtn:
                 text: 'View List'
                 on_release: root.manager.current = 'list'
 
-<DictInput@TextInput>:
-    font_size: 35
+<DictInput>:
+    font_size: 20
+    # font_size: 30
     size_hint: None, None
     width: 600
-    height: 120
-    multiline: True
+    height: 50
+    # height: 120
     write_tab: False
 
-<AddScreenLabel@Label>:
-    padding: 30, 30
+<ASLabel@Label>:
+    padding: 5, 5
+    # padding: 30, 30
     color: 1, 1, 1, 1
-    font_size: 30
+    font_size: 20
+    # font_size: 30
     size: self.texture_size
     size_hint_y: None
 
@@ -81,25 +88,26 @@ MyScreenManager:
     BoxLayout:
         orientation: 'vertical'
         AnchorLayout:
+            size_hint: 1, .9
             GridLayout:
                 rows: 7
                 cols: 1
-                padding: 30, 30, 30, 30
-                AddScreenLabel:
+                padding: 10, 10, 10, 10
+                ASLabel:
                     text: 'Kapampangan'
                 AnchorLayout:
                     size_hint_y: None
                     height: 150
                     DictInput:
                         id: k_input
-                AddScreenLabel:
+                ASLabel:
                     text: 'Tagalog'
                 AnchorLayout:
                     size_hint_y: None
                     height: 150
                     DictInput:
                         id: t_input
-                AddScreenLabel:
+                ASLabel:
                     text: 'English'
                 AnchorLayout:
                     size_hint_y: None
@@ -108,62 +116,289 @@ MyScreenManager:
                         id: e_input
                 AnchorLayout:
                     size_hint_y: None
-                    height: 150
+                    height: 70
+                    # height: 100
                     Button:
                         id: 'add_to_dict'
                         text: 'Save'
                         font_size: 30
-                        size_hint: 0.3, 0.5
+                        size_hint: 0.3, 1
                         on_release: root.add_entry()
-        Label:
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: 1, .1
             Button:
-                id: home_button_1
+                size_hint: None, None
+                height: 50
+                id: home_button_2
                 text: 'Back'
                 font_size: 20
                 on_release: root.manager.current = 'home'
+
+<SearchInput@TextInput>:
+    size_hint_x: 0.8
+    size_hint_y: None
+    height: 70
+    font_size: 40
+    write_tab: False
+
+<SearchBox@BoxLayout+BorderBehavior>:
+    borders: 2, 'solid', (1, 1, 1, 1)
 
 <SearchScreen>:
     name: 'search'
     BoxLayout:
         orientation: 'vertical'
-        Label:
+        SearchBox:
+            size_hint_y: 0.2
+            orientation: 'vertical'
+            AnchorLayout:
+                size_hint_y: 0.70
+                SearchInput:
+            AnchorLayout:
+                size_hint_y: 0.20
+                BoxLayout:
+                    size_hint_x: 0.8
+                    spacing: 100
+                    Button:
+                        text: 'Filters'
+                        on_release: root.show_filter_popup()
+                    Button:
+                        text: 'Search'
+                        on_release: root.on_search()
+            Widget:
+                size_hint_y: 0.1
+        Widget:       
+            size_hint_y: 0.7   
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_y: 0.1
             Button:
+                size_hint: None, None
+                height: 50
                 id: home_button_2
                 text: 'Back'
                 font_size: 20
                 on_release: root.manager.current = 'home'
+
+<FilterLabel@Label+BorderBehavior>:
+    borders: 2, 'solid', (1, 1, 1, 1)
+
+<FilterToggleBtn>:
+    group: 'language'
+
+<FilterPopup>:
+    id: filter_popup
+    size_hint: 0.4, 0.25
+    title: 'Filters'
+    BoxLayout:
+        orientation: 'vertical'
+        BoxLayout:
+            size_hint_y: 0.3
+            CheckBox:
+                id: filter_checkbox
+                size_hint_x: 0.2
+                active: False
+                on_release: root.screen.set_match(self.active)
+            Label:
+                size_hint_x: 0.3
+                id: match_checkbox
+                text: 'Exact match'
+                font_size: 20
+                halign: 'left'
+                valign: 'middle'
+            Label:
+                size_hint_x: 0.5
+        AnchorLayout:
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_x: 0.6
+                spacing: 20
+                FilterToggleBtn:
+                    id: kapampangan_btn
+                    text: 'Kapampangan'
+                    value: 'kapampangan'
+                    on_release: root.screen.set_language(self.value)
+
+                FilterToggleBtn:
+                    id: tagalog_btn
+                    text: 'Tagalog'
+                    value: 'tagalog'
+                    on_release: root.screen.set_language(self.value)
+                    
+                FilterToggleBtn:
+                    id: english_btn
+                    text: 'English'
+                    value: 'english'
+                    on_release: root.screen.set_language(self.value)
+                    
+        Widget:
+            size_hint_y: 0.1
+
+<ListScroll@ScrollView+BorderBehavior>:
+    borders: 2, 'solid', (1, 1, 1, 1)
 
 <ListScreen>:
     name: 'list'
     BoxLayout:
         id: list_box
         orientation: 'vertical'
-        canvas:
-            Color:
-                rgba: 0, 1, 1, 1
-            Rectangle:
-                pos: self.pos
-                size: self.size
-        ScrollView:
-            GridLayout:
-                canvas:
-                    Color:
-                        rgba: 0, 0, 0, 1
-                    Rectangle:
-                        pos: self.pos
-                        size: self.size
-                id: list_grid
-                orientation: 'vertical'
-                size_hint_y: None
-                height: self.minimum_height
-                row_default_height: 100
-                cols: 1
+        AnchorLayout:
+            size_hint_y: .1
+            SearchTextInput:
+                font_size: 25
+                size_hint: .8, .5
+        AnchorLayout:
+            size_hint_y: .8
+            ListScroll:
+                size_hint_x: 0.8
+                GridLayout:
+                    padding: 15, 0
+                    id: list_grid
+                    orientation: 'vertical'
+                    size_hint_y: None
+                    height: self.minimum_height
+                    row_default_height: 100
+                    cols: 1
         BoxLayout:
             orientation: 'vertical'
             size_hint: 1, .1
             Button:
-                size_hint: .1, 1
-                id: home_button_3
+                size_hint: None, None
+                height: 50
                 text: 'Back'
                 font_size: 20
                 on_release: root.manager.current = 'home'
+
+<DSLabel@Label>:
+    padding: 5, 5
+    color: 1, 1, 1, 1
+    font_size: 25
+    size: self.texture_size
+    size_hint_y: None
+
+<DictScreenBtn@Button>:
+    size_hint: None, None
+    height: 50
+    font_size: 20
+
+<BorderLabel@Label+BorderBehavior>:
+    borders: 2, 'solid', (1, 1, 1, 1)
+    size_hint: None, None
+    height: 70
+    width: 600
+    font_size: 20
+    canvas.before:
+        Color:
+            rgba: 0, 0, 0, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+
+<DictScreen>:
+    name: 'dict_entry'
+    BoxLayout:
+        orientation: 'vertical'
+        GridLayout:
+            orientation: 'vertical'
+            size_hint: 1, .9
+            row_default_height: 100
+            cols: 1
+            rows: 6
+            DSLabel:
+                text: 'Kapampangan'
+            AnchorLayout:
+                BorderLabel:
+                    id: kapampangan_ds
+                    text: 'Test Label'
+            DSLabel:
+                text: 'Tagalog'
+            AnchorLayout:
+                BorderLabel:
+                    id: tagalog_ds
+                    text: 'Test Label'
+            DSLabel:
+                text: 'English'
+            AnchorLayout:
+                BorderLabel:
+                    id: english_ds
+                    text: 'Test Label'
+
+        BoxLayout:
+            size_hint: 1, .1
+            orientation: 'horizontal'
+            DictScreenBtn:
+                text: 'Back'
+                on_release: root.manager.current = 'list'
+            Widget:
+            DictScreenBtn:
+                text: 'Edit'
+                on_release: root.on_edit_entry()
+            Widget:
+            DictScreenBtn:
+                text: 'Delete'
+                on_release: root.show_delete_popup()
+
+<DeletePopup>:
+    size_hint: 0.4, 0.2
+    title: 'Delete confirmation'
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            id: delete_label
+            text: 'Are you sure to delete this entry?'
+        BoxLayout:
+            orientation:'horizontal'
+            Button:
+                size_hint_y: 0.5
+                text: 'Delete'
+                on_release: root.screen.on_confirm_delete(root)            
+            Button:
+                size_hint_y: 0.5
+                text: 'Cancel'
+                on_release: root.dismiss()
+
+<EditScreen>:
+    name: 'edit_entry'
+    BoxLayout:
+        orientation: 'vertical'
+        GridLayout:
+            orientation: 'vertical'
+            size_hint: 1, .9
+            row_default_height: 100
+            cols: 1
+            rows: 6
+            DSLabel:
+                text: 'Kapampangan'
+            AnchorLayout:
+                EditInput:
+                    id: kapampangan_es
+            DSLabel:
+                text: 'Tagalog'
+            AnchorLayout:
+                EditInput:
+                    id: tagalog_es
+            DSLabel:
+                text: 'English'
+            AnchorLayout:
+                EditInput:
+                    id: english_es
+
+        BoxLayout:
+            size_hint: 1, .1
+            orientation: 'horizontal'
+            DictScreenBtn:
+                text: 'Back'
+                on_release: root.manager.current = 'dict_entry'
+            Widget:
+            DictScreenBtn:
+                text: 'Save'
+                on_release: root.on_save()
+
+<EditInput>:
+    size_hint: None, None
+    height: 70
+    width: 600
+    font_size: 20
+    write_tab: False
