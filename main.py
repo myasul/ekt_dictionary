@@ -1,13 +1,10 @@
 #!/usr/bin/env python3
 
-# Imports from SQLite library
 import re
-import time
-from sqlalchemy import create_engine, asc
-from sqlalchemy.exc import IntegrityError, SQLAlchemyError
-from sqlalchemy.orm import sessionmaker
-from database_setup import Dictionary, Base
-import database_helper as DictDB
+
+# Imports from SQLite library
+from sqlalchemy.exc import SQLAlchemyError, IntegrityError
+import database_helper as db_helper
 
 # Imports from Kivy library
 from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition
@@ -31,13 +28,6 @@ Config.set('graphics', 'height', '1000')
 Config.set('graphics', 'fullscreen', 0)
 
 
-# Connect to the database and create a database session
-engine = create_engine('sqlite:///ekt_dictionary.db')
-Base.metadata.bind = engine
-DBSession = sessionmaker(bind=engine, autoflush=True)
-session = DBSession()
-
-
 class DictTextInput(TextInput):
     def insert_text(self, substring, from_undo=False):
         dict_regex = re.compile(r"^[-'\sa-z]+$", re.I | re.M)
@@ -54,22 +44,22 @@ class AddScreen(Screen):
 
     def add_entry(self):
         # TODO :: Make the error message's box size dynamic
-        try:
-            if not self.are_fields_empty():
-                new_dict_entry = Dictionary(
+        if self.has_no_empty_fields():
+            try:
+                new_dict_entry = db_helper.Dictionary(
                     tagalog=self.ids.t_input.text,
                     kapampangan=self.ids.k_input.text.lower(),
                     english=self.ids.e_input.text)
-                session.add(new_dict_entry)
-                session.commit()
+                db_helper.session.add(new_dict_entry)
+                db_helper.session.commit()
                 self.popup('Confirmation Message', 'Dictionary entry saved!')
                 self.clear_text_inputs()
-            else:
+            except IntegrityError:
                 self.popup('Error Message', 'Entry already exists!')
-        except IntegrityError:
-            self.popup('Error Message', 'Entry already exists!')
-            session.rollback()
-            self.clear_text_inputs()
+                db_helper.session.rollback()
+                self.clear_text_inputs()
+        else:
+            self.popup('Error Message', 'All the fields are mandatory!')
 
     def popup(self, title, message):
         content = Label(text=message,
@@ -80,10 +70,10 @@ class AddScreen(Screen):
                                  size_hint=(0.4, 0.2))
         popup.open()
 
-    def are_fields_empty(self):
-        if not all([self.ids.e_input.text,
-                    self.ids.k_input.text,
-                    self.ids.t_input.text]):
+    def has_no_empty_fields(self):
+        if all([self.ids.e_input.text,
+                self.ids.k_input.text,
+                self.ids.t_input.text]):
             return True
         return False
 
@@ -113,16 +103,6 @@ class SearchScreen(Screen):
 
     def do_search(self):
         pass
-        # try:
-        #     return session.query(Dictionary)\
-        #         .filter(Dictionary.kapampangan.like("{}".format(search_str)))\
-        #         .filter(Dictionary.language == self.language)
-        #         .order_by(Dictionary.kapampangan.asc())\
-        #         .all()
-        # except IntegrityError:
-        #     # TODO :: Add logging
-        #     self.popup('Error Message', 'Error Occured. Please report.')
-        #     return None
 
 
 class FilterToggleBtn(ToggleButton):
@@ -150,7 +130,7 @@ class ListScreen(Screen):
             self.ids.list_grid.remove_widget(widget)
 
     def show_all_entries(self):
-        entries, error = DictDB.get_all_entries()
+        entries, error = db_helper.get_all_entries()
         if error:
             # TODO :: Add logging
             self.popup('Error Message', 'Error Occured. Please report.')
@@ -160,20 +140,15 @@ class ListScreen(Screen):
         # TODO :: Make it dynamic so the user can search in all languages
         self.clear_entries()
         entries = self.search_text_kapampangan(search_str)
-        print(entries)
         if len(entries) > 0:
             self.add_entry_widgets(entries)
 
     def search_text_kapampangan(self, search_str):
-        try:
-            return session.query(Dictionary)\
-                .filter(Dictionary.kapampangan.like("{}%".format(search_str)))\
-                .order_by(Dictionary.kapampangan.asc())\
-                .all()
-        except IntegrityError:
+        entries, error = db_helper.search_in_kapampangan(search_str, 1)
+        if error:
             # TODO :: Add logging
             self.popup('Error Message', 'Error Occured. Please report.')
-            return None
+        return entries
 
     def add_entry_widgets(self, entries):
         row_num = len(entries)
@@ -181,10 +156,13 @@ class ListScreen(Screen):
         self.ids.list_grid.rows = row_num
         for entry in entries:
             dict_entry = DictEntry(
-                text=entry.kapampangan.lower(),
+                text=entry.kapampangan,
                 font_size=25,
                 halign='left',
-                valign='middle'
+                valign='middle',
+                kapampangan=entry.kapampangan,
+                tagalog=entry.tagalog,
+                english=entry.english
             )
             dict_entry.bind(size=dict_entry.setter('text_size'))
             self.ids.list_grid.add_widget(dict_entry)
@@ -204,7 +182,6 @@ class SearchTextInput(DictTextInput):
         super(SearchTextInput, self).__init__(**kwargs)
 
     def keyboard_on_key_up(self, window, keycode):
-        print("Search Text: {}".format(self.text))
         self.search_matched_entries()
         return super(SearchTextInput, self).keyboard_on_key_up(window, keycode)
 
@@ -215,12 +192,22 @@ class SearchTextInput(DictTextInput):
 
 
 class DictEntry(Label):
+    kapampangan = StringProperty()
+    tagalog = StringProperty()
+    english = StringProperty()
 
     def on_touch_down(self, touch):
         if self.collide_point(touch.x, touch.y):
+            # Retrieve Dictionary Screen
             screen_manager = App.get_running_app().root
             dict_screen = screen_manager.get_screen('dict_entry')
-            dict_screen.kapampangan = self.text
+
+            # Set data to Dictionary Screen
+            dict_screen.kapampangan = self.kapampangan
+            dict_screen.english = self.english
+            dict_screen.tagalog = self.tagalog
+
+            # Redirect to Dictionary Screen
             screen_manager.current = 'dict_entry'
 
 
@@ -234,20 +221,30 @@ class DictScreen(Screen):
         self.kapampangan = StringProperty()
         self.tagalog = StringProperty()
         self.english = StringProperty()
+        self.db_object = None
 
     def set_dict_entry(self, entry):
+        self.db_object = entry
         self.kapampangan = entry.kapampangan
         self.tagalog = entry.tagalog
         self.english = entry.english
 
     def on_pre_enter(self):
         # Populate the Labels with the data retrieved from database
-        print("Entering Dictionary Screen")
-        entry = self.get_entry()
-        self.set_dict_entry(entry)
-        self.ids.kapampangan_ds.text = self.kapampangan
-        self.ids.tagalog_ds.text = self.tagalog
-        self.ids.english_ds.text = self.english
+        if self.kapampangan:
+            print("ENTERED DICT SCREEN!")
+            entry = self.get_entry()
+
+            if not entry:
+                self.popup('Error Message', 'Error occured. Please report.')
+
+            self.set_dict_entry(entry)
+            self.ids.kapampangan_ds.text = self.kapampangan
+            self.ids.tagalog_ds.text = self.tagalog
+            self.ids.english_ds.text = self.english
+        else:
+            # TODO :: Add logging
+            self.popup('Error Message', 'Error occured. Please report.')
 
     def show_delete_popup(self):
         delete_popup = DeletePopup(self)
@@ -262,9 +259,9 @@ class DictScreen(Screen):
         # User will also be redirected to the List screen.
         if self.kapampangan:
             entry = self.get_entry()
-            session.delete(entry)
+            db_helper.session.delete(entry)
             try:
-                session.commit()
+                db_helper.session.commit()
                 # Multiple delays are in place to display
                 # all information needed simultaneously
                 self.popup('Confirmation Message',
@@ -273,17 +270,24 @@ class DictScreen(Screen):
             except SQLAlchemyError as e:
                 # TODO :: Add logging
                 print("Error: {}".format(e))
+                db_helper.session.rollback()
                 self.popup('Error Message', 'Error occured. Please report.')
         else:
             # TODO :: Add logging
             self.popup('Error Message', 'Error occured. Please report.')
 
     def on_edit_entry(self):
+        # Retrieve Edit Screen
         screen_manager = App.get_running_app().root
         edit_entry = screen_manager.get_screen('edit_entry')
+
+        # Populate Edit Screen's class variables
         edit_entry.kapampangan = self.kapampangan
         edit_entry.tagalog = self.tagalog
         edit_entry.english = self.english
+        edit_entry.db_object = self.db_object
+
+        # Redirect to Edit Screen
         screen_manager.current = 'edit_entry'
 
     def go_to_list_screen(self, *args):
@@ -292,14 +296,14 @@ class DictScreen(Screen):
     def get_entry(self):
         # Get dictionary data using the word selected
         # by the user from the List Screen
-        if self.kapampangan:
-            return session.query(Dictionary) \
-                .filter(Dictionary.kapampangan == self.kapampangan) \
-                .one()
-        else:
+        entry, error = db_helper.search_entry(
+            kapampangan=self.kapampangan,
+            english=self.english,
+            tagalog=self.tagalog)
+        if error:
             # TODO :: Add logging
-            self.popup('Error Message', 'Error occured. Please report.')
             return None
+        return entry
 
     def popup(self, title, message):
         # Generic popup for error and confirmation messages
@@ -318,6 +322,7 @@ class EditScreen(Screen):
         self.kapampangan = StringProperty()
         self.tagalog = StringProperty()
         self.english = StringProperty()
+        self.db_object = None
 
     def on_pre_enter(self):
         self.set_text_from_dict_val()
@@ -333,18 +338,21 @@ class EditScreen(Screen):
         self.english = self.ids.english_es.text
 
     def on_save(self):
-        try:
-            entry = self.get_entry()
-            self.set_dict_val_from_text()
-            entry.kapampangan = self.kapampangan
-            entry.tagalog = self.tagalog
-            entry.english = self.english
-            session.add(entry)
-            session.commit()
-            self.go_to_dict_screen()
-        except SQLAlchemyError as e:
-            # TODO :: Add logging
-            print("Error: {}".format(e))
+        if self.db_object:
+            try:
+                self.set_dict_val_from_text()
+                self.db_object.kapampangan = self.kapampangan
+                self.db_object.tagalog = self.tagalog
+                self.db_object.english = self.english
+                db_helper.session.add(self.db_object)
+                db_helper.session.commit()
+                self.go_to_dict_screen()
+            except SQLAlchemyError as e:
+                # TODO :: Add logging
+                print("Error: {}".format(e))
+                db_helper.session.rollback()
+                self.popup('Error Message', 'Error occured. Please report.')
+        else:
             self.popup('Error Message', 'Error occured. Please report.')
 
     def go_to_dict_screen(self):
@@ -361,10 +369,14 @@ class EditScreen(Screen):
     def get_entry(self):
         # Get dictionary data using the word selected
         # by the user from the List Screen
-        if self.kapampangan:
-            return session.query(Dictionary) \
-                .filter(Dictionary.kapampangan == self.kapampangan) \
-                .one()
+        entries, error = db_helper.search_entry(
+            kapampangan=self.kapampangan,
+            english=self.english,
+            tagalog=self.tagalog)
+        if error:
+            # TODO :: Add logging
+            return None
+        return entries
 
     def popup(self, title, message):
         # Generic popup for error and confirmation messages
