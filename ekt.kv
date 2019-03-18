@@ -155,6 +155,7 @@ MyScreenManager:
             AnchorLayout:
                 size_hint_y: 0.70
                 SearchInput:
+                    id: search_input
             AnchorLayout:
                 size_hint_y: 0.20
                 BoxLayout:
@@ -184,31 +185,85 @@ MyScreenManager:
 <FilterLabel@Label+BorderBehavior>:
     borders: 2, 'solid', (1, 1, 1, 1)
 
+<FilterSearchModeGrid@GridLayout+BorderBehavior>:
+    borders: 2, 'solid', (1, 1, 1, 1)
+
+<FilterSearchLanguage@GridLayout+BorderBehavior>:
+    borders: 2, 'solid', (1, 1, 1, 1)
+
+
 <FilterToggleBtn>:
     group: 'language'
 
 <FilterPopup>:
     id: filter_popup
-    size_hint: 0.4, 0.25
+    size_hint: 0.4, 0.5
     title: 'Filters'
     BoxLayout:
         orientation: 'vertical'
-        BoxLayout:
-            size_hint_y: 0.3
-            CheckBox:
-                id: filter_checkbox
-                size_hint_x: 0.2
-                active: False
-                on_release: root.screen.set_match(self.active)
-            Label:
-                size_hint_x: 0.3
-                id: match_checkbox
-                text: 'Exact match'
-                font_size: 20
-                halign: 'left'
-                valign: 'middle'
-            Label:
-                size_hint_x: 0.5
+        Label:
+            size_hint_y: 0.2
+            id: search_mode
+            text: 'Search Mode'
+            font_size: 20
+        FilterSearchModeGrid:
+            size_hint_y: 0.6
+            cols: 1
+            rows: 5
+            Widget:
+                size_hint_y: 0.1
+            BoxLayout:
+                CheckBox:
+                    size_hint_x: 0.4
+                    id: match
+                    active: False
+                    on_release: root.screen.set_match(self.id)
+                    group: 'search_mode'
+                    color: 1, 0, 1, 4
+                Label:
+                    size_hint_x: 0.6
+                    text: 'Exact match'
+                    font_size: 20
+                    halign: 'left'
+                    valign: 'middle'
+                Widget:
+            BoxLayout:
+                CheckBox:
+                    size_hint_x: 0.4
+                    id: contains
+                    active: False
+                    group: 'search_mode'
+                    on_release: root.screen.set_match(self.id)
+                    color: 1, 0, 1, 4
+                Label:
+                    size_hint_x: 0.4
+                    text: 'Contains'
+                    font_size: 20
+                    halign: 'left'
+                    valign: 'middle'
+                Widget:
+            BoxLayout:
+                CheckBox:
+                    size_hint_x: 0.4
+                    id: starts_with
+                    active: True
+                    group: 'search_mode'
+                    on_release: root.screen.set_match(self.id)
+                    color: 1, 0, 1, 4
+                Label:
+                    size_hint_x: 0.6
+                    text: 'Starts with'
+                    font_size: 20
+                    halign: 'left'
+                    valign: 'middle'
+                Widget:
+            Widget:
+                size_hint_y: 0.1
+        Label:
+            size_hint_y: 0.2
+            id: search_mode
+            text: 'Language to Search'
+            font_size: 20
         AnchorLayout:
             BoxLayout:
                 orientation: 'vertical'

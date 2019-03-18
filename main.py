@@ -85,7 +85,7 @@ class DictInput(DictTextInput):
 class SearchScreen(Screen):
     def __init__(self, **kwargs):
         super(SearchScreen, self).__init__(**kwargs)
-        self.exact_match = False
+        self.exact_match = 'starts_with'
         self.language = 'kapampangan'
         self.filter_popup = FilterPopup(self)
 
@@ -98,11 +98,33 @@ class SearchScreen(Screen):
     def set_match(self, match):
         self.exact_match = match
 
+    def get_search_text(self):
+        return self.ids.search_input.text
+
     def on_search(self):
-        pass
+        search_text = self.get_search_text()
+        if self.language == 'kapampangan':
+            db_helper.search_in_kapampangan(search_text, 1)
+        elif self.language == 'english':
+            db_helper.search_in_english(search_text, 1)
+        elif self.language == 'tagalog':
+            db_helper.search_in_tagalog(search_text, 1)
+        else:
+            # TODO :: Add logging
+            self.popup('Error message',
+                       'Invalid language. Please report.')
 
     def do_search(self):
         pass
+
+    def popup(self, title, message):
+        content = Label(text=message,
+                        font_size=20,
+                        color=[1, 1, 1, 1])
+        popup = Popup(title=title,
+                      content=content,
+                      size_hint=(0.4, 0.2))
+        popup.open()
 
 
 class FilterToggleBtn(ToggleButton):
