@@ -4,3 +4,8 @@ ekt_dictionary.db
 # Pipenv files
 Pipfile.lock
 Pipfile
+<<<<<<< HEAD
+=======
+
+__pycache__/
+>>>>>>> 8be98e496d52c1f78b3dbe51e2c624d0564ab3c1

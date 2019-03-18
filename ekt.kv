@@ -165,6 +165,7 @@ MyScreenManager:
                         on_release: root.show_filter_popup()
                     Button:
                         text: 'Search'
+                        on_release: root.on_search()
             Widget:
                 size_hint_y: 0.1
         Widget:       
@@ -183,6 +184,9 @@ MyScreenManager:
 <FilterLabel@Label+BorderBehavior>:
     borders: 2, 'solid', (1, 1, 1, 1)
 
+<FilterToggleBtn>:
+    group: 'language'
+
 <FilterPopup>:
     id: filter_popup
     size_hint: 0.4, 0.25
@@ -195,12 +199,12 @@ MyScreenManager:
                 id: filter_checkbox
                 size_hint_x: 0.2
                 active: False
-                on_release: root.set_exact_match(self.active)
+                on_release: root.screen.set_match(self.active)
             Label:
                 size_hint_x: 0.3
                 id: match_checkbox
                 text: 'Exact match'
-                font_size: 15
+                font_size: 20
                 halign: 'left'
                 valign: 'middle'
             Label:
@@ -213,23 +217,26 @@ MyScreenManager:
                 FilterToggleBtn:
                     id: kapampangan_btn
                     text: 'Kapampangan'
-                    group: 'language'
                     value: 'kapampangan'
-                    on_release: root.set_language(self.value)
+                    on_release: root.screen.set_language(self.value)
+
                 FilterToggleBtn:
                     id: tagalog_btn
                     text: 'Tagalog'
-                    group: 'language'
                     value: 'tagalog'
-                    on_release: root.set_language(self.value)
+                    on_release: root.screen.set_language(self.value)
+                    
                 FilterToggleBtn:
                     id: english_btn
                     text: 'English'
-                    group: 'language'
                     value: 'english'
-                    on_release: root.set_language(self.value)
+                    on_release: root.screen.set_language(self.value)
+                    
         Widget:
             size_hint_y: 0.1
+
+<ListScroll@ScrollView+BorderBehavior>:
+    borders: 2, 'solid', (1, 1, 1, 1)
 
 <ListScreen>:
     name: 'list'
@@ -241,16 +248,18 @@ MyScreenManager:
             SearchTextInput:
                 font_size: 25
                 size_hint: .8, .5
-        
-        ScrollView:
-            size_hint: 1, .8
-            GridLayout:
-                id: list_grid
-                orientation: 'vertical'
-                size_hint_y: None
-                height: self.minimum_height
-                row_default_height: 100
-                cols: 1
+        AnchorLayout:
+            size_hint_y: .8
+            ListScroll:
+                size_hint_x: 0.8
+                GridLayout:
+                    padding: 15, 0
+                    id: list_grid
+                    orientation: 'vertical'
+                    size_hint_y: None
+                    height: self.minimum_height
+                    row_default_height: 100
+                    cols: 1
         BoxLayout:
             orientation: 'vertical'
             size_hint: 1, .1

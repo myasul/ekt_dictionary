@@ -3,10 +3,11 @@
 # Imports from SQLite library
 import re
 import time
-from sqlalchemy import create_engine, asc, func, select
+from sqlalchemy import create_engine, asc
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from sqlalchemy.orm import sessionmaker
 from database_setup import Dictionary, Base
+import database_helper as DictDB
 
 # Imports from Kivy library
 from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition
@@ -25,9 +26,9 @@ from kivy.lang import Builder
 from kivy.app import App
 from kivy.config import Config
 from borderbehaviour import BorderBehavior
-Config.set('graphics', 'width', '700')
-Config.set('graphics', 'height', '1500')
-# Config.set('graphics', 'fullscreen', 0)
+Config.set('graphics', 'width', '500')
+Config.set('graphics', 'height', '1000')
+Config.set('graphics', 'fullscreen', 0)
 
 
 # Connect to the database and create a database session
@@ -41,7 +42,8 @@ class DictTextInput(TextInput):
     def insert_text(self, substring, from_undo=False):
         dict_regex = re.compile(r"^[-'\sa-z]+$", re.I | re.M)
         if dict_regex.search(substring) and len(self.text) <= 49:
-            return super(DictTextInput, self).insert_text(substring, from_undo=from_undo)
+            return super(DictTextInput, self)\
+                .insert_text(substring, from_undo=from_undo)
 
 
 class AddScreen(Screen):
@@ -54,9 +56,10 @@ class AddScreen(Screen):
         # TODO :: Make the error message's box size dynamic
         try:
             if not self.are_fields_empty():
-                new_dict_entry = Dictionary(tagalog=self.ids.t_input.text,
-                                            kapampangan=self.ids.k_input.text,
-                                            english=self.ids.e_input.text)
+                new_dict_entry = Dictionary(
+                    tagalog=self.ids.t_input.text,
+                    kapampangan=self.ids.k_input.text.lower(),
+                    english=self.ids.e_input.text)
                 session.add(new_dict_entry)
                 session.commit()
                 self.popup('Confirmation Message', 'Dictionary entry saved!')
@@ -80,7 +83,7 @@ class AddScreen(Screen):
     def are_fields_empty(self):
         if not all([self.ids.e_input.text,
                     self.ids.k_input.text,
-                    self.ids.t_input.text]):
+                    self.ids.t_inpeut.text]):
             return True
         return False
 
@@ -91,8 +94,40 @@ class DictInput(DictTextInput):
 class SearchScreen(Screen):
     def __init__(self, **kwargs):
         super(SearchScreen, self).__init__(**kwargs)
-        self.exact_match = BooleanProperty(False)
-        self.language = StringProperty()
+        self.exact_match = False
+        self.language = 'kapampangan'
+        self.filter_popup = FilterPopup(self)
+
+    def show_filter_popup(self):
+        self.filter_popup.open()
+
+    def set_language(self, language):
+        self.language = language
+
+    def set_match(self, match):
+        self.exact_match = match
+
+    def on_search(self):
+        pass
+
+    def do_search(self):
+        pass
+        # try:
+        #     return session.query(Dictionary)\
+        #         .filter(Dictionary.kapampangan.like("{}".format(search_str)))\
+        #         .filter(Dictionary.language == self.language)
+        #         .order_by(Dictionary.kapampangan.asc())\
+        #         .all()
+        # except IntegrityError:
+        #     # TODO :: Add logging
+        #     self.popup('Error Message', 'Error Occured. Please report.')
+        #     return None
+
+
+class FilterToggleBtn(ToggleButton):
+    def __init__(self, **kwargs):
+        super(FilterToggleBtn, self).__init__(**kwargs)
+        self.value = StringProperty(False)
 
     def show_filter_popup(self):
         filter_popup = FilterPopup()
@@ -121,7 +156,8 @@ class FilterToggleBtn(ToggleButton):
 class ListScreen(Screen):
     def on_pre_enter(self):
         all_entries = self.show_all_entries()
-        self.add_entry_widgets(all_entries)
+        if all_entries:
+            self.add_entry_widgets(all_entries)
 
     def on_leave(self):
         self.clear_entries()
@@ -136,29 +172,24 @@ class ListScreen(Screen):
             self.ids.list_grid.remove_widget(widget)
 
     def show_all_entries(self):
-        try:
-            return session.query(Dictionary) \
-                .order_by(Dictionary.kapampangan.asc()) \
-                .all()
-        except IntegrityError:
+        entries, error = DictDB.get_all_entries()
+        if error:
             # TODO :: Add logging
             self.popup('Error Message', 'Error Occured. Please report.')
-            return None
+        return entries
 
     def do_search(self, search_str):
         # TODO :: Make it dynamic so the user can search in all languages
         self.clear_entries()
         entries = self.search_text_kapampangan(search_str)
-        print(entries)
         if len(entries) > 0:
             self.add_entry_widgets(entries)
 
     def search_text_kapampangan(self, search_str):
         try:
-            print("Search String: {}".format(search_str))
-            return session.query(Dictionary) \
-                .filter(Dictionary.kapampangan.like("{}%".format(search_str))) \
-                .order_by(Dictionary.kapampangan.asc()) \
+            return session.query(Dictionary)\
+                .filter(Dictionary.kapampangan.like("{}%".format(search_str)))\
+                .order_by(Dictionary.kapampangan.asc())\
                 .all()
         except IntegrityError:
             # TODO :: Add logging
@@ -170,12 +201,14 @@ class ListScreen(Screen):
 
         self.ids.list_grid.rows = row_num
         for entry in entries:
-            self.ids.list_grid.add_widget(
-                DictEntry(
-                    text=entry.kapampangan,
-                    font_size=25,
-                )
+            dict_entry = DictEntry(
+                text=entry.kapampangan.lower(),
+                font_size=25,
+                halign='left',
+                valign='middle'
             )
+            dict_entry.bind(size=dict_entry.setter('text_size'))
+            self.ids.list_grid.add_widget(dict_entry)
 
     def popup(self, title, message):
         content = Label(text=message,
@@ -380,8 +413,11 @@ class DeletePopup(Popup):
         super(DeletePopup, self).__init__(**kwargs)
         self.screen = screen
 
+
 class FilterPopup(Popup):
-    pass
+    def __init__(self, screen, **kwargs):
+        super(FilterPopup, self).__init__(**kwargs)
+        self.screen = screen
 
 
 class MyScreenManager(ScreenManager):
