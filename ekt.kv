@@ -185,15 +185,27 @@ MyScreenManager:
 <FilterLabel@Label+BorderBehavior>:
     borders: 2, 'solid', (1, 1, 1, 1)
 
-<FilterSearchModeGrid@GridLayout+BorderBehavior>:
+<FilterBorderGrid@GridLayout+BorderBehavior>:
     borders: 2, 'solid', (1, 1, 1, 1)
-
-<FilterSearchLanguage@GridLayout+BorderBehavior>:
-    borders: 2, 'solid', (1, 1, 1, 1)
-
 
 <FilterToggleBtn>:
     group: 'language'
+
+<FilterLabel@Label>:
+    size_hint_x: None
+    width: 100
+    size: self.texture_size
+    text: 'Exact match'
+    font_size: 20
+    halign: 'left'
+    valign: 'middle'
+
+<FilterCheckBox@CheckBox>:
+    size_hint_x: None
+    width: 50
+    color: 1, 0, 1, 4
+    allow_no_selection: False
+
 
 <FilterPopup>:
     id: filter_popup
@@ -203,89 +215,104 @@ MyScreenManager:
         orientation: 'vertical'
         Label:
             size_hint_y: 0.2
-            id: search_mode
             text: 'Search Mode'
             font_size: 20
-        FilterSearchModeGrid:
+        FilterBorderGrid:
             size_hint_y: 0.6
             cols: 1
             rows: 5
             Widget:
                 size_hint_y: 0.1
             BoxLayout:
-                CheckBox:
-                    size_hint_x: 0.4
+                FilterCheckBox:
                     id: match
                     active: False
                     on_release: root.screen.set_match(self.id)
                     group: 'search_mode'
-                    color: 1, 0, 1, 4
-                Label:
-                    size_hint_x: 0.6
+                FilterLabel:
                     text: 'Exact match'
-                    font_size: 20
-                    halign: 'left'
-                    valign: 'middle'
                 Widget:
             BoxLayout:
-                CheckBox:
-                    size_hint_x: 0.4
+                FilterCheckBox:
                     id: contains
                     active: False
                     group: 'search_mode'
                     on_release: root.screen.set_match(self.id)
-                    color: 1, 0, 1, 4
-                Label:
-                    size_hint_x: 0.4
+                FilterLabel:
                     text: 'Contains'
-                    font_size: 20
-                    halign: 'left'
-                    valign: 'middle'
                 Widget:
             BoxLayout:
-                CheckBox:
-                    size_hint_x: 0.4
+                FilterCheckBox:
                     id: starts_with
                     active: True
                     group: 'search_mode'
                     on_release: root.screen.set_match(self.id)
-                    color: 1, 0, 1, 4
-                Label:
-                    size_hint_x: 0.6
+                FilterLabel:
                     text: 'Starts with'
-                    font_size: 20
-                    halign: 'left'
-                    valign: 'middle'
                 Widget:
             Widget:
                 size_hint_y: 0.1w
         Label:
             size_hint_y: 0.2
-            id: search_mode
             text: 'Language to Search'
             font_size: 20
-        AnchorLayout:
+        FilterBorderGrid:
+            size_hint_y: 0.6
+            cols: 1
+            rows: 5
+            Widget:
+                size_hint_y: 0.1
             BoxLayout:
-                orientation: 'vertical'
-                size_hint_x: 0.6
-                spacing: 20
-                FilterToggleBtn:
-                    id: kapampangan_btn
+                FilterCheckBox:
+                    id: kapampangan_cb
+                    active: False
+                    on_release: root.screen.set_language(self.id)
+                    group: 'language'
+                FilterLabel:
                     text: 'Kapampangan'
-                    value: 'kapampangan'
-                    on_release: root.screen.set_language(self.value)
-
-                FilterToggleBtn:
-                    id: tagalog_btn
+                Widget:
+            BoxLayout:
+                FilterCheckBox:
+                    id: english_cb
+                    active: False
+                    group: 'language'
+                    on_release: root.screen.set_language(self.id)
+                FilterLabel:
                     text: 'Tagalog'
-                    value: 'tagalog'
-                    on_release: root.screen.set_language(self.value)
-                    
-                FilterToggleBtn:
-                    id: english_btn
+                Widget:
+            BoxLayout:
+                FilterCheckBox:
+                    id: tagalog_cb
+                    active: True
+                    group: 'language'
+                    on_release: root.screen.set_language(self.id)
+                FilterLabel:
                     text: 'English'
-                    value: 'english'
-                    on_release: root.screen.set_language(self.value)
+                Widget:
+            Widget:
+                size_hint_y: 0.1
+        # AnchorLayout:
+        #     BoxLayout:
+        #         orientation: 'vertical'
+        #         size_hint_x: 0.6
+        #         spacing: 20
+        #         FilterToggleBtn:
+        #             id: kapampangan_btn
+        #             text: 'Kapampangan'
+        #             value: 'kapampangan'
+        #             on_release: root.screen.set_language(self.value)
+
+        #         FilterToggleBtn:
+        #             id: tagalog_btn
+        #             text: 'Tagalog'
+        #             value: 'tagalog'
+        #             on_release: root.screen.set_language(self.value)
+                    
+        #         FilterToggleBtn:
+        #             id: english_btn
+        #             text: 'English'
+        #             value: 'english'
+        #             on_release: root.screen.set_language(self.value)
                     
         Widget:
             size_hint_y: 0.1
