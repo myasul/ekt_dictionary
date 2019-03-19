@@ -81,7 +81,6 @@ class AddScreen(Screen):
 class DictInput(DictTextInput):
     pass
 
-
 class SearchScreen(Screen):
     def __init__(self, **kwargs):
         super(SearchScreen, self).__init__(**kwargs)
