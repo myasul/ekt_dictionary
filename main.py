@@ -156,6 +156,7 @@ class SearchScreen(Screen):
                 font_size=25,
                 halign='left',
                 valign='middle',
+                screen='search',
                 kapampangan=entry.kapampangan,
                 tagalog=entry.tagalog,
                 english=entry.english
@@ -229,6 +230,7 @@ class ListScreen(Screen):
                 font_size=25,
                 halign='left',
                 valign='middle',
+                screen='list',
                 kapampangan=entry.kapampangan,
                 tagalog=entry.tagalog,
                 english=entry.english
@@ -264,6 +266,7 @@ class DictEntry(Label):
     kapampangan = StringProperty()
     tagalog = StringProperty()
     english = StringProperty()
+    screen = StringProperty()
 
     def on_touch_down(self, touch):
         if self.collide_point(touch.x, touch.y):
@@ -275,6 +278,7 @@ class DictEntry(Label):
             dict_screen.kapampangan = self.kapampangan
             dict_screen.english = self.english
             dict_screen.tagalog = self.tagalog
+            dict_screen.back_screen = self.screen
 
             # Redirect to Dictionary Screen
             screen_manager.current = 'dict_entry'
@@ -290,6 +294,7 @@ class DictScreen(Screen):
         self.kapampangan = StringProperty()
         self.tagalog = StringProperty()
         self.english = StringProperty()
+        self.back_screen = StringProperty()
         self.db_object = None
 
     def set_dict_entry(self, entry):
@@ -359,6 +364,9 @@ class DictScreen(Screen):
 
         # Redirect to Edit Screen
         screen_manager.current = 'edit_entry'
+
+    def on_back(self):
+        self.manager.current = self.back_screen
 
     def go_to_list_screen(self, *args):
         self.manager.current = 'list'
