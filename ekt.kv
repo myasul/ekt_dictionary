@@ -142,14 +142,14 @@ MyScreenManager:
     font_size: 40
     write_tab: False
 
-<SearchBox@BoxLayout+BorderBehavior>:
+<SearchBox@BoxLayout>:
     borders: 2, 'solid', (1, 1, 1, 1)
 
 <SearchScreen>:
     name: 'search'
     BoxLayout:
         orientation: 'vertical'
-        SearchBox:
+        BoxLayout:
             size_hint_y: 0.2
             orientation: 'vertical'
             AnchorLayout:
@@ -169,8 +169,18 @@ MyScreenManager:
                         on_release: root.on_search()
             Widget:
                 size_hint_y: 0.1
-        Widget:       
-            size_hint_y: 0.7   
+        AnchorLayout:
+            size_hint_y: 0.7
+            ListScroll:
+                size_hint_x: 0.8
+                GridLayout:
+                    padding: 15, 0
+                    id: list_grid
+                    orientation: 'vertical'
+                    size_hint_y: None
+                    height: self.minimum_height
+                    row_default_height: 100
+                    cols: 1   
         BoxLayout:
             orientation: 'vertical'
             size_hint_y: 0.1
@@ -227,7 +237,8 @@ MyScreenManager:
                 FilterCheckBox:
                     id: match
                     active: False
-                    on_release: root.screen.set_match(self.id)
+                    value: 'exact_match'
+                    on_release: root.screen.set_match(self.value)
                     group: 'search_mode'
                 FilterLabel:
                     text: 'Exact match'
@@ -236,8 +247,9 @@ MyScreenManager:
                 FilterCheckBox:
                     id: contains
                     active: False
+                    value: 'contains'
                     group: 'search_mode'
-                    on_release: root.screen.set_match(self.id)
+                    on_release: root.screen.set_match(self.value)
                 FilterLabel:
                     text: 'Contains'
                 Widget:
@@ -245,13 +257,14 @@ MyScreenManager:
                 FilterCheckBox:
                     id: starts_with
                     active: True
+                    value: 'starts_with'
                     group: 'search_mode'
-                    on_release: root.screen.set_match(self.id)
+                    on_release: root.screen.set_match(self.value)
                 FilterLabel:
                     text: 'Starts with'
                 Widget:
             Widget:
-                size_hint_y: 0.1w
+                size_hint_y: 0.1
         Label:
             size_hint_y: 0.2
             text: 'Language to Search'
@@ -265,56 +278,35 @@ MyScreenManager:
             BoxLayout:
                 FilterCheckBox:
                     id: kapampangan_cb
-                    active: False
-                    on_release: root.screen.set_language(self.id)
+                    active: True
+                    value: 'kapampangan'
+                    on_release: root.screen.set_language(self.value)
                     group: 'language'
                 FilterLabel:
                     text: 'Kapampangan'
                 Widget:
             BoxLayout:
                 FilterCheckBox:
-                    id: english_cb
+                    id: tagalog_cb
                     active: False
+                    value: 'tagalog'
                     group: 'language'
-                    on_release: root.screen.set_language(self.id)
+                    on_release: root.screen.set_language(self.value)
                 FilterLabel:
                     text: 'Tagalog'
                 Widget:
             BoxLayout:
                 FilterCheckBox:
-                    id: tagalog_cb
-                    active: True
+                    id: english_cb
+                    active: False
+                    value: 'english'
                     group: 'language'
-                    on_release: root.screen.set_language(self.id)
+                    on_release: root.screen.set_language(self.value)
                 FilterLabel:
                     text: 'English'
                 Widget:
             Widget:
-                size_hint_y: 0.1
-                
-        # AnchorLayout:
-        #     BoxLayout:
-        #         orientation: 'vertical'
-        #         size_hint_x: 0.6
-        #         spacing: 20
-        #         FilterToggleBtn:
-        #             id: kapampangan_btn
-        #             text: 'Kapampangan'
-        #             value: 'kapampangan'
-        #             on_release: root.screen.set_language(self.value)
-
-        #         FilterToggleBtn:
-        #             id: tagalog_btn
-        #             text: 'Tagalog'
-        #             value: 'tagalog'
-        #             on_release: root.screen.set_language(self.value)
-                    
-        #         FilterToggleBtn:
-        #             id: english_btn
-        #             text: 'English'
-        #             value: 'english'
-        #             on_release: root.screen.set_language(self.value)
-                    
+                size_hint_y: 0.1                    
         Widget:
             size_hint_y: 0.1
 

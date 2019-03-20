@@ -169,8 +169,20 @@ MyScreenManager:
                         on_release: root.on_search()
             Widget:
                 size_hint_y: 0.1
-        Widget:       
-            size_hint_y: 0.7   
+        AnchorLayout:
+            id: list_grid_0
+            size_hint_y: 0.7
+            ListScroll:
+                size_hint_x: 0.8
+                id: list_grid_1
+                GridLayout:
+                    padding: 15, 0
+                    id: list_grid_2
+                    orientation: 'vertical'
+                    size_hint_y: None
+                    height: self.minimum_height
+                    row_default_height: 100
+                    cols: 1   
         BoxLayout:
             orientation: 'vertical'
             size_hint_y: 0.1
@@ -251,7 +263,7 @@ MyScreenManager:
                     text: 'Starts with'
                 Widget:
             Widget:
-                size_hint_y: 0.1
+                size_hint_y: 0.1w
         Label:
             size_hint_y: 0.2
             text: 'Language to Search'
@@ -291,6 +303,7 @@ MyScreenManager:
                 Widget:
             Widget:
                 size_hint_y: 0.1
+                
         # AnchorLayout:
         #     BoxLayout:
         #         orientation: 'vertical'

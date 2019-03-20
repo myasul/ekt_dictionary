@@ -18,13 +18,14 @@ from kivy.uix.button import Button
 from kivy.uix.togglebutton import ToggleButton
 from kivy.uix.label import Label
 from kivy.uix.popup import Popup
+from kivy.uix.checkbox import CheckBox
 from kivy.clock import Clock
 from kivy.lang import Builder
 from kivy.app import App
 from kivy.config import Config
 from borderbehaviour import BorderBehavior
-Config.set('graphics', 'width', '500')
-Config.set('graphics', 'height', '1000')
+Config.set('graphics', 'width', '700')
+Config.set('graphics', 'height', '800')
 Config.set('graphics', 'fullscreen', 0)
 
 import re
@@ -84,9 +85,14 @@ class DictInput(DictTextInput):
 class SearchScreen(Screen):
     def __init__(self, **kwargs):
         super(SearchScreen, self).__init__(**kwargs)
-        self.exact_match = 'starts_with'
+        self.search_mode = 1
         self.language = 'kapampangan'
         self.filter_popup = FilterPopup(self)
+        self.search_codes = {
+                            "exact_match": 0,
+                            "starts with": 1,
+                            "contains": 2,
+                            }
 
     def show_filter_popup(self):
         self.filter_popup.open()
@@ -94,27 +100,68 @@ class SearchScreen(Screen):
     def set_language(self, language):
         self.language = language
 
-    def set_match(self, match):
-        self.exact_match = match
+    def set_search_mode(self, match):
+        self.search_mode = self.search_codes.get(match)
 
     def get_search_text(self):
-        return self.ids.search_input.text
+        return self.ids.search_input.text        
 
     def on_search(self):
-        search_text = self.get_search_text()
-        if self.language == 'kapampangan':
-            db_helper.search_in_kapampangan(search_text, 1)
-        elif self.language == 'english':
-            db_helper.search_in_english(search_text, 1)
-        elif self.language == 'tagalog':
-            db_helper.search_in_tagalog(search_text, 1)
+        results, error = self.do_search()
+        if error:
+            # TODO :: Add logging
+            self.popup('Error Message', 'Error Occured. Please report.')
+            return
+
+        if results is None:
+            self.popup('Message', 'No results found!')
+        else:
+            self.display_results(results)
+
+    def do_search(self):
+        self.clear_results()
+        if self.search_mode:
+            search_text = self.get_search_text()
+            if self.language == 'kapampangan':
+                return db_helper.search_in_kapampangan(search_text, self.search_mode)
+            elif self.language == 'english':
+                return db_helper.search_in_english(search_text, self.search_mode)
+            elif self.language == 'tagalog':
+                return db_helper.search_in_tagalog(search_text, self.search_mode)
+            else:
+                # TODO :: Add logging
+                self.popup('Error message',
+                        'Invalid language. Please report.')
         else:
             # TODO :: Add logging
             self.popup('Error message',
-                       'Invalid language. Please report.')
+                    'Invalid language. Please report.')
 
-    def do_search(self):
-        pass
+    def clear_results(self):
+        delete_widgets = []
+        for widget in self.ids.list_grid.children:
+            if isinstance(widget, DictEntry):
+                delete_widgets.append(widget)
+
+        for widget in delete_widgets:
+            self.ids.list_grid.remove_widget(widget)
+
+    def display_results(self, entries):
+        row_num = len(entries)
+        self.ids.list_grid.rows = row_num
+        for entry in entries:
+            # print(db_helper.object_as_dict(entry))
+            dict_entry = DictEntry(
+                text=entry.kapampangan,
+                font_size=25,
+                halign='left',
+                valign='middle',
+                kapampangan=entry.kapampangan,
+                tagalog=entry.tagalog,
+                english=entry.english
+            )
+            dict_entry.bind(size=dict_entry.setter('text_size'))
+            self.ids.list_grid.add_widget(dict_entry)
 
     def popup(self, title, message):
         content = Label(text=message,
@@ -154,6 +201,7 @@ class ListScreen(Screen):
         if error:
             # TODO :: Add logging
             self.popup('Error Message', 'Error Occured. Please report.')
+            return
         return entries
 
     def do_search(self, search_str):
@@ -168,6 +216,7 @@ class ListScreen(Screen):
         if error:
             # TODO :: Add logging
             self.popup('Error Message', 'Error Occured. Please report.')
+            return
         return entries
 
     def add_entry_widgets(self, entries):
@@ -187,38 +236,6 @@ class ListScreen(Screen):
             dict_entry.bind(size=dict_entry.setter('text_size'))
             self.ids.list_grid.add_widget(dict_entry)
 
-    def do_search(self, search_str):
-        # TODO :: Make it dynamic so the user can search in all languages
-        self.clear_entries()
-        entries = self.search_text_kapampangan(search_str)
-        print(entries)
-        if len(entries) > 0:
-            self.add_entry_widgets(entries)
-
-    def search_text_kapampangan(self, search_str):
-        try:
-            print("Search String: {}".format(search_str))
-            return session.query(Dictionary) \
-                .filter(Dictionary.kapampangan.like("{}%".format(search_str))) \
-                .order_by(Dictionary.kapampangan.asc()) \
-                .all()
-        except IntegrityError:
-            # TODO :: Add logging
-            self.popup('Error Message', 'Error Occured. Please report.')
-            return None
-
-    def add_entry_widgets(self, entries):
-        row_num = len(entries)
-
-        self.ids.list_grid.rows = row_num
-        for entry in entries:
-            self.ids.list_grid.add_widget(
-                DictEntry(
-                    text=entry.kapampangan,
-                    font_size=25,
-                )
-            )        
-
     def popup(self, title, message):
         content = Label(text=message,
                         font_size=20,
@@ -227,25 +244,6 @@ class ListScreen(Screen):
                       content=content,
                       size_hint=(0.4, 0.2))
         popup.open()
-
-class SearchTextInput(TextInput):
-    def __init__(self, **kwargs):
-        super(SearchTextInput, self).__init__(**kwargs)
-
-    def insert_text(self, substring, from_undo=False):
-        dict_regex = re.compile(r"^[-'\sa-z]+$", re.I | re.M)
-        if dict_regex.search(substring):
-            return super(SearchTextInput, self).insert_text(substring, from_undo=from_undo)
-
-    def keyboard_on_key_up(self, window, keycode):
-        print("Search Text: {}".format(self.text))
-        self.search_matched_entries()
-        return super(SearchTextInput, self).keyboard_on_key_up(window, keycode)
-
-    def search_matched_entries(self):
-        screen_manager = App.get_running_app().root
-        list_screen = screen_manager.get_screen('list')
-        list_screen.do_search(self.text)
 
 
 class SearchTextInput(DictTextInput):
@@ -308,6 +306,7 @@ class DictScreen(Screen):
 
             if not entry:
                 self.popup('Error Message', 'Error occured. Please report.')
+                return
 
             self.set_dict_entry(entry)
             self.ids.kapampangan_ds.text = self.kapampangan
@@ -475,14 +474,16 @@ class DeletePopup(Popup):
         super(DeletePopup, self).__init__(**kwargs)
         self.screen = screen
 
-class FilterPopup(Popup):
-    pass
-
 
 class FilterPopup(Popup):
     def __init__(self, screen, **kwargs):
         super(FilterPopup, self).__init__(**kwargs)
         self.screen = screen
+
+class FilterCheckBox(CheckBox):
+    value = StringProperty()
+    def __init__(self, **kwargs):
+        super(FilterCheckBox, self).__init__(**kwargs)
 
 
 class MyScreenManager(ScreenManager):

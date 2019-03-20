@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, asc
+from sqlalchemy import create_engine, asc, inspect
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from sqlalchemy.orm import sessionmaker
 from database_setup import Dictionary, Base
@@ -16,6 +16,11 @@ SEARCH_MODES = [
     "{}%",  # Starts with
     "%{}%"  #
 ]
+
+
+def object_as_dict(obj):
+    return {c.key: getattr(obj, c.key)
+            for c in inspect(obj).mapper.column_attrs}
 
 
 def get_all_entries():
