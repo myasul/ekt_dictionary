@@ -341,7 +341,7 @@ class DictScreen(Screen):
                 # all information needed simultaneously
                 self.popup('Confirmation Message',
                            'Dictionary entry deleted!')
-                Clock.schedule_once(self.go_to_list_screen, 1.5)
+                Clock.schedule_once(self.on_back, 1.5)
             except SQLAlchemyError as e:
                 # TODO :: Add logging
                 print("Error: {}".format(e))

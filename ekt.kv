@@ -238,7 +238,7 @@ MyScreenManager:
                     id: match
                     active: False
                     value: 'exact_match'
-                    on_release: root.screen.set_match(self.value)
+                    on_release: root.screen.set_search_mode(self.value)
                     group: 'search_mode'
                 FilterLabel:
                     text: 'Exact match'
@@ -249,7 +249,7 @@ MyScreenManager:
                     active: False
                     value: 'contains'
                     group: 'search_mode'
-                    on_release: root.screen.set_match(self.value)
+                    on_release: root.screen.set_search_mode(self.value)
                 FilterLabel:
                     text: 'Contains'
                 Widget:
@@ -259,7 +259,7 @@ MyScreenManager:
                     active: True
                     value: 'starts_with'
                     group: 'search_mode'
-                    on_release: root.screen.set_match(self.value)
+                    on_release: root.screen.set_search_mode(self.value)
                 FilterLabel:
                     text: 'Starts with'
                 Widget:
