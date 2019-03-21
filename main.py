@@ -94,6 +94,10 @@ class SearchScreen(Screen):
                             "contains": 2,
                             }
 
+    def on_pre_enter(self):
+        self.ids.search_input.text = ""
+        self.on_search()
+
     def show_filter_popup(self):
         self.filter_popup.open()
 
@@ -365,7 +369,7 @@ class DictScreen(Screen):
         # Redirect to Edit Screen
         screen_manager.current = 'edit_entry'
 
-    def on_back(self):
+    def on_back(self, *args):
         self.manager.current = self.back_screen
 
     def go_to_list_screen(self, *args):
