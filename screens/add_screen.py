@@ -3,7 +3,7 @@ from kivy.uix.screenmanager import Screen
 from kivy.uix.label import Label
 from sqlalchemy.exc import IntegrityError
 from model import database_helper as db_helper
-from components.components import AutoDismissPopup
+from components.components import AutoDismissPopup, DictTextInput
 
 
 class AddScreen(Screen):
@@ -46,3 +46,6 @@ class AddScreen(Screen):
                 self.ids.t_input.text]):
             return True
         return False
+
+class DictInput(DictTextInput):
+    pass

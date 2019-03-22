@@ -52,6 +52,9 @@ class DictEntry(Label):
             dict_screen.tagalog = self.tagalog
             dict_screen.back_screen = self.screen
 
+            # Redirect to Dictionary Screen
+            screen_manager.current = 'dict_entry'
+
 
 class DictTextInput(TextInput):
     def insert_text(self, substring, from_undo=False):
@@ -59,6 +62,3 @@ class DictTextInput(TextInput):
         if dict_regex.search(substring) and len(self.text) <= 49:
             return super(DictTextInput, self)\
                 .insert_text(substring, from_undo=from_undo)
-
-            # Redirect to Dictionary Screen
-            screen_manager.current = 'dict_entry'
