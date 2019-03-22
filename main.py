@@ -4,7 +4,7 @@ import re
 
 # Imports from SQLite library
 from sqlalchemy.exc import SQLAlchemyError, IntegrityError
-import database_helper as db_helper
+import model.database_helper as db_helper
 
 # Imports from Kivy library
 from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition
@@ -23,10 +23,14 @@ from kivy.clock import Clock
 from kivy.lang import Builder
 from kivy.app import App
 from kivy.config import Config
+from kivy.logger import Logger
 from borderbehaviour import BorderBehavior
 Config.set('graphics', 'width', '700')
 Config.set('graphics', 'height', '800')
 Config.set('graphics', 'fullscreen', 0)
+
+# Kivy screens
+from screens.add_screen import AddScreen
 
 import re
 
@@ -36,48 +40,6 @@ class DictTextInput(TextInput):
         if dict_regex.search(substring) and len(self.text) <= 49:
             return super(DictTextInput, self)\
                 .insert_text(substring, from_undo=from_undo)
-
-
-class AddScreen(Screen):
-    def clear_text_inputs(self):
-        self.ids.e_input.text = ''
-        self.ids.k_input.text = ''
-        self.ids.t_input.text = ''
-
-    def add_entry(self):
-        # TODO :: Make the error message's box size dynamic
-        if self.has_no_empty_fields():
-            try:
-                new_dict_entry = db_helper.Dictionary(
-                    tagalog=self.ids.t_input.text,
-                    kapampangan=self.ids.k_input.text.lower(),
-                    english=self.ids.e_input.text)
-                db_helper.session.add(new_dict_entry)
-                db_helper.session.commit()
-                self.popup('Confirmation Message', 'Dictionary entry saved!')
-                self.clear_text_inputs()
-            except IntegrityError:
-                self.popup('Error Message', 'Entry already exists!')
-                db_helper.session.rollback()
-                self.clear_text_inputs()
-        else:
-            self.popup('Error Message', 'All the fields are mandatory!')
-
-    def popup(self, title, message):
-        content = Label(text=message,
-                        font_size=20,
-                        color=[1, 1, 1, 1])
-        popup = AutoDismissPopup(title=title,
-                                 content=content,
-                                 size_hint=(0.4, 0.2))
-        popup.open()
-
-    def has_no_empty_fields(self):
-        if all([self.ids.e_input.text,
-                self.ids.k_input.text,
-                self.ids.t_input.text]):
-            return True
-        return False
 
 class DictInput(DictTextInput):
     pass
@@ -113,7 +75,7 @@ class SearchScreen(Screen):
     def on_search(self):
         results, error = self.do_search()
         if error:
-            # TODO :: Add logging
+            Logging.info()
             self.popup('Error Message', 'Error Occured. Please report.')
             return
 

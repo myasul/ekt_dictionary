@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine, asc, inspect
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from sqlalchemy.orm import sessionmaker
-from database_setup import Dictionary, Base
+from model.database_setup import Dictionary, Base
 
 # Connect to the database and create a database session
 engine = create_engine('sqlite:///ekt_dictionary.db')
