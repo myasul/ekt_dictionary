@@ -21,19 +21,6 @@ class DeletePopup(Popup):
         self.screen = screen
 
 
-class FilterPopup(Popup):
-    def __init__(self, screen, **kwargs):
-        super(FilterPopup, self).__init__(**kwargs)
-        self.screen = screen
-
-
-class FilterCheckBox(CheckBox):
-    value = StringProperty()
-
-    def __init__(self, **kwargs):
-        super(FilterCheckBox, self).__init__(**kwargs)
-
-
 class DictEntry(Label):
     kapampangan = StringProperty()
     tagalog = StringProperty()

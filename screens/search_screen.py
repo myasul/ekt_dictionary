@@ -1,7 +1,10 @@
 from kivy.uix.screenmanager import Screen
 from kivy.uix.label import Label
 from kivy.uix.popup import Popup
-from components.components import FilterPopup, DictEntry
+from kivy.uix.checkbox import CheckBox
+from kivy.properties import StringProperty
+
+from components.components import DictEntry
 import model.database_helper as db_helper
 
 class SearchScreen(Screen):
@@ -97,3 +100,16 @@ class SearchScreen(Screen):
                       content=content,
                       size_hint=(0.4, 0.2))
         popup.open()
+
+
+class FilterPopup(Popup):
+    def __init__(self, screen, **kwargs):
+        super(FilterPopup, self).__init__(**kwargs)
+        self.screen = screen
+
+
+class FilterCheckBox(CheckBox):
+    value = StringProperty()
+
+    def __init__(self, **kwargs):
+        super(FilterCheckBox, self).__init__(**kwargs)
