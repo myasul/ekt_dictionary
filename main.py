@@ -31,6 +31,7 @@ Config.set('graphics', 'fullscreen', 0)
 
 # Kivy screens
 from screens.add_screen import AddScreen
+from screens.search_screen import SearchScreen
 
 import re
 
@@ -75,7 +76,6 @@ class SearchScreen(Screen):
     def on_search(self):
         results, error = self.do_search()
         if error:
-            Logging.info()
             self.popup('Error Message', 'Error Occured. Please report.')
             return
 
