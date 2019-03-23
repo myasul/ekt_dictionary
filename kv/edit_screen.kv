@@ -1,0 +1,45 @@
+#:import BorderBehavior borderbehaviour
+
+<EditScreen>:
+    name: 'edit_entry'
+    BoxLayout:
+        orientation: 'vertical'
+        GridLayout:
+            orientation: 'vertical'
+            size_hint: 1, .9
+            row_default_height: 100
+            cols: 1
+            rows: 6
+            DSLabel:
+                text: 'Kapampangan'
+            AnchorLayout:
+                EditInput:
+                    id: kapampangan_es
+            DSLabel:
+                text: 'Tagalog'
+            AnchorLayout:
+                EditInput:
+                    id: tagalog_es
+            DSLabel:
+                text: 'English'
+            AnchorLayout:
+                EditInput:
+                    id: english_es
+
+        BoxLayout:
+            size_hint: 1, .1
+            orientation: 'horizontal'
+            DictScreenBtn:
+                text: 'Back'
+                on_release: root.manager.current = 'dict_entry'
+            Widget:
+            DictScreenBtn:
+                text: 'Save'
+                on_release: root.on_save()
+
+<EditInput>:
+    size_hint: None, None
+    height: 70
+    width: 600
+    font_size: 20
+    write_tab: False

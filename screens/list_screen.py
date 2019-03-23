@@ -2,9 +2,14 @@ from kivy.app import App
 from kivy.uix.screenmanager import Screen
 from kivy.uix.popup import Popup
 from kivy.uix.label import Label
+from kivy.lang import Builder
+import os
 
 from components.components import DictTextInput, DictEntry
 import model.database_helper as db_helper
+
+path = os.path.dirname(os.path.abspath(__file__))
+ekt = Builder.load_file(path + "/../kv/list_screen.kv")
 
 
 class ListScreen(Screen):

@@ -1,0 +1,70 @@
+<DictInput>:
+    font_size: 20
+    # font_size: 30
+    size_hint: None, None
+    width: 600
+    height: 50
+    # height: 120
+    write_tab: False
+
+<ASLabel@Label>:
+    padding: 5, 5
+    # padding: 30, 30
+    color: 1, 1, 1, 1
+    font_size: 20
+    # font_size: 30
+    size: self.texture_size
+    size_hint_y: None
+
+<AddScreen>:
+    name: 'add'
+    BoxLayout:
+        orientation: 'vertical'
+        AnchorLayout:
+            size_hint: 1, .9
+            GridLayout:
+                rows: 7
+                cols: 1
+                padding: 10, 10, 10, 10
+                ASLabel:
+                    text: 'Kapampangan'
+                AnchorLayout:
+                    size_hint_y: None
+                    height: 150
+                    DictInput:
+                        id: k_input
+                ASLabel:
+                    text: 'Tagalog'
+                AnchorLayout:
+                    size_hint_y: None
+                    height: 150
+                    DictInput:
+                        id: t_input
+                ASLabel:
+                    text: 'English'
+                AnchorLayout:
+                    size_hint_y: None
+                    height: 150
+                    DictInput:
+                        id: e_input
+                AnchorLayout:
+                    size_hint_y: None
+                    height: 70
+                    # height: 100
+                    Button:
+                        id: 'add_to_dict'
+                        text: 'Save'
+                        font_size: 30
+                        size_hint: 0.3, 1
+                        on_release: root.add_entry()
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: 1, .1
+            Button:
+                size_hint: None, None
+                height: 50
+                id: home_button_2
+                text: 'Back'
+                font_size: 20
+                on_release: root.manager.current = 'home'
+                

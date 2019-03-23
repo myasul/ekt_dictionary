@@ -1,13 +1,19 @@
 from sqlalchemy.exc import SQLAlchemyError
+import os
 
 from kivy.app import App
 from kivy.uix.screenmanager import Screen
 from kivy.uix.label import Label
 from kivy.clock import Clock
 from kivy.properties import StringProperty
+from kivy.lang import Builder
 
 from components.components import DeletePopup, AutoDismissPopup
 import model.database_helper as db_helper
+
+path = os.path.dirname(os.path.abspath(__file__))
+ekt = Builder.load_file(path + "/../kv/dict_screen.kv")
+
 
 class DictScreen(Screen):
     def __init__(self, **kwargs):

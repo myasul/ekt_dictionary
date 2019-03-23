@@ -15,6 +15,6 @@ class Dictionary(Base):
     date_created = Column(DateTime(timezone=True), server_default=func.now())
 
 
-engine = create_engine('sqlite:///ekt_dictionary.db')
+engine = create_engine('sqlite:///model/ekt_dictionary.db')
 
 Base.metadata.create_all(engine)

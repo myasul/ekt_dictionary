@@ -4,7 +4,7 @@ from sqlalchemy.orm import sessionmaker
 from model.database_setup import Dictionary, Base
 
 # Connect to the database and create a database session
-engine = create_engine('sqlite:///ekt_dictionary.db')
+engine = create_engine('sqlite:///model/ekt_dictionary.db')
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine, autoflush=True)
 session = DBSession()

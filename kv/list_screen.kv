@@ -1,0 +1,36 @@
+#:import BorderBehavior borderbehaviour
+
+<ListScroll@ScrollView+BorderBehavior>:
+    borders: 2, 'solid', (1, 1, 1, 1)
+
+<ListScreen>:
+    name: 'list'
+    BoxLayout:
+        id: list_box
+        orientation: 'vertical'
+        AnchorLayout:
+            size_hint_y: .1
+            SearchTextInput:
+                font_size: 25
+                size_hint: .8, .5
+        AnchorLayout:
+            size_hint_y: .8
+            ListScroll:
+                size_hint_x: 0.8
+                GridLayout:
+                    padding: 15, 0
+                    id: list_grid
+                    orientation: 'vertical'
+                    size_hint_y: None
+                    height: self.minimum_height
+                    row_default_height: 100
+                    cols: 1
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: 1, .1
+            Button:
+                size_hint: None, None
+                height: 50
+                text: 'Back'
+                font_size: 20
+                on_release: root.manager.current = 'home'

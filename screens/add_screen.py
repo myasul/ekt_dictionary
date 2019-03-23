@@ -1,9 +1,14 @@
 from kivy.app import App
 from kivy.uix.screenmanager import Screen
 from kivy.uix.label import Label
+from kivy.lang import Builder
+import os
 from sqlalchemy.exc import IntegrityError
 from model import database_helper as db_helper
 from components.components import AutoDismissPopup, DictTextInput
+
+path = os.path.dirname(os.path.abspath(__file__))
+ekt = Builder.load_file(path + "/../kv/add_screen.kv")
 
 
 class AddScreen(Screen):
@@ -46,6 +51,7 @@ class AddScreen(Screen):
                 self.ids.t_input.text]):
             return True
         return False
+
 
 class DictInput(DictTextInput):
     pass

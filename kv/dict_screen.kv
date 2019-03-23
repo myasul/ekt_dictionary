@@ -1,0 +1,87 @@
+#:import BorderBehavior borderbehaviour
+
+<DSLabel@Label>:
+    padding: 5, 5
+    color: 1, 1, 1, 1
+    font_size: 25
+    size: self.texture_size
+    size_hint_y: None
+
+<DictScreenBtn@Button>:
+    size_hint: None, None
+    height: 50
+    font_size: 20
+
+<BorderLabel@Label+BorderBehavior>:
+    borders: 2, 'solid', (1, 1, 1, 1)
+    size_hint: None, None
+    height: 70
+    width: 600
+    font_size: 20
+    canvas.before:
+        Color:
+            rgba: 0, 0, 0, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+
+<DictScreen>:
+    name: 'dict_entry'
+    BoxLayout:
+        orientation: 'vertical'
+        GridLayout:
+            orientation: 'vertical'
+            size_hint: 1, .9
+            row_default_height: 100
+            cols: 1
+            rows: 6
+            DSLabel:
+                text: 'Kapampangan'
+            AnchorLayout:
+                BorderLabel:
+                    id: kapampangan_ds
+            DSLabel:
+                text: 'Tagalog'
+            AnchorLayout:
+                BorderLabel:
+                    id: tagalog_ds
+            DSLabel:
+                text: 'English'
+            AnchorLayout:
+                BorderLabel:
+                    id: english_ds
+
+        BoxLayout:
+            size_hint: 1, .1
+            orientation: 'horizontal'
+            DictScreenBtn:
+                text: 'Back'
+                on_release: root.on_back()
+            Widget:
+            DictScreenBtn:
+                text: 'Edit'
+                on_release: root.on_edit_entry()
+            Widget:
+            DictScreenBtn:
+                text: 'Delete'
+                on_release: root.show_delete_popup()
+
+<DeletePopup>:
+    size_hint: 0.4, 0.2
+    title: 'Delete confirmation'
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            id: delete_label
+            text: 'Are you sure to delete this entry?'
+        BoxLayout:
+            orientation:'horizontal'
+            Button:
+                size_hint_y: 0.5
+                text: 'Delete'
+                on_release: root.screen.on_confirm_delete(root)            
+            Button:
+                size_hint_y: 0.5
+                text: 'Cancel'
+                on_release: root.dismiss()

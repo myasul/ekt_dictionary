@@ -3,9 +3,15 @@ from kivy.uix.label import Label
 from kivy.uix.popup import Popup
 from kivy.uix.checkbox import CheckBox
 from kivy.properties import StringProperty
+from kivy.lang import Builder
 
+import os
 from components.components import DictEntry
 import model.database_helper as db_helper
+
+path = os.path.dirname(os.path.abspath(__file__))
+ekt = Builder.load_file(path + "/../kv/search_screen.kv")
+
 
 class SearchScreen(Screen):
     def __init__(self, **kwargs):
@@ -14,10 +20,10 @@ class SearchScreen(Screen):
         self.language = 'kapampangan'
         self.filter_popup = FilterPopup(self)
         self.search_codes = {
-                            "exact_match": 0,
-                            "starts with": 1,
-                            "contains": 2,
-                            }
+            "exact_match": 0,
+            "starts with": 1,
+            "contains": 2,
+        }
 
     def on_pre_enter(self):
         self.ids.search_input.text = ""
@@ -33,7 +39,7 @@ class SearchScreen(Screen):
         self.search_mode = self.search_codes.get(match)
 
     def get_search_text(self):
-        return self.ids.search_input.text        
+        return self.ids.search_input.text
 
     def on_search(self):
         results, error = self.do_search()
@@ -51,19 +57,22 @@ class SearchScreen(Screen):
         if self.search_mode:
             search_text = self.get_search_text()
             if self.language == 'kapampangan':
-                return db_helper.search_in_kapampangan(search_text, self.search_mode)
+                return db_helper.search_in_kapampangan(search_text,
+                                                       self.search_mode)
             elif self.language == 'english':
-                return db_helper.search_in_english(search_text, self.search_mode)
+                return db_helper.search_in_english(search_text,
+                                                   self.search_mode)
             elif self.language == 'tagalog':
-                return db_helper.search_in_tagalog(search_text, self.search_mode)
+                return db_helper.search_in_tagalog(search_text,
+                                                   self.search_mode)
             else:
                 # TODO :: Add logging
                 self.popup('Error message',
-                        'Invalid language. Please report.')
+                           'Invalid language. Please report.')
         else:
             # TODO :: Add logging
             self.popup('Error message',
-                    'Invalid language. Please report.')
+                       'Invalid language. Please report.')
 
     def clear_results(self):
         delete_widgets = []

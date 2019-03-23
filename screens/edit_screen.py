@@ -1,12 +1,18 @@
 from sqlalchemy.exc import SQLAlchemyError
+import os
 
 from kivy.app import App
 from kivy.uix.screenmanager import Screen
 from kivy.uix.label import Label
 from kivy.properties import StringProperty
+from kivy.lang import Builder
 
 import model.database_helper as db_helper
 from components.components import DictTextInput, AutoDismissPopup
+
+path = os.path.dirname(os.path.abspath(__file__))
+ekt = Builder.load_file(path + "/../kv/edit_screen.kv")
+
 
 class EditScreen(Screen):
     def __init__(self, **kwargs):
