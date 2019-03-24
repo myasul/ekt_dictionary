@@ -7,6 +7,7 @@ from kivy.uix.label import Label
 from kivy.clock import Clock
 from kivy.properties import StringProperty
 from kivy.lang import Builder
+from kivy.logger import Logger
 
 from components.components import DeletePopup, AutoDismissPopup
 import model.database_helper as db_helper
@@ -32,11 +33,16 @@ class DictScreen(Screen):
 
     def on_pre_enter(self):
         # Populate the Labels with the data retrieved from database
+        Logger.info('Application: Entering Dictionary screen.')
+        Logger.info('Application: Viewing: K:{} - E:{} - T: {}'.format(
+            self.kapampangan, self.english, self.tagalog))
+
         if self.kapampangan:
             print("ENTERED DICT SCREEN!")
             entry = self.get_entry()
 
             if not entry:
+                Logger.error('Application: Dictionary entry cannot found.')
                 self.popup('Error Message', 'Error occured. Please report.')
                 return
 
@@ -45,8 +51,11 @@ class DictScreen(Screen):
             self.ids.tagalog_ds.text = self.tagalog
             self.ids.english_ds.text = self.english
         else:
-            # TODO :: Add logging
+            Logger.error('Application: Dictionary entry cannot found.')
             self.popup('Error Message', 'Error occured. Please report.')
+
+    def on_pre_leave(self):
+        Logger.info('Application: Leaving Dictionary Screen')
 
     def show_delete_popup(self):
         delete_popup = DeletePopup(self)
@@ -70,12 +79,11 @@ class DictScreen(Screen):
                            'Dictionary entry deleted!')
                 Clock.schedule_once(self.on_back, 1.5)
             except SQLAlchemyError as e:
-                # TODO :: Add logging
-                print("Error: {}".format(e))
                 db_helper.session.rollback()
+                Logger.error('Application: Error Stack: {}'.format(e))
                 self.popup('Error Message', 'Error occured. Please report.')
         else:
-            # TODO :: Add logging
+            Logger.error('Application: Dictionary entry cannot found.')
             self.popup('Error Message', 'Error occured. Please report.')
 
     def on_edit_entry(self):
@@ -106,7 +114,7 @@ class DictScreen(Screen):
             english=self.english,
             tagalog=self.tagalog)
         if error:
-            # TODO :: Add logging
+            Logger.error('Application: Error Stack: {}'.format(error))
             return None
         return entry
 

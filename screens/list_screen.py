@@ -3,6 +3,7 @@ from kivy.uix.screenmanager import Screen
 from kivy.uix.popup import Popup
 from kivy.uix.label import Label
 from kivy.lang import Builder
+from kivy.logger import Logger
 import os
 
 from components.components import DictTextInput, DictEntry
@@ -14,41 +15,46 @@ ekt = Builder.load_file(path + "/../kv/list_screen.kv")
 
 class ListScreen(Screen):
     def on_pre_enter(self):
+        Logger.info('Application: Entering List screen.')
         all_entries = self.show_all_entries()
         if all_entries:
             self.add_entry_widgets(all_entries)
 
     def on_leave(self):
+        Logger.info('Application: Leaving List screen.')
         self.clear_entries()
 
     def clear_entries(self):
+        Logger.info('Application: Deleting old entries.')
         delete_widgets = []
         for widget in self.ids.list_grid.children:
             if isinstance(widget, DictEntry):
                 delete_widgets.append(widget)
 
         for widget in delete_widgets:
+            Logger.debug('Application: Deleting {}'.format(widget.text))
             self.ids.list_grid.remove_widget(widget)
 
     def show_all_entries(self):
         entries, error = db_helper.get_all_entries()
         if error:
-            # TODO :: Add logging
+            Logger.error('Application: Error Stack: {}'.format(error))
             self.popup('Error Message', 'Error Occured. Please report.')
             return
         return entries
 
     def do_search(self, search_str):
-        # TODO :: Make it dynamic so the user can search in all languages
+        Logger.info('Application: Search start.')
         self.clear_entries()
         entries = self.search_text_kapampangan(search_str)
         if len(entries) > 0:
             self.add_entry_widgets(entries)
+        Logger.info('Application: Search complete.')
 
     def search_text_kapampangan(self, search_str):
         entries, error = db_helper.search_in_kapampangan(search_str, 1)
         if error:
-            # TODO :: Add logging
+            Logger.error('Application: Error Stack: {}'.format(error))
             self.popup('Error Message', 'Error Occured. Please report.')
             return
         return entries
@@ -58,6 +64,7 @@ class ListScreen(Screen):
 
         self.ids.list_grid.rows = row_num
         for entry in entries:
+            Logger.debug('Application: Adding {}'.format(entry.kapampangan))
             dict_entry = DictEntry(
                 text=entry.kapampangan,
                 font_size=25,

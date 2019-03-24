@@ -24,7 +24,8 @@ Config.set('graphics', 'fullscreen', 0)
 
 
 class HomeScreen(Screen):
-    pass
+    def on_enter(self):
+        Logger.info('Application: Entering Home Screen')
 
 
 class MyScreenManager(ScreenManager):

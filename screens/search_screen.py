@@ -4,6 +4,7 @@ from kivy.uix.popup import Popup
 from kivy.uix.checkbox import CheckBox
 from kivy.properties import StringProperty
 from kivy.lang import Builder
+from kivy.logger import Logger
 
 import os
 from components.components import DictEntry
@@ -11,6 +12,12 @@ import model.database_helper as db_helper
 
 path = os.path.dirname(os.path.abspath(__file__))
 ekt = Builder.load_file(path + "/../kv/search_screen.kv")
+
+SEARCH_MODES = [
+    "exact_match",
+    "starts with",
+    "contains",
+]
 
 
 class SearchScreen(Screen):
@@ -28,6 +35,10 @@ class SearchScreen(Screen):
     def on_pre_enter(self):
         self.ids.search_input.text = ""
         self.on_search()
+        Logger.info("Application: Entering Search Screen.")
+
+    def on_pre_leave(self):
+        Logger.info("Application: Leaving Search Screen.")
 
     def show_filter_popup(self):
         self.filter_popup.open()
@@ -42,8 +53,10 @@ class SearchScreen(Screen):
         return self.ids.search_input.text
 
     def on_search(self):
+        Logger.info("Application: Search start.")
         results, error = self.do_search()
         if error:
+            Logger.error('Application: Error Stack: {}'.format(error))
             self.popup('Error Message', 'Error Occured. Please report.')
             return
 
@@ -51,9 +64,13 @@ class SearchScreen(Screen):
             self.popup('Message', 'No results found!')
         else:
             self.display_results(results)
+        Logger.info("Application: Search complete.")
 
     def do_search(self):
         self.clear_results()
+        Logger.info('Application: Searching using the following filters ' +
+                    '(Language: {}, Search Mode: {})'.format(
+                        self.language, SEARCH_MODES[self.search_mode]))
         if self.search_mode:
             search_text = self.get_search_text()
             if self.language == 'kapampangan':
@@ -66,28 +83,35 @@ class SearchScreen(Screen):
                 return db_helper.search_in_tagalog(search_text,
                                                    self.search_mode)
             else:
-                # TODO :: Add logging
+                Logger.error(
+                    'Application: Language {} is invalid.'.format(
+                        self.language))
                 self.popup('Error message',
                            'Invalid language. Please report.')
         else:
-            # TODO :: Add logging
+            Logger.error(
+                'Application: Search mode {} is invalid.'.format(
+                    self.search_mode))
             self.popup('Error message',
-                       'Invalid language. Please report.')
+                       'Invalid Search mode. Please report.')
 
     def clear_results(self):
+        Logger.info('Application: Clearing old results.')
         delete_widgets = []
         for widget in self.ids.list_grid.children:
             if isinstance(widget, DictEntry):
                 delete_widgets.append(widget)
 
         for widget in delete_widgets:
+            Logger.debug('Application: Deleting {}'.format(widget.text))
             self.ids.list_grid.remove_widget(widget)
 
     def display_results(self, entries):
+        Logger.info('Application: Displaying search results.')
         row_num = len(entries)
         self.ids.list_grid.rows = row_num
         for entry in entries:
-            # print(db_helper.object_as_dict(entry))
+            Logger.debug('Application: Adding {}.'.format(entry.kapampangan))
             dict_entry = DictEntry(
                 text=entry.kapampangan,
                 font_size=25,

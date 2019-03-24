@@ -2,6 +2,7 @@ from kivy.app import App
 from kivy.uix.screenmanager import Screen
 from kivy.uix.label import Label
 from kivy.lang import Builder
+from kivy.logger import Logger
 import os
 from sqlalchemy.exc import IntegrityError
 from model import database_helper as db_helper
@@ -17,8 +18,14 @@ class AddScreen(Screen):
         self.ids.k_input.text = ''
         self.ids.t_input.text = ''
 
+    def on_pre_enter(self):
+        Logger.info('Application: Entering Add Screen')
+
+    def on_pre_leave(self):
+        Logger.info('Application: Leaving Add Screen')
+
     def add_entry(self):
-        # TODO :: Make the error message's box size dynamic
+        Logger.info('Adding new dictionary entry')
         if self.has_no_empty_fields():
             try:
                 new_dict_entry = db_helper.Dictionary(
@@ -27,14 +34,21 @@ class AddScreen(Screen):
                     english=self.ids.e_input.text)
                 db_helper.session.add(new_dict_entry)
                 db_helper.session.commit()
+
                 self.popup('Confirmation Message', 'Dictionary entry saved!')
                 self.clear_text_inputs()
-            except IntegrityError:
+
+                Logger.info('Application: {} added.'.format(
+                    self.ids.k_input.text.lower()))
+            except IntegrityError as e:
                 self.popup('Error Message', 'Entry already exists!')
                 db_helper.session.rollback()
                 self.clear_text_inputs()
+                Logger.error('Application: Error Stack: {}'.format(e))
         else:
             self.popup('Error Message', 'All the fields are mandatory!')
+            Logger.info(
+                'Application: User Error: All the fields are mandatory!')
 
     def popup(self, title, message):
         content = Label(text=message,
