@@ -96,14 +96,14 @@ class SearchScreen(Screen):
                        'Invalid Search mode. Please report.')
 
     def clear_results(self):
-        Logger.info('Application: Clearing old results.')
+        Logger.info('Application: Removing old results.')
         delete_widgets = []
         for widget in self.ids.list_grid.children:
             if isinstance(widget, DictEntry):
                 delete_widgets.append(widget)
 
         for widget in delete_widgets:
-            Logger.debug('Application: Deleting {}'.format(widget.text))
+            Logger.debug('Application: Removing {}'.format(widget.text))
             self.ids.list_grid.remove_widget(widget)
 
     def display_results(self, entries):

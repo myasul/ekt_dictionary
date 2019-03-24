@@ -25,14 +25,14 @@ class ListScreen(Screen):
         self.clear_entries()
 
     def clear_entries(self):
-        Logger.info('Application: Deleting old entries.')
+        Logger.info('Application: Removing old entries.')
         delete_widgets = []
         for widget in self.ids.list_grid.children:
             if isinstance(widget, DictEntry):
                 delete_widgets.append(widget)
 
         for widget in delete_widgets:
-            Logger.debug('Application: Deleting {}'.format(widget.text))
+            Logger.debug('Application: Removing {}'.format(widget.text))
             self.ids.list_grid.remove_widget(widget)
 
     def show_all_entries(self):

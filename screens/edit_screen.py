@@ -25,7 +25,7 @@ class EditScreen(Screen):
 
     def on_pre_enter(self):
         Logger.info('Application: Entering Edit Screen')
-        Logger.info('Application: Editing: K:{} - E:{} - T: {}'.format(
+        Logger.info('Application: Editing: K: {} - E: {} - T: {}'.format(
             self.kapampangan, self.english, self.tagalog))
         self.set_text_from_dict_val()
 

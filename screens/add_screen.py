@@ -39,7 +39,7 @@ class AddScreen(Screen):
                 self.clear_text_inputs()
 
                 Logger.info('Application: {} added.'.format(
-                    self.ids.k_input.text.lower()))
+                    new_dict_entry.kapampangan))
             except IntegrityError as e:
                 self.popup('Error Message', 'Entry already exists!')
                 db_helper.session.rollback()

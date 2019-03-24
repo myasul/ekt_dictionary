@@ -34,11 +34,10 @@ class DictScreen(Screen):
     def on_pre_enter(self):
         # Populate the Labels with the data retrieved from database
         Logger.info('Application: Entering Dictionary screen.')
-        Logger.info('Application: Viewing: K:{} - E:{} - T: {}'.format(
+        Logger.info('Application: Viewing: K: {} - E: {} - T: {}'.format(
             self.kapampangan, self.english, self.tagalog))
 
         if self.kapampangan:
-            print("ENTERED DICT SCREEN!")
             entry = self.get_entry()
 
             if not entry:
