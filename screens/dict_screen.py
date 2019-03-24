@@ -32,7 +32,6 @@ class DictScreen(Screen):
         self.english = entry.english
 
     def on_pre_enter(self):
-        # Populate the Labels with the data retrieved from database
         Logger.info('Application: Entering Dictionary screen.')
         Logger.info('Application: Viewing: K: {} - E: {} - T: {}'.format(
             self.kapampangan, self.english, self.tagalog))
@@ -45,6 +44,7 @@ class DictScreen(Screen):
                 self.popup('Error Message', 'Error occured. Please report.')
                 return
 
+            # Populate the Labels with the data retrieved from database
             self.set_dict_entry(entry)
             self.ids.kapampangan_ds.text = self.kapampangan
             self.ids.tagalog_ds.text = self.tagalog

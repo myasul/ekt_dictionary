@@ -15,16 +15,21 @@ ekt = Builder.load_file(path + "/../kv/list_screen.kv")
 
 class ListScreen(Screen):
     def on_pre_enter(self):
+        # Show all entries upon entering the list
+        # screen for the first time.
         Logger.info('Application: Entering List screen.')
-        all_entries = self.show_all_entries()
-        if all_entries:
-            self.add_entry_widgets(all_entries)
+        self.show_all_entries()
 
     def on_leave(self):
+        # Remove all widgets before leaving the List screen.
+        # This would ensure that the list that the users
+        # see is always up-to-date.
         Logger.info('Application: Leaving List screen.')
         self.clear_entries()
 
     def clear_entries(self):
+        # Method will remove old widgets before
+        # adding the new search results.
         Logger.info('Application: Removing old entries.')
         delete_widgets = []
         for widget in self.ids.list_grid.children:
@@ -36,12 +41,14 @@ class ListScreen(Screen):
             self.ids.list_grid.remove_widget(widget)
 
     def show_all_entries(self):
+        Logger.info('Application: Listing all dictionary entries')
         entries, error = db_helper.get_all_entries()
         if error:
             Logger.error('Application: Error Stack: {}'.format(error))
             self.popup('Error Message', 'Error Occured. Please report.')
             return
-        return entries
+        if entries:
+            self.add_entry_widgets(entries)
 
     def do_search(self, search_str):
         Logger.info('Application: Search start.')
@@ -60,6 +67,9 @@ class ListScreen(Screen):
         return entries
 
     def add_entry_widgets(self, entries):
+        # Depending on the results from the database,
+        # this method will add Dictionary widgets on
+        # the screen.
         row_num = len(entries)
 
         self.ids.list_grid.rows = row_num
@@ -79,6 +89,7 @@ class ListScreen(Screen):
             self.ids.list_grid.add_widget(dict_entry)
 
     def popup(self, title, message):
+        # Generic popup for error and confirmation messages
         content = Label(text=message,
                         font_size=20,
                         color=[1, 1, 1, 1])
@@ -93,6 +104,10 @@ class SearchTextInput(DictTextInput):
         super(SearchTextInput, self).__init__(**kwargs)
 
     def keyboard_on_key_up(self, window, keycode):
+        # Typing on search text input would
+        # trigger the search function that would
+        # enable the list screen to add results widgets
+        # to its screen.
         self.search_matched_entries()
         return super(SearchTextInput, self).keyboard_on_key_up(window, keycode)
 

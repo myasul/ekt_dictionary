@@ -51,6 +51,7 @@ class AddScreen(Screen):
                 'Application: User Error: All the fields are mandatory!')
 
     def popup(self, title, message):
+        # Generic popup for error and confirmation messages
         content = Label(text=message,
                         font_size=20,
                         color=[1, 1, 1, 1])

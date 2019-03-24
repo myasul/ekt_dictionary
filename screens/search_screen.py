@@ -33,6 +33,8 @@ class SearchScreen(Screen):
         }
 
     def on_pre_enter(self):
+        # Clear the input text upon entering the Search screen.
+        # Initial search with blank filters.
         self.ids.search_input.text = ""
         self.on_search()
         Logger.info("Application: Entering Search Screen.")
@@ -67,6 +69,8 @@ class SearchScreen(Screen):
         Logger.info("Application: Search complete.")
 
     def do_search(self):
+        # Search the ekt database with the filters
+        # set by the user.
         self.clear_results()
         Logger.info('Application: Searching using the following filters ' +
                     '(Language: {}, Search Mode: {})'.format(
@@ -96,6 +100,7 @@ class SearchScreen(Screen):
                        'Invalid Search mode. Please report.')
 
     def clear_results(self):
+        # Method will remove old results.
         Logger.info('Application: Removing old results.')
         delete_widgets = []
         for widget in self.ids.list_grid.children:
@@ -107,6 +112,9 @@ class SearchScreen(Screen):
             self.ids.list_grid.remove_widget(widget)
 
     def display_results(self, entries):
+        # Depending on the results from the database,
+        # this method will add Dictionary widgets on
+        # the screen.
         Logger.info('Application: Displaying search results.')
         row_num = len(entries)
         self.ids.list_grid.rows = row_num
@@ -126,6 +134,7 @@ class SearchScreen(Screen):
             self.ids.list_grid.add_widget(dict_entry)
 
     def popup(self, title, message):
+        # Generic popup for error and confirmation messages
         content = Label(text=message,
                         font_size=20,
                         color=[1, 1, 1, 1])

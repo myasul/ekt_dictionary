@@ -7,6 +7,7 @@ from kivy.uix.label import Label
 from kivy.properties import StringProperty
 from kivy.lang import Builder
 from kivy.logger import Logger
+from kivy.clock import Clock
 
 import model.database_helper as db_helper
 from components.components import DictTextInput, AutoDismissPopup
@@ -61,7 +62,12 @@ class EditScreen(Screen):
                 Logger.info(
                     'Application: Changes for {} is now saved'.format(
                         self.kapampangan))
-                self.go_to_dict_screen()
+
+                # Multiple delays are in place to display
+                # all information needed simultaneously
+                self.popup('Confirmation Message',
+                           'Changes saved!')
+                Clock.schedule_once(self.go_to_dict_screen, 1.5)
             except SQLAlchemyError as e:
                 Logger.error('Application: Error Stack: {}'.format(e))
                 db_helper.session.rollback()
@@ -71,7 +77,7 @@ class EditScreen(Screen):
             Logger.error('Dictionary entry\'s object is missing')
             self.popup('Error Message', 'Error occured. Please report.')
 
-    def go_to_dict_screen(self):
+    def go_to_dict_screen(self, *args):
         self.update_dict_screen()
         self.manager.current = 'dict_entry'
 
