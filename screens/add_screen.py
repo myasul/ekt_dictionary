@@ -53,11 +53,11 @@ class AddScreen(Screen):
     def popup(self, title, message):
         # Generic popup for error and confirmation messages
         content = Label(text=message,
-                        font_size=20,
+                        font_size=40,
                         color=[1, 1, 1, 1])
         popup = AutoDismissPopup(title=title,
                                  content=content,
-                                 size_hint=(0.4, 0.2))
+                                 size_hint=(0.6, 0.3))
         popup.open()
 
     def has_no_empty_fields(self):

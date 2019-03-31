@@ -1,18 +1,19 @@
 <DictInput>:
-    font_size: 20
-    # font_size: 30
+    # font_size: 20
+    font_size: 50
     size_hint: None, None
-    width: 600
-    height: 50
+    width: 1000
+    height: 100
     # height: 120
+    padding: 15
     write_tab: False
 
 <ASLabel@Label>:
-    padding: 5, 5
-    # padding: 30, 30
+    # padding: 5, 5
+    padding: 30, 30
     color: 1, 1, 1, 1
-    font_size: 20
-    # font_size: 30
+    # font_size: 20
+    font_size: 40
     size: self.texture_size
     size_hint_y: None
 
@@ -20,51 +21,50 @@
     name: 'add'
     BoxLayout:
         orientation: 'vertical'
+        Widget:
+            size_hint_y: 0.05
         AnchorLayout:
-            size_hint: 1, .9
+            size_hint_y: 0.85
             GridLayout:
+                size_hint_y: 1
                 rows: 7
                 cols: 1
-                padding: 10, 10, 10, 10
+                padding: 50, 0
                 ASLabel:
                     text: 'Kapampangan'
                 AnchorLayout:
-                    size_hint_y: None
                     height: 150
                     DictInput:
                         id: k_input
                 ASLabel:
                     text: 'Tagalog'
                 AnchorLayout:
-                    size_hint_y: None
                     height: 150
                     DictInput:
                         id: t_input
                 ASLabel:
                     text: 'English'
                 AnchorLayout:
-                    size_hint_y: None
                     height: 150
                     DictInput:
                         id: e_input
                 AnchorLayout:
-                    size_hint_y: None
-                    height: 70
-                    # height: 100
+                    size_hint_y: 0.3
                     Button:
                         id: 'add_to_dict'
                         text: 'Save'
-                        font_size: 30
+                        font_size: 40
                         size_hint: 0.3, 1
                         on_release: root.add_entry()
         BoxLayout:
             orientation: 'vertical'
-            size_hint: 1, .1
+            size_hint_y: 0.1
+            Widget:
+                size_hint_y: 0.3
             Button:
-                size_hint: None, None
-                height: 50
+                size_hint_x: 0.2    
                 id: home_button_2
                 text: 'Back'
-                font_size: 20
+                font_size: 40
                 on_release: root.manager.current = 'home'
                 
