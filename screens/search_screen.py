@@ -7,7 +7,7 @@ from kivy.lang import Builder
 from kivy.logger import Logger
 
 import os
-from components.components import DictEntry
+from components.components import DictEntry, AutoDismissPopup
 import model.database_helper as db_helper
 
 path = os.path.dirname(os.path.abspath(__file__))
@@ -122,7 +122,7 @@ class SearchScreen(Screen):
             Logger.debug('Application: Adding {}.'.format(entry.kapampangan))
             dict_entry = DictEntry(
                 text=entry.kapampangan,
-                font_size=25,
+                font_size=40,
                 halign='left',
                 valign='middle',
                 screen='search',
@@ -136,11 +136,11 @@ class SearchScreen(Screen):
     def popup(self, title, message):
         # Generic popup for error and confirmation messages
         content = Label(text=message,
-                        font_size=20,
+                        font_size=40,
                         color=[1, 1, 1, 1])
-        popup = Popup(title=title,
-                      content=content,
-                      size_hint=(0.4, 0.2))
+        popup = AutoDismissPopup(title=title,
+                                 content=content,
+                                 size_hint=(0.6, 0.3))
         popup.open()
 
 
