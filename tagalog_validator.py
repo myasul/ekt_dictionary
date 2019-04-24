@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 import requests
 import csv
 import re
@@ -10,9 +10,9 @@ BANSA_URL = "http://bansa.org/dictionaries/"\
 
 
 def main():
-    with open('kapampangan.csv', 'rb') as inp, \
-        open('kapampangan_clean.csv', 'wb+') as out, \
-            open('kapampangan_errors.csv', 'wb+') as err:
+    with open('kapampangan.csv', 'r', encoding="utf-8") as inp, \
+        open('kapampangan_clean.csv', 'w', encoding="utf-8") as out, \
+            open('kapampangan_errors.csv', 'w', encoding="utf-8") as err:
         writer = csv.writer(out)
         writer_err = csv.writer(err)
 
@@ -27,10 +27,13 @@ def main():
 
                     # only add entries that are truly "kapampangan"
                     if not tables:
+                        print(
+                            f"Processed: {row}")
                         writer.writerow(row)
 
-            except (IndexError, Timeout), e:
-                writer_err.writer_err(row)
+            except (IndexError, Timeout, UnicodeDecodeError, Exception) as e:
+                print(f"Exception: {e}")
+                writer_err.writerow(row)
 
 
 if __name__ == "__main__":
