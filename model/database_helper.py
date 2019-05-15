@@ -2,6 +2,9 @@ from sqlalchemy import create_engine, asc, inspect
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from sqlalchemy.orm import sessionmaker
 from model.database_setup import Dictionary, Base
+from kivy.logger import Logger
+
+import traceback
 
 # Connect to the database and create a database session
 engine = create_engine('sqlite:///model/ekt_dictionary.db')
@@ -17,6 +20,8 @@ SEARCH_MODES = [
     "%{}%"  #
 ]
 
+DICTIONARY_CSV = 'ekt_entries.csv'
+    
 
 def object_as_dict(obj):
     return {c.key: getattr(obj, c.key)
@@ -29,6 +34,7 @@ def get_all_entries():
                 .order_by(Dictionary.kapampangan.asc())
                 .all(), None)
     except SQLAlchemyError as e:
+        Logger.info('Error: {}'.format(traceback.format_exc()))
         return None, e
 
 
@@ -70,7 +76,7 @@ def search_in_tagalog(keyword, mode):
                 .order_by(Dictionary.tagalog.asc())
                 .all(), None)
     except SQLAlchemyError as e:
-        print("Error: {}".format(e))
+        Logger.info('Error: {}'.format(traceback.format_exc()))
         return None, e
     except IndexError:
         raise IndexError("Invalid Search mode.")
@@ -92,7 +98,7 @@ def search_in_english(keyword, mode):
                 .order_by(Dictionary.english.asc())
                 .all(), None)
     except SQLAlchemyError as e:
-        print("Error: {}".format(e))
+        Logger.info('Error: {}'.format(traceback.format_exc()))
         return None, e
     except IndexError:
         raise IndexError("Invalid Search mode.")
@@ -107,4 +113,11 @@ def search_entry(kapampangan, english, tagalog):
                 .order_by(Dictionary.english.asc())
                 .one(), None)
     except SQLAlchemyError as e:
+        Logger.info('Error: {}'.format(traceback.format_exc()))
         return None, e
+
+def has_dictionary_entries():
+    pass
+
+def load_dictionary_entries():
+    pass
