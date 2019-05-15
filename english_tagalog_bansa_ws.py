@@ -12,10 +12,10 @@ FILE_PATH = os.path.dirname(os.path.abspath(__file__))
 
 
 def main():
-    with open(FILE_PATH + "/kapampangan_decoded.csv", "r",
+    with open(FILE_PATH + "/kapampangan_clean.csv", "r",
               encoding="utf-8") as inp, \
-        open(FILE_PATH + "/ekt_entries.csv", "a", encoding="utf-8") as out,\
-            open(FILE_PATH + "/ekt_err.csv", "a", encoding="utf-8") as err:
+        open(FILE_PATH + "/ekt_entries.csv", "w+", encoding="utf-8") as out,\
+            open(FILE_PATH + "/ekt_err.csv", "w+", encoding="utf-8") as err:
         writer = csv.writer(out)
         writer_err = csv.writer(err)
 
@@ -41,7 +41,6 @@ def main():
                 if resp.status_code == 200:
                     print(f"Encoding: {resp.encoding}")
                     row[2] = find_tagalog_in_bansa_table(resp.text)
-                    decoded
                     writer.writerow(row)
                     print(f"Processed: {row}")
             except:

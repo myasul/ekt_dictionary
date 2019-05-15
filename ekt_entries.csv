@@ -1,4 +1,3 @@
-Kapampangan, English,cdsadsadsa
 abak,morning,nauukol sa umaga
 "abalu, mabiasa",learn,tuto
 "abisuan, warningan",warn,bala
@@ -17,6 +16,7 @@ acmulan,throat,lalamunan
 adornuan,aborn,silang
 adta,sap of tree or plant,
 "aduan, yawad",implore,"mamanhik, lumuhog, sumamo"
+aflwxw,later,mamaya
 agaganaka,miss,binibini
 aganaka,remember,alaala
 aggaganaka daka,i miss you,
@@ -96,7 +96,8 @@ amuyam,sponge,espongha
 "amuyutan, konbincian",persuade,"humikayat, umakit, mag-udyok, magbuyo"
 anam,six,anim
 anapaya?,what did he/she say?,
-andarul,"b""child's walker""",
+andarul,child's walker,
+angkamin,"claim as one's own, covet",angkin
 angu,"extract, take","hugutin, hanguin, katasin, pigain"
 anibersario,anniversary,anniversaryo
 anitpatiko,antipathetic,mabigat ang dugo
@@ -464,7 +465,7 @@ distiliador,screwdriver,disturnilyador
 ditak,"few, little, slight","kaunti, unti"
 ditak,little,"kaunti, unti"
 ditak,small,liit
-"ditak dili, pugu\xc3\xadt",least,kaliitliitan
+"ditak dili, puguít",least,kaliitliitan
 ditak-ditak,little by little,
 dolar,dollar,dolyar
 domingo,week,linggo
@@ -514,20 +515,1490 @@ estrangheru,"alien, stranger","dayo, dayuhan"
 estrella,star,bituwin
 estudiante,student,mag-aaral
 exacto,precise,"kailangan, karakaraka, ganap"
+flcvhq,strike,paluin
 francia,france,franses
 gabak,torn,pingas
-gabak,torn,pingas
 gabak-gabak,tattered,"gulanít, gulá-gulanít, punít-punít, sirá-sirâ"
-gabak,torn,pingas
-gabak-gabak,tattered,"gulanít, gulá-gulanít, punít-punít, sirá-sirâ"
+gabun,"land, soil, ground",lupa
 gadtu,half-cooked as in rice,
 gaguti,cannot talk straight,
-gabak,torn,b'pingas'
-gabak-gabak,tattered,"b'gulan\xc3\xadt, gul\xc3\xa1-gulan\xc3\xadt, pun\xc3\xadt-pun\xc3\xadt, sir\xc3\xa1-sir\xc3\xa2'"
-gabun,"land, soil, ground",b'lupa'
-gadtu,half-cooked as in rice,
-gaguti,cannot talk straight,
-galapak maili,guffaw,b'halakhak'
-galaukan,pick,b'piko'
-gabak,torn,pingas
-gabak-gabak,tattered,"gulanít, gulá-gulanít, punít-punít, sirá-sirâ"
+gakgak,cry,iyak
+galapak maili,guffaw,halakhak
+galaukan,pick,piko
+galiguit,gnash,magngalit
+galikguik,giggle,ngisi
+galikguik,screech,"hiyaw, sigaw"
+galikguik,squeak,"tili, hiyaw, pigibik"
+galo,"action, movement",galaw
+galudgud,spine,gulugod
+galudgud,backbone,"gulugod, buto sa likod"
+ganadus,animals,hayop
+gandus,yam,ube
+garapata,flea,pulgas
+garitun,cart,kareta
+gartilla,wheelbarrow,kartilya
+gaslo,unruly behavior,
+gastarul,wasteful,"aksaya, mag-aksaya, aksayahin"
+gastarul,extravagant,aksaya
+gastarul,spendthrift,bulagsak
+"gastus, pigastusan",expenditure,"gugol, nagugol, ginasta"
+gatal,itchiness,kati
+gatiauin,name of a barrio in arayat,
+gatpanapun,afternoon,hapon
+"gawa, dapat, accion",action,galaw
+gawuk,to get something by using (dipping) the hand,
+gayndu,mother,magulang
+gayndu,mother (of animals),
+gili,slice,hiwa
+gitad,flirt,kikay
+gitata,reek,"usok, aso, singaw"
+gosa,gauze,"gasa, kayong manipis"
+gracia,blessing,biyaya
+gracia,boon,"kaloob, bigay"
+graduacion,graduation,pagtatamo ng titulo sa anomang karunungan
+granati,maroon,"doon, naroon, nandoon, paroon, pumaroon"
+grande,grand,"dakila, bunyi"
+"guardia, guardian, banten",guard,bantay
+guarnakion,bridle,kabesada
+"gubat, kakewan",jungle,gubat
+guilian,cut,lapangin
+guilid,border,tabi
+guilid,brink,"gilid, tabi, pangpang"
+guilid,edge,gilid
+"guilid, tibis",slope,gulod
+"guilitan, guilit",slit,"sipak, lahang"
+guinaldo,gift,kaloob
+guisingan,wake up,
+"gulasio, gulait",yell,hiyaw
+gulasyo,shout,sigaw
+gulis,mark,senyal
+gulis,line,linya
+gulisan,scratch,galos
+gulut,back,likod
+gulyutan,tow,paghatak
+gumale,sing,kumanta
+gurul,hill,burol
+gusal,activity,gawain
+gutgut,complicated,"kumplikado, magulo"
+hata,will you do something?,
+hege,dinner,"hapunan, maghapunan"
+his/hers,"keya, kaya","galaw, kilos, kiya, ismid, ingos"
+hudios,jew,hudyo
+huebes,thursday,huwebes
+"hues, kuman, atulan",judge,huwes
+hulio,july,hulyo
+hunio,june,hunyo
+husticia,justice,katarungan
+mapalyari,suppose,"maghinala, magsapantaha, ipagpalagay"
+iagkas,say,sabihin
+"ibalik, subli",return,"bumalik, balikan"
+ibe,dizzy,ibay
+ibie,give,ibigay
+ibie,convey,"maglipat, maghatid"
+"ibie, pagkalub",extend,"dugtong, dumugtong, dugtungan"
+ibye,give,ibigay
+idake,share,ambos
+"iduang, yabut",hand,kamay
+iglip,doze off,
+iglo,eagerness,asam
+igpit,"strictness, tightness",kahigpitan
+igrupu,classify,uriin
+ikwa,get,matanggap
+ila,"them, they",sila
+"ilaga, mukal",boil,ilaga
+"ilague, ipalto",expose,"hinga, maghinga, ihinga"
+ilanio,rarify,buhaghagin
+"ilapad, ilualas",widen,"laparan, lwangan, lwagan"
+ilib,cogon grass,
+ilig,"interest, taste for",interes
+ilu,silk,seda
+imungkai,suggest,imungkahe
+imut,ask for something,
+independencia,independence,pagsasarili
+"inspeksyunan, inspekcionan",inspect,suriin
+inspiracion,inspiration,inspirasyon
+intencion,intention,"balak, magbalak, balakin"
+inyawad,ask for,
+ipabando,advertise,ipabalita
+"isadia, yanda, magsadia",observe,magmasid
+isak,small brook or stream,
+isik,chinese,bagay sa kainsikan
+iskrin,screen,tabing
+iskuala,miter,munting bagay
+"iskuater, makituknang",squatter,nakayuko
+istuna,stop,"iwas, umiwas, iwasan"
+itaid,link,"magkabit, ikabit"
+itas,elevate,"itaas, pataasin"
+"itas, ibuat (lift)",raise,angatin
+"itatag, ipundar",establish,magtatag
+itaute,retail,"tingi, amot"
+"iti, ining, ining..aini",this,ganito
+itulid,straighten,"tuwid, tumuwid"
+iyagpa,spread,iunat
+iyapse,say,sabihin
+jo,friend,barkada
+jo,partner,kaanib
+jo,love,pagmamahal
+kaballero,cavalier,nakasakay sa kabayo
+kabangal,a piece of,
+kabat,to lock,
+kabayangnan,youth,kabataan
+kabiasnan,intellect,talino
+kabiasnan,wisdom,talino
+kabid,pull back,
+kablas,echo,"umalingawngaw, tumaginting"
+kabsi,fullness,kabusugan
+"kabusadu, sanak",familiar,kabisado
+kabyo,process sugar cane into sugar,
+kadalumduman,darkness,dilim
+kagli,state of conceiving,
+"kaguili, guilian",slice,hiwa
+kaili,left,"alis, natira"
+kaili,left side,
+"kakaburi, kapalsintan, nobia, -ia",sweetheart,kasintahan
+"kakaburi, katipan, nobio nobia","fiance, fiancee",kasintahan
+kakak,stammer,"mautal, maumid"
+kakak,stutter,"umutal, mautal, magago, magaril, maumid"
+kakak,stammerer,mali-mali
+kakak,stuttering,"gago, gaga"
+"kakaluluan, kalipitan",poverty,hirap
+kakewan,forest,gubat
+kaklak,deafness,kabingihan
+"kakompetencia, kasalipit",rival,"kaagawan, kalaban"
+kalaalangnan,venerable,kagalanggalang
+kalabkab,blaze,"liyab, magliyab"
+kalabukab,a poisonous snake similar to a cobra,
+kaladua,soul,"kalulwa, tao, katao"
+kaladwa,soul,"kalulwa, tao, katao"
+kalagad,scarcely,dxkrgk
+kalakati,snips used for breaking betel nut,
+kalame,a kind of rice cake,
+kalamunding,philippine lemon,
+kalamunding,lemon,limon
+kalamungge,a kind of vegetable,
+kalapanti,shards of broken china or ceramics,
+"kalbag, kinco",nickel,nikel
+kalbit,"touch, tap",hawak
+kalbitan,trigger,gatilyo
+kalbitan,pluck,"labnot, manglabnot, labnutin"
+kaleldo,summer,tag-araw
+kaleldo,season,kapanahunan
+kalgareta,a kind of meat stew,
+kalibyan,lust,kalibugan
+kalikubak,dandruff,balakubak
+kalilwa,"separate, set aside",hiwalay
+kalinguan,forget,limot
+kalken,scrawl,sulat na padaskol
+"kalubalab, baiwan",neophyte,"bagong binyagan, bagong nag-aaral"
+kalugkug,roar,dagundong
+"kalulu, pakakalulu, lipit",poor,mahirap
+kaluskus,rustle,"kumaluskos, lumagitik"
+kaluskus,sound,"ingay, maingay"
+kamantigi,a kind of tree,
+kamatsilis,a kind of fruit tree,
+kamutingan,silliness,"kamusmusan, kahangalan"
+kandungangu,a wild bird,
+kantidad,volume,bulto
+kanunugak,garden snake,
+kanunugak,snake,ahas
+kanwari,pretend,magkunwari
+kanyaman,delicious,sarap
+kanyo,pig slop,
+kapadurutnan,biochain,kadena
+"kapagobra, kompanero",co-worker,kasamahan sa trabaho
+"kapaintulutan, tulut",consent,"pahintulutan, itulot, magpahintulot, pumayag"
+"kapalit, kaliwas",alternate,"halinhinan, halihalili"
+"kapalit, kayalili",substitute,kahalili
+kapalsintan,lover,"nangingibig, mangliligaw"
+kapalyarian,"happening, situation",nangyari
+kapartner,partner,kaanib
+kapasensiahan,patience,tiyaga
+"kapigaganaka, pigaganakan, migaganaka",worry,balisa
+kapilla,chapel,bisita
+kapitna,half,medya
+kaplas,"hurt, sting",hapdi
+kapsa,shell,kabibe
+kaptas,bale,"magtali, magbigkis"
+kaptas,sheaf,"haya, bigkis"
+kapusantu,cemetery,sementeryo
+"karculan, tantian",estimate,halagahan
+"karinan, tuknangan",shelter,kanlungan
+karkulador,calculator,"tagakuro, tagatasa"
+karwai,carriage,karosa
+kasalesayan,story,"kuwento, kwento"
+kasalpantayanan,faith,pananampalataya
+kasalungsungan,currently,"ngayo'y, ngayo"
+kasankapan,appliance,"pagsasangkap, paggamit"
+kasankapan,property,ari
+"kasantingan, marimla",cool,walastik
+"kasapakat, kasorait",accomplice,kasabwat
+kasapunggul,bunch,bungkos
+kasapuwegu,match box,
+kasilyas,toilet,kubeta
+kasnuk,abhorrence,"yamot, inip, muhi"
+kastanas,chestnut,kastanyas
+kasuba,safron,kasubha
+"kasulung, progreso",progress,unlad
+kasulungsungan,current,kuryente
+kasulungsungan,live,tahan
+kasumangid,"across, beyond, the other side",sa tapat ng
+katambayan,"co-worker, collaborator",kasamahan sa trabaho
+katampatan,appropriate,karampatan
+"katatan, guilian",slash,laslas
+katibug,basket,buslo
+katmu,full of,
+katuangan,father-in-law,biyenan
+katuglung,continuation,karugtong
+katus,snap,paltok
+kaul,embrace,yakap
+kaul,hug,yakap
+kayabe,companion,kasama
+kayaduanan,request,habilin
+kayagape,beside,tabi
+kayalan,absence,kapalyahan
+kayanib,member,kasapi
+kaybat,after,matapos
+keganagana,total,kabuuan
+keibaitan,birth,kapanganakan
+kekatamung,our,atin
+kekaungan,to all,
+kekayu,yours,inyo
+kekongan,to all of you,
+kelat,ubiquitious,ang pagkakapasa lahat ng dako
+"kelebrahan, magkelebra",celebrate,ipiagdiwang
+keni,here,dito
+kenu,whose,kanino
+kepis,cap,gora
+kera,lie down,
+keraklan,mostly,halos lahat
+keraklan,majority,"karamihan, kalakhang bahagi"
+keraklan,mainly,kaunaunahan
+kesa,instead,"bagkos, bagkus"
+kesa,than,kaysa
+kesyo,this or that,
+ket,bite,kagatin
+ketubasan,gone bad,
+kikimut,active,aktibo
+kikwan,miscarriage,kunan
+kilap,"sheen, shine","kintab, ningning, kislap"
+kildap,lightning,kidlat
+"kildap, alti",earthquake wari?!?!?,
+kile,brow,kilay
+kile,eyebrow,kilay
+kilikitan,tickle,kiliti
+kilim,flicker,"pumagakpak, pumagaspas"
+kilual,outside,labas
+kilub,inside,sa loob ng
+kilub,in,sa lugar
+kilub,interior,loob
+kimo,awkward,"kahihiyan, napahiya"
+kimtse,parsley,kintsay
+kimut,movement,"kilos, kumilos"
+kingwa,taken from,
+kintalan,brand,tatak
+kiyak,cry,iyak
+kodernu,notebook,kwaderno
+"kodrado, kuadrado",square,"kudrado, kuwadrado"
+komanggi,brown skin color,
+komangi,brown,kape
+komentarista,commentator,tagapagpaliwanag
+kompania,company,kompanya
+kompeticion,competition,tagisan
+konbiniente,convenient,"ukol, bagay, akma, marapat, samana pre"
+kornatin,cornet,"korneta, patunog na tanso, tambuling tanso"
+korobius,germs,kagaw
+"kortina, iskrin",screen,tabing
+kosiang,pious,"banal, madasalin"
+"kotu, kuota",quota,"kwota, ukol na hulog, ) abuloy, ambag"
+krisotan,a literary joust,
+krobyus,microbe,mikrobyo
+krobyus,germ,mikrobyo
+krobyus,virus,nana na nakakahawa
+kuartu,room in the house,
+kuartu,room,"silid, kuwarto"
+kubiertos,silverware,kubyertos
+kubit,crooked,baluktot
+kuchillo,kitchen knife,
+kueba,cave,kuweba
+"kuento, istoria",tale,"kuwento, kwento"
+kuentu,narrate,"salaysay, magsalaysay, isalaysay"
+"kuentu, istoria",relate,"salaysay, magsalaysay, isalaysay"
+kuerdas,chord,"kwerdas, lubid, panali"
+kukharita,teaspoon,kutarita
+kukul,piece of cane sugar,
+kulapispis,bankrupt,bangkarote
+kulate,creep like a vine,
+kulayu,owl,kuwago
+kuldas,alight,bumaba
+kuldas,"alight, climb down, descend",bumaba
+kule,color,kulay
+kulebra,a deadly disease,
+kuliat,"a kind of tree, its fruit",
+"kulion, kulio",boo,bulaga
+kulkul,hole,lungga
+kulkul,hole in the ground,
+kulkulan,"dig, dirg a hole",hukay
+kulta,curdle like milk,
+kulubasa,squash,kalabasa
+kulul,color,kulay
+kulul suklati,brown,kape
+kulumbu,mosquito net,
+kuluping,deformation of ear,
+kulutun,frown,"sungit, sibangot"
+kulyat,tree,puno
+kulyawan,the color yellow,
+kulyo,yell,hiyaw
+kumad,larvae of head lice,
+kumad,louse,kuto
+"kumayap, mibawi",recover,mabawi
+"kumpas, tiempo",rhythm,ritmo
+kumusad,slither,slither
+kumyak,cry,iyak
+kuneu,rabbit,kuneho
+kunyat,chewiness,kunat
+kupak,smack,"lasa, lasap, halik na matunog"
+kurat,whiny,"daing, panaghoy"
+kuriru,"literary form, story in verse",
+kursunsilyu,boxer short,
+kurul,retreat,urong
+kusintirul,pamperer,"bumusog, magpataba"
+kusuelo,pleasure,"lugod, kaluguran"
+kusuelo,fun,siste
+kutil,wart,kulugo
+kutnanan,consultant,konsultant
+kwayan,bamboo,kawayan
+kyapus,"imitate, mimic",gaya
+la,they,sila
+la,them,sila
+"labas, lague",star,bituwin
+labasas,razor,labaha
+"laganap, kelat",rampant,"makaras, malikot"
+"lagpakan, lasakan",wreck,"pagkabagbag, pagkalubog"
+laguen,haunt,"lumagi, tumanod"
+lagyu,name,turing
+laipan,centipede,alupihan
+lakbe,trip,talisod
+lakdan,scorpion,alakdan
+laklakan,devour,"sakmalin, lamunin, sirain, iwasak"
+"lakto, luksuan, lakton",skip,"laktaw, lumaktaw, laktawan"
+lakuatsa,leisure,pagpapagayongayon
+lalague,character,"likas, asal, anyo ng titik"
+lalam,downstairs,"baba, ibaba"
+lalam,"bottom, down",sayadin
+lalam,below,sa ilalim
+lalam,depth,lalim
+lalam,under,sa ilalim ng
+lalam gabun,subway,sa ilalim ng lupa
+lalawe,man,binata
+lalmunan,throat,lalamunan
+lamese,table,hapag kainan
+lamnan,fill,"pumuno, bumusog, punuin, busugin"
+"lampasan, labisan, lumabis, lumampas, sumobra, mipalalu, lagpas",exceed,"humigit, lumagpas, lumabis, lumalo"
+langasan,dress,sayadin
+langotsi,sack,kaban
+"langut, langutan",chew,ngata
+langutan,chewing gum,
+"lapad, lualas",expanse,"lawig, lawak"
+lasak-lasak,ruins,kasiraan
+lasetas,knife,kutsilyo
+lasi-lasi,rubble,guho
+"lati, mamala, matras",recede,"umurong, itigil"
+"latiko, latikuan",whip,latigo
+lawe lawe,looking around,
+lawiwi,love song,
+lawut,far,layo
+lele,edge,gilid
+lele,put aside,
+leproso,lente,lente
+liamado,favorite,paborita
+libe,libido,libido
+libutad,middle,gitna
+"ligtas, saguipan",save,"impok, mag-impok, impokin"
+lima,five,singko
+"limasan, limas",drain,bambang
+limatak,glutton,taong matakaw o masiba
+limbun,procession,prusisyon
+lingas-ngasan,bother,"abala, kaabalahan"
+lipaktung,cricket,kuliglig
+lipunga,athlete's foot,
+"lisun, lisyun",lesson,aral
+"lokuan, pamiasnan",dupe,"mangdaya, mang-ulol"
+"lomba-lomba, ballena",whale,balyena
+lorgabista,binoculars,largabista
+"lote, dakal",lot,"kapalaran, kaukulang bahagi, lupa"
+ltxvos,tender,yumi
+lual,out,labas
+lulam,nimbus clouds,
+"lumapad, lumualas",expand,"lumwag, lumawak, kumalat"
+lumbug,set,itakda
+"lumbug, palbug",submerge,"lubog, lumubog"
+"lumibut, lumibad, maglibad-libad",roam,"lumaboy, gumala"
+"lumpia, limpia",egg roll,
+lumput,sprout,tubo
+lumual,appear,lumitaw
+"lumuat, magluat",last,nakaraan
+lunganisa,sausage,langonisa
+lungub,"come in, enter",pumasok
+lungub,join,"magkabit, ikabit"
+lunkut,sorrow,"kapighatian, pighati"
+lunto,show,"bunyag, magbunyag, ibunyag"
+lupisak,lizard,butiki
+lupisak,house lizard,
+luyuk,slack,"mahina, makuyad"
+luyus,betel nut,
+"maaayama, makapanguiguil",you are cute,
+mabaknal,choke,"uminis, inisin, hwag pahingahin"
+mabalungus,big mouth,
+mabangnas,rotten,bugok
+"mabawas, dumitak",diminish,"bumawas, bawasan, magbawas"
+mabayat,severe,marahas
+mabayat,heavy,mabigat
+mabibie,live,tahan
+mabie,being,pagkatao
+mabie,living,tumira
+mabie,alive,"buhay, bumuhay, buhayin"
+"mabilis, masalusu, matalustus",fast,ayuno
+mablas,reciprocate,pagtugunin ang dalawang bagay
+mabsi,full,busog
+mabuhi,live,tahan
+mabungsul,swoon,hilo
+mabungsul,faint,bunsol
+"magaling, biasa",skilled,sanay
+magarimuan,save,"impok, mag-impok, impokin"
+magatal,itchy,kati
+magbitaung,howl,ungal
+"magdeklara, (vt) deklara",declare,magpahayag
+magdimitir,resign,"tiwalag, tumiwalag"
+magkera,lie down,
+"magkukulam, buruha",witch,bruha
+magkulta,coagulate,mamuo
+magkurat- curatan,whine,"daing, panaghoy"
+maglabul,gabble,"sumatsat, kumahig ng salitaan"
+maglalawe,gaze,"magmasid, magmalas, tumitig"
+maglaram,tell a lie,
+maglawe-lawe,browse,magmasid
+"maglintugan, miglintugan",blister,paltos
+maglubas,strip,himulmol
+"magmaliksi, mamaligua",hurry,dali
+"magmenus, magarímuan",economize,mag-arimohonan
+"magmenus, magarimuan",economize,mag-arimohonan
+magmuri,pick,piko
+magpaguera,recline,"sandig, sumandig"
+magpakaluat,linger,"maubos, magtagal, tumagal"
+magpakarakal,multiply,"magmultiplikar, magparami"
+magpalia,fail,"lagpak, maglagpak, ilagpak"
+"magpaliwag, magpaluat",tarry,"magtagal, maglwat, tumigil, huminto"
+magpalpatok,crackle,"humiging, lumagitik, lumagutok, umalatiit"
+magpayaglit,doze,"umidlip, mag-antok, magtuka"
+magpayaglit,nap,idlip
+magpayaglit,snooze,umidlip
+magpayasuk,smoker,manghihitit
+magraduadu,graduate,"tapos, magtapos"
+magrenta,tenant,kasama
+"magsilbi, maliari",competent,"bagay, akma, may-kaya"
+"magsilbi, maliari",may,pupunhan
+magtaburak,glut,"lumamon, sumakmal"
+magtagumpe,succeed,magtagumpay
+magtestigus,witness,testigo
+magtestigus,testify,magpatotoo
+magtiaga,persevere,"sikap, magsikap"
+"magtinda, mamisali",sell,"magbili, ipagbili"
+magtumbairu,tumble,"tumba, magtumba, itumba"
+magundap-undap,glimmer,"sinag, silay"
+maigpit,strict,mabagsik
+maigpitan,strictly,mahigpit
+maindredus,snoopy,snoopy
+maindredus,nosy,pakialamera
+majic,magic,nauukol sa mahia
+makabague,appropriate,karampatan
+"makabakle, makakera",horizontal,"halang, pahalang"
+makabaluktuk,bent,"biling, magbiling, bilingin"
+makadisgustu,offensive,"alingasaw, umalingasaw"
+makalbug,sunken,"humpak, impis"
+makaliim,secret,lihim
+"makalto, mayayakit",visible,aninag
+makalual,exterior,"labas, lumabas"
+makalub,inside,sa loob ng
+makamatua,elder,nakatatanda
+"makapngyarian, mayupaya",almighty,makapangyarihan sa lahat
+makasadia,set,itakda
+"makasadia, makayadia",ready,handa
+"makasakinda, makatalindata",supine,"tihaya, tamad"
+"makasibangut, makasibaktung",pouting,"magmungot, magkunot ng noo"
+"makataid, makakonekta",connection,sugpong
+makatalakad,upright,"tindig, magtindig, itindig"
+makatikdo,erect,"magtayo, magtatag"
+makatuknang,resident,ang naninirahan
+makatuknang,occupant,"ang nagmamay-ari, ang napapanahon"
+"makatula, makapakaíli",humorous,mapagpatawa
+"makatumbo, makabuklo",protruding,usli
+makayaliwa,special,tangi
+makayama,enjoyable,nakaliligaya
+makibat,responsible,responsable
+"makibat, magresayt",recite,"bigkas, magbigkas, bumigkas, ibigkas, bigkasin"
+makibungil,argue,"magmatwid, makipagmatwiranan"
+makipagkompetencia,compete,"lumaban, makipagpunyagi"
+"makiput, maskup",tight,gipit
+makiterakan,to attend,
+maklak,deaf,"bingi, mabingi"
+makmul,gulp,lunok
+"makpak, malakpak",clap,"palakpak, pumalakpak"
+"makting, baktingan, bakting",tinkle,magpangting ang tenga
+makualta,rich,yaman
+makuenta,fussy,hambog
+makusuelu,proud,palalo
+makyasawa,to get married,
+mal,precious,mahalaga
+malakak,snore,hilik
+"malandi, puta, malgarit",wanton,"malibog, mahalay, landi, kiri"
+malapsu,expire,"matapos, malutas, malagot ang hininga, mamatay"
+malda,crowd,madla
+malda,masses,misa
+malda,multitude,kawan
+maleldo,easter,pasko ng pagkabuhay
+maliap,wild,"mabangis, mailap"
+malibi,lewd,"laswa, malaswa"
+malibi,lustful,"malibog, mahalay"
+malicia,desire,"asam, umaasam, inaasam"
+malilut,ripe,hinog
+malinatnat,smooth,pino
+malingapngap,ticklish,kiliti
+malipup,sweltering,mainis sa init
+malisangan,warm,"alinsangan, maalinsangan"
+malulam,cloudy,"ulap, maulap"
+malulut,ripe,hinog
+maluwalas,broad,maaliwalas
+mamakbung,erupt,"putok, pumutok"
+mamawus,i'll wait,
+mamayutputan,proliferate,[proliferate
+mamialung,play,maglaro
+mamisali,seller,tagapagtinda
+mamleising,shuffle,"pagbabalansa ng baraha, lalang, daya"
+"mamugmug, masagua",crumby,"mumo, butil, munting putol"
+mamukipak,dirty,"laswa, malaswa"
+mamulai,run,takbo
+mamyalung,play,maglaro
+mamyasamas,properly,wasto
+managuanta,refrain from,
+manalbe,watch,orasan
+manampil,fix the dishes (after eating),
+manapelar,appeal,"habol, humabol, habulin"
+manasik,sow,"maghasik, ihasik, hasikan"
+mandalum,plaintiff,"tagapagsakdal, ang nagsasakdal"
+mandatun,settle,tuusin
+mandatun,stay,"tili, manatili"
+manensayu,rehearse,"sanay, magsanay, sanayin"
+maneynaya,wait,antay
+mangabiayan,subsist,"manatili, mamalagi"
+mangalinguan,forget,limot
+mangalisik,brisk,"maliksi, masaya, magaan ang katawan"
+mangalugui,lose,talo
+"mangansilyu, gansiluan",crochet,crochet
+mangaslak,dilated,"lumapad, laparan, lumwang, lwangan, humaba, habaan"
+mangaugse,spill,tapon
+mangisnawa,breathe,"hinga, huminga"
+mangisnawa.. saldak,snort,magsingasing
+manguribdib,shudder,"panginginig, takot"
+"maniali, tagapaniali",buyer,"tagabili, mamimili"
+maniamientu,mason,kantero
+maniampaga,bloom,"bulaklak, mamulaklak"
+maniampaga,abloom,"bulaklak, mamulaklak"
+manigaral,study,mag-aral
+"maniud, manyud",drift,"pilit, dahas"
+mantekilla,butter,mantikilya
+mantillo,hammer,martilyo
+manuknangan,settler,nakatira
+manunkulan,officer,"pinuno, kawani"
+manurud,barber,barbero
+manyaman,delicious,sarap
+manyampukaki,over flow of love,
+manyampukaki,overflowing,bastos
+manyuka,vomit,"suka, magsuka"
+manyulul,pakakalulu,lolo
+"mapagal, matikal",weary,kapaguran
+mapagbiasa-biasa,smart aleck,
+mapagpakensia,tolerant,"mapagparaan, mapagbata"
+mapaliari,possibly,maaaring
+"mapamirait, baritakan",cheater,mandurugas
+mapamye,generous,mapagbigay
+"mapaniwala, abibilug buntuk",gullible,uto-uto
+mapanyaup,sexy,mainam
+maparas,hot,mainit
+maparas,peppery,paminta
+mapekat,sticky,malagkit
+mapenandit,soon,agad
+mapibabata,patient,alaga
+maplas,aching,"makirot, masakit"
+mappia,warrior,"mangdidigma, kawal"
+mapun,dinner,"hapunan, maghapunan"
+maquilukub,cohabit with,
+marakal,many,dami
+maralikat,profusely,"sagana, marami"
+"maranum, malanio",watery,matubig
+maranun,early,maaga
+"marapat, maliari",occur,"mangyari, magkataon"
+"marcha, magmarcha",march,marso
+marilya,jealous,"selos, magselos"
+marimla,cold,lamig
+maritak,few,"kaunti, unti"
+masabal,concern,malasakit
+"masagua, pulkiria",messy,magulo
+"masala, mayasinta",vivid,"buhay ang loob, masigla"
+masalese,well,balon
+masalpak,whats,ano
+masasal,eager,asam
+maslam,sour,maasim
+"maspak, aspakan",crackle,"humiging, lumagitik, lumagutok, umalatiit"
+masuerti,successful,matagumpay
+masuerti,fortunate,"mapalad, maginghawa"
+"masulud, makalagwerta",secluded,"ilayo, ihiwalay, ibukod"
+masunguit,mean,paraan
+matalimik,silent,tahimik
+mataluras,slippery,dulas
+matalusad,slippery,dulas
+mataram,sharp,marahas
+mataram,acute,"matulis, matalino"
+matatangap,valid,balid
+matbud,fragile,marupok
+matbud,delicate,marupok
+mathematica,mathematics,matematika
+matiab,capsize,"taob, tumaob"
+"matibe, magluat",durable,"tibay, matibay"
+matiguit,taut,"banat, magbanat, banatin"
+matilus,pointed,"tulis, matulis"
+matilus,sharp,marahas
+"matipid, marimut",thrifty,"tipid, magtipid, tipirin"
+matni buntuk,clever,marunong
+matras,retreat,urong
+matrimonio,matrimony,pag-aasawa
+"matsura, manoug",ika ita,
+matua,old,gulang
+matua,parent,magulang
+matud,sleep,tulog
+matudtud,"sleep, snooze",tulog
+matulid,straight,tuwiran
+matundu,sleepy,"antok, maantok, antukin"
+matut,to fart,
+mayagyu,strong,matindi
+mayasinta,clear,linaw
+"mayasinta, mayalto",evident,"totoo, tunay, malinaw, maliwanag"
+mayaspak,split,hati
+maympis,thin,pipis
+mayupaya,omnipotent,makapangyarihan sa lahat
+mebantikul,sprained,pilay
+mebating,lost,olat
+mebigu,jilted,"landi, kiri"
+mebuysit,unset,itakda
+medesgracia,disgraced,dinudusta
+medio (somewhat),rather,manapa
+mekua,attracted,"akit, umakit, inakit"
+mekurilyo,short,kapos
+melaparis,hit by a vehicle,
+melula,trance,pagkawalang diwa
+memayutputan,prolific,"namumunga, mabunga"
+memoria,memory,alaala
+memulang,maniac,"ulol, baliw, haling"
+menakit,seen,seen
+mengalumpis,wrinkled,lukot
+mengapapauna,precedent,"sinundan, nauna"
+menibat,from,taga
+meniglo,eager,asam
+menuling,black and blue,
+menuling,bruise,pas
+menuling,livid,kulay talong
+menyambut,nanalo siya,
+mepaltuk,sprained,pilay
+merakap,captive,bihag
+merapat,incident,"sakuna, masamang pagkakataon"
+"mesambut, meraig, mesaul",defeated,talo
+mesayang,lost,olat
+"mesayang, mewalang, kuenta",wasted,"aksaya, mag-aksaya, aksayahin"
+mesindak,afraid,nasindak
+metong,one,sang--
+meulad,insane,basag ang pula
+meyayat,thin,pipis
+mi,urine,jingle
+mi,we,atin
+miagape,abreast,"katabi, kasiping"
+miagnan,simultaneously,makasabay
+miarapan,face to face,
+miasawa,couple,"pagsamahin, pagpisanin, pag-asawahin"
+"mibagsak, sapungan",crash,"pumutok, lumagitik"
+mibagwa,prosper,"bumuti ang kalagayan, guminghawa"
+mibara,clog,"abala, hadlang, kapansanan, kaabalahan"
+mibara,stall,puwesto
+miblas,dress up,
+mie,live,tahan
+mie,render,"sumuko, pahinohod, makipagtuos, isauli, ibigay"
+miembro,member,kasapi
+mierkules,wednesday,miyerkoles
+migising,wake up,
+miglalang,creator,"may-lalang, may-likha, may-kapal"
+miglate,welt,"latay, lumatay"
+miglayas,runaway,magtakas
+miglintugan,scald,banli
+migpalya,absent,pumalya
+migup,drink,"uminom, inomin"
+mikakalabkad,blazing,"liyab, magliyab"
+mikalait,tangle with,
+mikanlapit... lub,intimate,"taos, taimtim, tapat na loob, kasi"
+mikapali,enraged,"galitin, papag-initin"
+"mikapatad, mikaputul",brothers,kapatid
+mikawani,split,hati
+mikawani,separate,hiwalay
+milabas,past,nakaraan
+milabas,previous,dati
+milabas,elapse,"lumipas, makaraan ang panahon"
+milalabas,fleeting,"sakay, taanan"
+"milibe, mipalit, pilibayan, pipalitan",exchange,palit
+millionairo,millionaire,milyonaryo
+milulupa,alike,pareho
+milulupa,identical,pareho
+milupung,huddle,"bunton, kagulo"
+milyari,happen,mangyari
+mimingat,take care,
+mimwa keka,are you angry,
+mimwa keka,angry to me,
+mindak,sway,"liguygoy, wagayway, pagpag, liglig, kapanyarihan"
+mingatba,side to side,
+minta,arived,"sumipak, sumibak, lumahang"
+mipaburen,neglected,"baya, bayaan, pabayaan"
+"mipaintagun, mipatiempu",incidental,nagkataon
+"mipakirut, mengasdan",startled,nagulat
+mipamulala,surprised,sus
+mipangasawa,copulate,"iugnay, isugpong"
+mipapate,fighting,pinag-aagawan
+mipasar,pass,lipas
+mipate,fighting,pinag-aagawan
+mipawas,perspire,"pawis, pawisan"
+miras,arrive,sapitin
+miras (arrive),reach,sapitin
+misalbag,"explode, scatter",pasabugin
+misapwak,born,silang
+misasanmetung,unanimous,magkaisa
+mision,mission,"tungkulin, misyon"
+misionario,missionary,misyonaryo
+misip,think,akala
+misip,speculate,"mangalakal, magwari, gumunita"
+"misip, malak",contemplate,"magdilidili, magbulay, magwari, gumunita, magnilay"
+misterioso,mysterious,misteryosa
+mitabnu,meet,"salubong, sumalubong, salubungin"
+mitakid,stub,"puno, beha, upos"
+mitakid,stumble,"tisod, dupilas"
+mitakutan,scare,takutin
+"mitalusad, magislaid",slide,dausdos
+mitatalamitam,meeting/look for(at),
+mitatau (flaming),ablaze,lipunan
+mitau,burn,sunog
+mitipun,accumulate,"magtipon, magsalansan"
+"mitipun, mipulung",convene,"magpisan, magtipon"
+"mitomba, mibulang, miragsa",fall,bagsak
+mitukituki,consecutive,sunodsunod
+mitutuki,back-to-back,likod
+mitutundu,gising,"gising, manggising, gisingin"
+miyugse,spill,tapon
+morus,"unchristian, barbarian, a person without manners","kristyano, kampon ni kristo"
+mua,anger,ungal
+"mua, mimua",angry,virna lisa
+"mugmug, sagua",crumb,"mumo, butil, munting putol"
+mukum,"judgment, last","hatol, paghuhukom"
+mulai,run,takbo
+mulus,flood,dilubyo
+municipio,municipal hall,
+munikala,suggest,imungkahe
+munisipio,tower hall,
+munta,come,"lumapit, pumarito"
+"mupul, malut",harvest,ani
+murit,you are crazy,
+"murit, muret",crazy,basag ang pula
+mysterio,mystery,"hiwaga, mahiwaga"
+napun,yesterday,kahapon
+naydamo,poutang-ina,ina
+negatib,negative,negatibo
+negocio,business,"kalagayan, pagkabuhay, hanap-buhay"
+"negocio, comercio",trade,pangyayari
+ngamu,you said,
+ngamupaya,what,ano
+ngana,he said,
+ngungut,coconut,niyog
+"ninu, kaninu, kenu",whom,sino
+nokarin,where,"saan, san"
+"norte, paralaya",north,"hilaga, hilagaan"
+nukarin,where,"saan, san"
+obat,why,bakit
+obligacion,duty,"katungkulan, bwis o singil ng aduana"
+"obligacion, katunkulan",obligation,"katungkulan, tungkulin"
+"obserban, pagumasdan, magobserba, magumasid",observe,magmasid
+okasion,occasion,okasyon
+okupahan,occupy,"gumamit, magtalaga"
+olen,marble,dyolen
+oneng,but,subalit
+opicial,official,opisyal
+opicina,office,opisina
+"order, yutus, utusan, mutus, morder",order,kautusan
+ordinancia,ordinance,"utos, tuntunin"
+organisacion,organization,samahan
+ornalan,installment,hulugan
+ornamento,ornament,hiyas
+orsabispo,archbishop,arsobispo
+ortelano,farmer,"sakahán, magsáka, magsasaká"
+ortelano,peasant,"taong bukid, magsasaka"
+ostia,host,host
+ostia,wafer,apa
+osyu,sauce,sarsa
+ot,why,bakit
+pabagya-bagya,gradual,untiunti
+pabanglu,perfume,pabango
+pabayat,something that weighs you down,
+paburen,let,pahintulutan
+padurut,spin,paikitin
+"padurut, dumurut",twirl,"ikot, ikit, pihit"
+pag-aldoldo,daily,araw-araw
+"pagdependi, protekta",protect,"mag-alaga, umampon, kumupkop, magtangkilik, lumingap, tumingin"
+pagkabie,livelihood,kabuhayan
+pagkabie,existence,pagkabuhay
+pagkalub,offering,alay
+paglalawe,attitude,"turing, ituring"
+pagmayumu,dessert,magmatamis
+pagmemoria,memorize,"kabisa, mangkabisa, kabisahin"
+pagmulalan,curious,"masinop, mainam"
+"pagpakensia, pibatan, paburen",tolerate,"baya, bayaan, pabayaan"
+pagpaldas,weeds,damo
+pagpaldasan,mourn,luksa
+"pagtaksilan, pagturaidulan",betray,ipagkanulo
+paguitan,margin,gilid
+paimburisan,"abandon, forsake","talikdan, talikuran"
+paitas,soar,"umilanglang, paitaas"
+"paitas, mipakde",rise,"balikwas, magbalikwas, balikwasin"
+pakabsian,satisfy,bigyan ng kasiyan
+pakabsiyan,make one eat his fill,
+pakatudtud,tranquilizer,wdzzul
+pakawasa,refreshment,meryenda
+pakdu,"shock, forced",gimbal
+pakiapusan,mimic,gaya
+"pakit, palto",show,"bunyag, magbunyag, ibunyag"
+pakyapusan,imitate,gaya
+palabud,bolo,"gulok, itak"
+palague,presume,"hinala, maghinala, hinalaan"
+palague lub,frank,"tahas, tahasan"
+palak,dregs,latak
+"palangian, langi",dry,tigang
+palatso,small ax,
+palatun,plate,pinggan
+palbug,to place underwater,
+paldak,kick,"sipa, sipain"
+paldakan,to kick,
+paldas,"black, black clothes for mourning",luksa
+"paldas, pamagpaldas",mourning,luksa
+palele-lele,vicinity,"pook, nayon, lugar"
+paligi,"canal, ditch, gutter",bambang
+"palingapngapan, mangalingapngap",tickle,kiliti
+"palipitan, palipit",wring,"piga, magpiga, pigain"
+"palitan, mipalit",switch,"iba, umiba"
+palmuran,humiliate,magpangayupapa
+palmuran,curse,sumpa
+"palmuran, malmura",scold,pagsabihan
+palpipate,pugnacious,"palaaway, mapagbasag-ulo, basag-ulero"
+palsalanan,indict,"dikta, magdikta, idikta"
+palsimi,suffering,dusa
+palsingsingan,ring finger,
+palsinta,romantic love,
+"palual, kalualan",discharge,pagtitiwalag
+palub,enclose,"lakip, maglakip, ilakip"
+paludpud,base of the bamboo tree,
+paluka,beat,bugbog
+pamaglaram,perjury,panunumpa na walang katotohanan
+pamagtangal,admiration,paghanga
+pamagtiaga,perseverance,"tiyaga, katiyagaan"
+pamakipag,adventure,pakikipagsapalaran
+pamalsalanan,charge,singil
+pamalsinta,your love,
+pamamirait,cheating,pandaraya
+pamamiyalung,the act of playing,
+pamananam,agriculture,pagsasaka
+pamanyuyu,service,serbisyo
+pamaqkialam,intervention,pamamagitan
+"pambihira, extraordinario",extraordinary,pambihira
+pambuk,snout,"nguso, ilong"
+pamiabe,"living together, union","pagkakaisa, pagkakaayon"
+pamiabeabe,social,pagtitipon
+pamiagkas,spelling,baybay
+pamibiye-biye,way of life,
+pamibungil,argument,alingasngas
+pamikaburi,engagement,dez6ko
+pamikaintindi,accord,kasunduan
+pamikakunu,alarm,"pagibik, babala, gulat, gulo"
+pamikamaganak,consanguinity,"kadugo, kamag-anak"
+pamikasundu,"agreement, contract, settlement",kasunduan
+pamikatagun,chance,palad
+pamikawani,separation,paghihiwalay
+pamikontra,conflict,"makipaglaban, makipagtalo, lumaban, makipagaway"
+pamipagsalita,conversation,pag-uusap
+pamipamuk,"battle, war",digmaan
+pamipisali,sale,pagtitinda
+pamisabi,accord,kasunduan
+pamisali,sell out,
+pamisanmetung,unity,pagkakaisa
+pamisanmetung,"amalgamation, merging, solidarity",pag-iisa
+pamisulatan,correspondence,pakikipagsulatan
+pamun,goodbye,paalam
+pamunag,sunrise,bukang liwayway
+pamuntuk,head,ulo
+pamusni,"can opener, foreword",pambukas
+"pan, pan de sal, pan de sito",bun,pusod
+panabud,bolo,"gulok, itak"
+"panagkasanan, managkas",curse,sumpa
+panalumduman,to search,
+pananguilu,toilet paper,
+"pandak, punguk",pudgy,mataba ang pisngi
+pandakaki,a kind of shrub,
+pangadeporma,deformity,pagkasira ng anyo
+pangaibat,afterwards,tapos
+pangalugui,loss,perde
+pangapirake,division,"bahagi, kaalitan"
+pangayatyu,presence,"harap, harapan, pagharap, anyo"
+pangayatyu,existence,pagkabuhay
+pangimut,"action, activity",galaw
+pangisnawa,breath,hininga
+pangmetung,singular,"namumukod, bukod-tangi"
+pangutnan,interrogate,"usig, usigin"
+"paniaplit, saplitan",goad,tudlungin
+panik,act of going up the stairs,
+pankat,faction,"pangkat, pulutong, kaalitan, gulo"
+panlub,admission,pagtanggap
+pantuk,finger wrestling,
+pantyun,tomb,nitso
+panugali,character,"likas, asal, anyo ng titik"
+panugse,waste,"wasak, guho, ilang"
+panupaya,"forgive, pardon",patawarin
+panusigan,please,"umaliw, makalugod, magbigay lugod, magbigay-loob"
+panyalak,"sieve, strainer",salaan
+panyiguraduan,ensure,tiyak
+"papal de lisa, or, - de liha",sandpaper,papel-de-liha
+paralaya,east,east
+paras,spicy hot, maanghang
+"parehu, milulupa",similar,"hambing, kahambing, magkahambing"
+parilla,gridiron,ihawan
+parilla,grate,kayod
+paro,shrimp,hipon
+paroba,west,habagat
+"parti, departamiento",section,purok
+pasaerus,passengers,pasaheros
+pasbul,gate,"puwerta, pwerta"
+pasdan,snipe,kanduro
+"pasibaiwan, ulitan, yulit",repeat,ulit
+pasiknangan,sport,maglibang magsaya
+pasipulai,scamper,"tumaanan, tumakas"
+pasipulai,scramble,"umagaw, mangukyabit, ipakipagtalo"
+paslan,press,gato
+paslan,squeeze,piga
+pasuabi,token,balap
+patakla,prone to moving his bowel,
+patalupit,bottle cap metal,
+pataram,blade,"talim, dahon"
+pataram,knife,kutsilyo
+"patawan, mitau",ignite,"magningas, mag-alab"
+paten,slay,pumatay
+paten,kill,pumatay
+patente,patent,bakya
+patikulodyung,acacia tree,
+patikulodyung,another name for the acacia tree,
+patingapun,all day,
+patlud,break,sirain
+patna,let-up,pahintulutan
+patse,whenever,kailanman
+patuag,bending over,
+patugut,stop,"iwas, umiwas, iwasan"
+patuknangan,terminate,"hantong, humantong"
+patulbad,a kind of rice cake,
+paud,yoke for a farm animal,
+paugtuan,lunch,mananghalian
+"paunakan, pangunakan",niece,pamangkin
+"pautang, kredito",credit,"utang, mangutang, utangin"
+pawaga,explanation,paglalahad
+"pawas, mipawas",sweat,pawis
+payalili,have something or someone replaced,
+"payapa, taimik",peaceful,panatag
+payatras,retrogression,"pag-urong, pagbalik"
+pecamatas,zenith,"senit, ang tapat ng ulo sa itaas"
+"pekamarok, pekamatsura",worst,worst
+pekamasanting,best,pinakamahusay
+pekamatas,maximum,kataastaasan
+pekamatas,supreme,"kataastaasan, pinakamataas"
+pekamayap,best,pinakamahusay
+pekapun,leader,"pamunuan, pamuno, puno, mamuno"
+pekwa,game of domino,
+penandit,"a moment, shortly",mamayang kaunti
+penibatan,origin,pinagbuhatan
+penibatan,from,taga
+pepatagal,chased,"taboy, itaboy, magtaboy"
+"perdibli, perdipli",safety pin,
+periodico,magazine,magasin
+perlas,pearl,mutya
+"perwicio, mesira",damage,perhuwisyo
+"piabe-abe, piabenabayan",consolidate,"isama, isapi ilakip, magsama, magsapi, maglakip"
+piaben,combine,pagsamahin
+pialung,game,laro
+pibandian,"assets, wealth","yaman, boong kahalagahan ng pag-aari o tinatangkilik"
+pibandian,asset,asset
+pibata,endure,tiis
+"pibatan, mibata",endure,tiis
+piblas,"clothes, suit",bihis
+piblas,attire,"magbihis, maggayak, magpalamuti"
+piblasan,to dress up,
+pibuburian,likable,ganito
+pigagap,earnest desire,
+pigagbakacionan,resort,"pagdalo, pagdulog"
+pigalanggalangan,wrist,pulso
+pikailyan,a joke,
+pikalukalwan,joint,sugpong
+pikasunduan,mutual,magkaayon
+pikawanian,divide,hati
+pikayari,deal,"magbahagi, maghati, mangalakal"
+"pikayari, pikasundu",settlement,pagkakasundo
+pikayasan,scrapings,pinagkayasan
+piklungan,joint,sugpong
+"pikompara, piparewan",compare,kumpara
+pikulatayan,trellis,dalayrayan
+pilagarian,sawdust,kusot
+"pilatan, paguitan",space,puwang
+pildis,move slightly,
+pilmi,firm,matatag
+pilualan,exit,"labas, lumabas"
+pilulanan,vessel,sisidlan
+piluluban,entrance,"puwerta, pwerta"
+pilulubluban,conscience,bukungbukong
+piluluguran,loveable,pagmamahal
+piluluran,spittoon,luraan
+pimpo,towel,tuwalya
+"pingan, pipanganan",dishes,pinggan
+pingkit,slit-eyed,singkit
+pingo,a kind of saltwater fish,
+pipagbuertan,turnaround,turnaround
+pipalitan,interchange,palit
+pipamialungan,playground,laruan
+pipanganan,restaurant,restawran
+pipanutangan,creditor,"ang nagpapautang, ang pinagkakautangan"
+pipumpunan,forefather,ninuno
+pipumpunan,ancestor,"kanunuan, pinagbuhatan, pinanggalingan"
+pirait,cheating,pandaraya
+piraitan,swindle,dayain
+piraralanan,passage,daan
+pirat,rip,"punit, pumunit, punitin"
+piruya,rake,kalaykay
+pisabian,discuss,usap
+pisali,sell,"magbili, ipagbili"
+pisamban,church,simba
+pisamut,mixture,sahog
+pisanmetung,merge,pag-isahin
+pisik,spill,tapon
+pitaid,join,"magkabit, ikabit"
+pitaklan,asshole,butas ng puwet
+pitaklan,poopy,tae
+pitaklan,anus,tumbong
+pitaklan,scrotum,betlog
+pitnan,divide,hati
+pitsuran,visualize,kita
+pitsuran,imagine,"gunitain, wariin, dilidiliin, bulayin"
+piyalung,"play, sport",maglaro
+pkwah,"hire, rent",arkila
+plansan,press,gato
+plantu,stuck,palalo
+plasdan,fishpond,palaisdaan
+plasu,deadline,"katapusan, huling araw"
+plyrd,side,kabila
+posibilidad,possibility,"pangyayari, bisa"
+posicion,position,tunkulin
+"potang, kabud",once,minsan
+presidyo,town hall,
+sugi,priest class,
+prinela,flannel,pranela
+pritil,sluice,sangka
+"puersa, puersan",force,pilit
+puersan,coerce,"pigilin, ampatin"
+puga,fish roe,
+pugit,finish last,
+"pukpukan, pulpukan",poke,"kalikot, kalikutin"
+pul,"honey, molasses",pulot-pukyutan
+pulgatoryu,purgatory,purgatoryo
+pulkiria,filthy,"dumi, madumi, marumi"
+pulkirya,slobbish,salaula
+pulpiaru,hotheaded,mainit and ulo
+"pulquero, pulqueruan",butcher,"katay, magkatay, katayin"
+"pulu, asta",handle,"dampot, mangdampot"
+pundamiento,fundamental,patibayan
+punggul,handful,"isang haya, dakot"
+pungus,severed,putol
+puni,meals served during lent,
+punti,break off,
+puntuk,carry on top of the head,
+"puputan, mapuput",suffocate,"uminis, inisin"
+pusad,"belly button, navel",pusod
+pusitara,elope,tanan
+"pustura, posicion",posture,"tayo, lagay"
+pusyun,occasion,okasyon
+putut,cut,lapangin
+pututan,cut,lapangin
+pututan,mow,"gapas, maggapas, gapasin"
+putyukan,honeybee,pukyutan
+puunan,capital,kapitolo
+puwad,thigh,"hita, mahita"
+pwad,thigh,"hita, mahita"
+quimut,motion,"galaw, kilos"
+rancho,ranch,rantso
+ranco,rank,"malago, mayabong, mataba, maantot, mabaho"
+ranup,hunger,gutom
+rapal,hurry,dali
+rason,reason,katuwiran
+ratun,stillness,tahimik
+rawak,"evil, wickedness",masama
+"reputacion, paintungulan",reputation,reputasyon
+"residencia, tuknangan",residence,"tahanan, tirahan"
+resistencia,resistance,pigil
+"retaso, pitabasan",remnant,labi
+"rilis, tramo",railroad,tren
+"rima, poecia",verse,"tugma, tugmaan"
+rirya,jealousy,pangingimbulo
+ritak,few,"kaunti, unti"
+roeda,ferris wheel,
+rollo,scroll,"balumbon, ikid"
+roma,rome,dumi
+romantiso,romantic,romantika
+rusia,russia,rusya
+sabagkalan,plug,pasak
+sabak,husk,balat
+sagkan,shield,kalasag
+sagkan,block,tipak
+sagmitan,seize,daklutin
+sagpangan,seize,daklutin
+saguiwa,raw,"hilaw, bubot, sariwa"
+saingsing,groan,"dumaing, humibik"
+sakbit,sling,saklay
+"sakbit, sakle",strap,"sintas, panali"
+"sake, saken",ride,"lulan, lumulan"
+"saklo, suapang",greedy,dayukdok
+saklu,fetch water,
+saklu,to fetch water,
+saklungan,save,"impok, mag-impok, impokin"
+"salabat, maslat",interfere,"makialam, manghimasok, sumabad"
+salada,salad,ensalada
+salada pruta,salad,ensalada
+salampakan,crotch,puklo
+salangi,"come inside, enter",pumasok
+"salap, panialap",strainer,salaan
+"salas, kilab",living room,
+"salasan, salesen, talatag, yayus, yaregla",arrange,"ayos, mag-ayos, ayusin"
+salbag,spread,iunat
+"salbag, bubud",sow,"maghasik, ihasik, hasikan"
+salibubang,beetle,salagubang
+salikap,basket,buslo
+salinku,turn,buklat
+salupil,bib,bibero
+saluput,surround,paikutan
+samapluk,tamarind,sampalok
+samasnan,settle,tuusin
+sambitlan,cite,"paharapin sa paglilitis, banggitin, tukuyin"
+"sambitlan, saglawayan, banguitan",mention,banggit
+samiento,floor,sahig
+samientuan,pave,maglatag ng bato o laryo
+sandalia,sandal,"sandalyas, sinelas"
+sandirit,propeller,elise
+"sankanan, pamalsalanan, parsalanan, palsala, parsala",blame,"sisi, manisi, sisihin"
+sankap,ingredient,sangkap
+sanwich,sandwich,sanwits
+"sapak, mitmu, masna",full,busog
+sapatilla,washer,hilamos
+sapingilan,slap,sampal
+sapni,"child, descendants",suplmg
+sapua,pulp,sapal
+sarento,sergeant,sarhento
+saresa,cherry,seresas
+saria,intentional,"kinusa, sinadya, talaga"
+"saya, ligaya, kusuelu",bliss,"kaginghawahan, kasayahan, saya, lugod, kaluguran"
+sebalan,collided,"sagupa, sumagupa"
+seis,six,anim
+selagpian,in-law,sa lugar
+"selio, sello",stamp,tatak
+sensitibo,sensitive,"damdam, makadama"
+"sentencia, atul, sentencian",sentence,hatulan
+sesen papragul,rear,likod
+siap,chirp,siyap
+sibuk,try out,subukan
+siklod,kneel,napaluhod
+sikuako,pipe,kuwako
+sinkilan,nudge,sikuhin ng lihim upang masabi ang ibig sabihin ng walang makaalam
+sisilim,twilight,takip-silim
+siuala,voice,boses
+soltero,single,nag-iisa
+submarino,submarine,nasa ilalim ng dagat
+subornuan,support,suporta
+suguiran,defy,nzavaqleqhaqvo
+sukad,measurement,sukatan
+suklati,cocoa,kakaw
+sulapawan,airport,paliparan
+sulapo,fly,lipad
+suli,problem,problema
+suli,sprout,tubo
+suli,graft,"magpasupling, magagpang ng ibang sanga"
+sulip,downstairs,"baba, ibaba"
+sulparit,squirt,"sumpit, pulandit"
+"sulu, sulugui",lamp,ilaw
+sulud,dress,sayadin
+"sumipa, maldak, sipan, sikaran, paldakan, sipa",kick,"sipa, sipain"
+sumpal,cork,tapon
+"sumuyu, sumerbisyu, sumerbicio, magserbicio",serve,paglingkuran
+sundur,resume,resume
+sunga,gasp,"hingal, humingal"
+"sungul, sungulan",bribe,suhol
+sunlag,shine,magningning
+supillo,toothbrush,sipilyo
+susaid,suicide,"pagbibigti, pagpapatiwakal, ang nagbigti o nagpatiwakal"
+suspecha,suspicion,hinala
+suspende,suspend,pansamantala
+susulud,outfit,"mga kasuntan, damit"
+"sut, isut",reconciliation,pagkakasundo
+tabalu,i don't know, hindi ko alam
+tabletas,tablet,tableta
+tabrete,chair,upuan
+tagkilan,touch,hawak
+tagle,nature,taglay
+taglus,proceed,tumuloy
+taguling,gutter,alulod
+tagumpe,success,tagumpay
+"tagunan, tumagun",attend,"lumingap, kumandili, duminig, maglingkod"
+tagusgus,slide,dausdos
+"tai, itai, itungi",stitch,tumahi
+taid,"lead by the hand, spur",tahid
+taiktik,stick,"dikit, dumikit"
+taimik,"quiet, still",kalma
+tais,hone,"hasaan, talaran"
+taisan,whetstone,hasaan
+takde,sleeve,manggas
+takde,upper arm,
+takid,trip,talisod
+takla,defecate,"tadtad, magtadtad, tadtarin"
+takla,stool,"bangko, taburete"
+taklang batwin,falling star,
+takneydo,damn it,
+talakad,"stand, to stand up",tumayo
+talakad,arise,"bumangon, manggaling, magmula"
+"talalingap, talasaup",attendant,"alila, lingkod, abay"
+talambie,biography,talambuhay
+talamitam,relationship,ugnayan
+taldawa,field,lupa
+talip,peel,talupan
+talipampan,alias,bansag
+talipan,peel,talupan
+taliri,finger,daliri
+talisain,a rooster with speckled feathers,
+talnanan,knob,"umbok, buko ng kahoy, buko ng bulaklak"
+talubang,butterfly,paruparo
+talusad,slippery,dulas
+tambunan,bury,baon
+tamimi,shy,dungo
+"tamnanan, tamnan, tanam",plant,"maghasik, ihasik, hasikan"
+tampa,hit with the hand,
+tampalingan,to slap,
+tamumu,bee,bubuyog
+tana,us,atin
+tanam,crop,ani
+tandus,spear,sibat
+tandusan,spear,sibat
+tangalan,admire,hangaan
+tangapan,accept,"tumanggap, tanggapin"
+tangapan,admit,amin
+tanguian,decline,"humapay, kumiling, humilig, tumanggi, umiwas"
+tanke,stalk,sundin
+tanke,twig,siit
+tankilikan,uphold,"itaas, alalayan"
+tapangku,lean-to,"sandal, magsandal, isandal"
+tapias,shard,tapyas
+tapuk,"cohort, group, platoon",pulutong
+taram,"blade, sharpness","talim, dahon"
+taramindu,tamarind jam,
+taranati,star fruit,
+tatap,winnow,tahip
+tatas,fluent,"madulas, magaan"
+tatio,cock,tite
+tatyo,rooster,katyaw
+tayas,whet,"patalasin, ihasa"
+teklada,piano key,
+tekuan,cup,tasa
+telegra,wire,alambre
+tenam,planted,"maghasik, ihasik, hasikan"
+teoria,theory,kaalaman sa pag-iisip
+terak,dance,sayaw
+terakan,ball,baile
+tiani,tweezers,"ipit, pang-ipit, panipit, sipit"
+tiba,bake,"magtinapay, magbibingka"
+tibukbuk,hood,panakip sa ulo
+tidwa,"by twos, double",doble
+tikal,fatigue,pagal
+tiltilan,dip,"sawsaw, sumawsaw"
+timbabalak,lizard,butiki
+timbu,slim bamboo,
+timbu,reed,xtc8oe
+timbulan,flotation device,
+timiran,press,gato
+tindaragul,big toe,
+"tinud, makaustu",proper,wasto
+"tipak, katigkal",chunk,tipak
+tiradol,slingshot,tirador
+miyabe,together,sama
+tornillo,screw,tornilyo
+tramo,track,"bakas, yapak"
+tres,three,matris
+tresurera,treasurer,tesorero
+trinidad,trinity,"binubuo ng tatlo, santisima trinidad"
+tsura,ugly,chitae
+tudtud,sleep,tulog
+tudturan,bed,kama
+tugak,frog,palaka
+tuglung,connect,"magkabit, ikabit"
+tuknang,stay,"tili, manatili"
+tuknang,quit,"palayain, pabayaan"
+tuknang,live,tahan
+tuknang,cease,"maglikat, magtigil, pumanaw, mawala, itigil, papaglikatin"
+tuknangan,address,"talumpati, magtalumpati"
+"tulauk, magtokokok",crow,uwak
+tulud,leaflet,munting dahon
+"tumali, mibangun",rise,"balikwas, magbalikwas, balikwasin"
+tumumbo,protrude,"luwa, lumuwa"
+tundun,nape,batok
+tunggal,"alone, sole",solo
+tunguen,treat,"gamot, gumamot, gamutin"
+turaidul,treacherous,taksil
+turak,ugly,chitae
+turopa,haystack,mandala
+turwanan,teach,turo
+ualis,buttonhole,ohales
+ubad,nude,"hubo, maghubo, hubuan"
+"ubad, lubas",naked,"hubad, maghubad, hubarin"
+ubat,tinder,"lulog, kusot"
+udyuran,scrub,isis
+ugtu,lunch,mananghalian
+ula,prophecy,hula
+"ula, paula-ula",conjecture,"maghaka, magsapantaha maghinala, magbintang"
+"ulan, manula, ula",guess,haka
+ulas,blanket,kumot
+ulilla,orphan,ulila
+ulip,mend,sulsi
+unias,pick,piko
+urud,haircut,gupit
+ustu,just,"sukat, ganap"
+"ustu, makabague",fit,ihit
+uyat,"root, vein",puno
+"wacat, paludpud",roots of tree,
+wali,youngest sibling,
+wantis,glove,guwantes
+wapin,yes,"oo, opo"
+"ware - as in ""aku ware"" (more accurately)",rather,manapa
+watas,poet,manunula
+ya,he,"kaniya, kanya"
+yabe,include,kabilang
+yaklung,bend,"liko, lumiko"
+"yakmul, makmul",swallow,lunok
+yalis,move,urong
+yambag,donate,"magkaloob, magdulot, umambag, umabuloy, magbigay"
+"yandug, yampang, iparikil",dedicate,"alay, mag-alay, alayan"
+yatsa,throw,"hagis, ihagis"
+yatu,earth,lupa
+yeng,respect him,
+yornu,bake,"magtinapay, magbibingka"
+yubu,glory,"lumwalhati, maghambog, magparanya"
+yugse,dump,"panglaw, bigat ng loob"
+yutus,direct,diretso
+"kabud-abud, gulping-gulpi, alang ketunan-tunan",suddenly,bigla na lang
+"matuang panaun, minungang panaun",ancient,unang tao
+akawul daka,akawul,
+aldo sueldo,payday,
+alimu,alimu,
+alimum,petrichor,
+antimong,antimong,
+artipicial,artifical,
+atsu,atsu,
+bagkat,nougat,
+bakulau,chimpanzee,
+bengatibo,vengeful,
+bukilia,mouthpiece,
+dramaturgo,playwright,
+gareta,oxcart,
+granada,pomegranate,
+"gubat, kakewan",rainforest,
+guitarista,guitarist,
+guyabnan,handrail,
+"impisa, kapuprumeruan",begginning,
+ispagueti,spaghetti,
+kabanglu,kabanglu,
+kablas,backfire,
+kakialung,playmate,
+kalingwan,kalingwan,
+kalsador,shoehorn,
+kantidad (an amount),quanlity,
+karakal,karakal,
+kashif,kashif,
+katsup,ketchup,
+"kemiento, samiento, samientuan",cemet,
+kentimos,centave,
+kerida,concubine,
+kiriling,tintinnabulation,
+komision,commision,
+konstablario,constabulary,
+kuliawan,oriole,
+kunal,pockmark,
+lagwa,lagwa,
+lakal,pad,
+lalam danum,underwater,
+laparis,runover,
+lasetas,jackknife,
+libreta,bankbook,
+libreta,passbook,
+lipunga,trenchfoot,
+lovebird,lovebird,
+mablas,retailiate,
+maduluk,smolder,
+magpenitencia,flagellant,
+"maina.. lub, talakalunus",softhearted,
+makakalale,careful,
+makapangaklingan,earsplitting,
+makatumbo,bulding,
+"malpa, kulembut",weakling,
+malutub,fledgling,
+mamiblas,mamiblas,
+"manabu, mibagsak",flunk,
+manbibilay,manbibilae,
+memalintusan,memalintusan,
+memusitara,memusitara,
+meninap,dreamt,
+migkamali,mistaken,
+milayu,milayu,
+milibe,swap,
+momma,mimwa,
+murit,lunatic,
+myung,zoom,
+nunganunga,noonga,
+obligan,obligate,
+pabanwa,pabanwa,
+paglokwan,paglokwan,
+"pakapata, pakatudtud",anesthetic,
+palipitan,tweak,
+pamitabnu,constact,
+patus,horseshoe,
+paunacan,neice/nephew,pamangkin
+pisuk,clubfoot,
+piteterakan,ballroom,
+pucut,fishnet,
+pusad,bellybutton,
+salimpara,ricochet,
+samientuan,solidify,
+sandirit,pinwheel,
+semestro,semester,
+sigui,zoom,
+sikuat,uppercut,
+"sim, yeru, iero",shingle,
+subling mie,resurrect,
+suli,offshoot,
+teknisa,technique,
+trambia,streetcar,
+trambia,tram,
+"trisyunan, pagtraidulan",doublecross,
