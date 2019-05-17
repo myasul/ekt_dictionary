@@ -30,7 +30,7 @@ def get_all_entries():
                 .order_by(Dictionary.kapampangan.asc())
                 .all(), None)
     except SQLAlchemyError as e:
-        Logger.error('Error: {}'.format(traceback.format_exc()))
+        Logger.error(f'Error: {traceback.format_exc()}')
         return None, e
 
 
@@ -61,7 +61,7 @@ def search_in_kapampangan(keyword, mode, count=False):
                 .order_by(Dictionary.kapampangan.asc())
                 .all(), None)
     except SQLAlchemyError as e:
-        Logger.error("Application: {}".format(traceback.format_exc()))
+        Logger.error(f"Application: {traceback.format_exc()}")
         return None, e
     except IndexError:
         raise IndexError("Invalid Search mode.")
@@ -83,7 +83,7 @@ def search_in_tagalog(keyword, mode):
                 .order_by(Dictionary.tagalog.asc())
                 .all(), None)
     except SQLAlchemyError as e:
-        Logger.error('Application: {}'.format(traceback.format_exc()))
+        Logger.error(f'Application: {traceback.format_exc()}')
         return None, e
     except IndexError:
         raise IndexError("Invalid Search mode.")
@@ -105,7 +105,7 @@ def search_in_english(keyword, mode):
                 .order_by(Dictionary.english.asc())
                 .all(), None)
     except SQLAlchemyError as e:
-        Logger.error('Application: {}'.format(traceback.format_exc()))
+        Logger.error(f'Application: {traceback.format_exc()}')
         return None, e
     except IndexError:
         raise IndexError("Invalid Search mode.")
@@ -120,7 +120,7 @@ def search_entry(kapampangan, english, tagalog):
                 .order_by(Dictionary.english.asc())
                 .one(), None)
     except SQLAlchemyError as e:
-        Logger.error('Error: {}'.format(traceback.format_exc()))
+        Logger.error(f'Application: {traceback.format_exc()}')
         return None, e
 
 def add_dictionary(entry):
@@ -143,9 +143,9 @@ def add_screen(screen):
 def count_dictionary_entries():
     try:
         count = session.query(func.count(Dictionary.kapampangan)).all()
-        Logger.info('Application: There are {} entries' \
-                ' in the dictionary table.'.format(count[0][0]))
+        Logger.info(f'Application: There are {count[0][0]} entries' \
+                ' in the dictionary table.')
         return count.pop()[0]
     except Exception:
-        Logger.error('Error: {}'.format(traceback.format_exc()))
+        Logger.error(f'Application: {traceback.format_exc()}')
         raise
