@@ -2,17 +2,26 @@
 import requests
 import csv
 import re
+import os
 from bs4 import BeautifulSoup
 from requests.exceptions import Timeout
 
 BANSA_URL = "http://bansa.org/dictionaries/"\
     "tgl/?dict_lang=tgl&type=search&data={}"
 
+CSV_FILENAME = 'kapampangan.csv'
+CSV_FILENAME_OUTPUT = 'kapampangan_clean.csv'
+CSV_ERR_FILENAME = 'kapampangan_err.csv'
+CSV_FOLDER = f'/csvs/{CSV_FILENAME}'
+CSV_OUTPUT_FOLDER = f'/csvs/{CSV_FILENAME_OUTPUT}'
+CSV_OUTPUT_ERR_FOLDER = f'/csvs/{CSV_ERR_FILENAME}'
+FILE_PATH = os.path.dirname(os.path.abspath(__file__))
+
 
 def main():
-    with open('kapampangan.csv', 'r', encoding="utf-8") as inp, \
-        open('kapampangan_clean.csv', 'w', encoding="utf-8") as out, \
-            open('kapampangan_errors.csv', 'w', encoding="utf-8") as err:
+    with open(FILE_PATH + CSV_FOLDER, 'r', encoding="utf-8") as inp, \
+        open(FILE_PATH + CSV_OUTPUT_FOLDER, 'w', encoding="utf-8") as out, \
+            open(FILE_PATH + CSV_OUTPUT_ERR_FOLDER, 'w', encoding="utf-8") as err:
         writer = csv.writer(out)
         writer_err = csv.writer(err)
 

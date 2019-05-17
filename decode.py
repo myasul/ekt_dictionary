@@ -2,13 +2,17 @@
 import csv
 import re
 import sys
+import os
 
 CSV_FILENAME = 'ekt_entries.csv'
 CSV_FILENAME_OUTPUT = 'ekt_entries_clean.csv'
+CSV_FOLDER = f'/csvs/{CSV_FILENAME}'
+CSV_OUTPUT_FOLDER = f'/csvs/{CSV_FILENAME_OUTPUT}'
+FILE_PATH = os.path.dirname(os.path.abspath(__file__))
 
 def decode():
-    with open(CSV_FILENAME) as inp, \
-            open(CSV_FILENAME_OUTPUT, 'w+', encoding='utf-8') as out:
+    with open(FILE_PATH + CSV_FOLDER) as inp, \
+            open(FILE_PATH + CSV_OUTPUT_FOLDER, 'w+', encoding='utf-8') as out:
         writer = csv.writer(out)
 
         for row in csv.reader(inp):
@@ -17,8 +21,8 @@ def decode():
             writer.writerow(row)
 
 def remove_carriage_return():
-    with open(CSV_FILENAME) as in_file, \
-        open(CSV_FILENAME_OUTPUT, 'w+', encoding='utf-8') as out_file:
+    with open(FILE_PATH + CSV_FOLDER) as in_file, \
+        open(FILE_PATH + CSV_OUTPUT_FOLDER, 'w+', encoding='utf-8') as out_file:
         old = in_file.read()
         old.replace(r'\r', '')
         out_file.write(old)
