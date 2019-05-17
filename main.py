@@ -6,6 +6,9 @@ from screens.search_screen import SearchScreen
 from screens.list_screen import ListScreen
 from screens.dict_screen import DictScreen
 from screens.edit_screen import EditScreen
+from model import database_helper as db_helper
+from tools.const import CSV_PATH, SCREENS_CSV, DICTIONARY_CSV
+from tools.helper import load_data
 
 import re
 import os
@@ -26,6 +29,14 @@ Config.set('graphics', 'fullscreen', 0)
 class HomeScreen(Screen):
     def on_enter(self):
         Logger.info('Application: Entering Home Screen')
+        if db_helper.count_dictionary_entries() == 0:
+            # TODO :: Add pop-up to inform that the app is 
+            # populating database.
+            load_data(CSV_PATH + SCREENS_CSV, 'screens')
+            load_data(CSV_PATH + DICTIONARY_CSV, 'dictionary')
+        else:
+            Logger.info('Application: Dictionary database is loaded.')
+
 
 
 class MyScreenManager(ScreenManager):

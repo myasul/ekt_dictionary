@@ -1,10 +1,13 @@
-from sqlalchemy import create_engine, asc, inspect
+from sqlalchemy import create_engine, asc, inspect, func
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from sqlalchemy.orm import sessionmaker
-from model.database_setup import Dictionary, Base
+from model.database_setup import Dictionary, Screens, Base
 from kivy.logger import Logger
+from tools.const import SEARCH_MODES
 
 import traceback
+import csv
+import os
 
 # Connect to the database and create a database session
 engine = create_engine('sqlite:///model/ekt_dictionary.db')
@@ -12,15 +15,8 @@ Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine, autoflush=True)
 session = DBSession()
 
-# TODO :: Add logging
-
-SEARCH_MODES = [
-    "{}",   # Exact match
-    "{}%",  # Starts with
-    "%{}%"  #
-]
-
-DICTIONARY_CSV = 'ekt_entries.csv'
+# TODO ::  #1 Add logging
+# TODO ::  #2 Add docstring
     
 
 def object_as_dict(obj):
@@ -34,11 +30,11 @@ def get_all_entries():
                 .order_by(Dictionary.kapampangan.asc())
                 .all(), None)
     except SQLAlchemyError as e:
-        Logger.info('Error: {}'.format(traceback.format_exc()))
+        Logger.error('Error: {}'.format(traceback.format_exc()))
         return None, e
 
 
-def search_in_kapampangan(keyword, mode):
+def search_in_kapampangan(keyword, mode, count=False):
     '''
     Searches the given Kapampangan word through dictionary.
 
@@ -48,13 +44,24 @@ def search_in_kapampangan(keyword, mode):
     2 - Contains
     '''
     try:
+        if count:
+            entry_count = session.query(func.count(Dictionary.kapampangan))\
+                .filter(
+                    Dictionary.kapampangan.like(
+                        SEARCH_MODES[mode].format(keyword))
+                ).all()
+            try:
+                return (entry_count[0][0], None)
+            except IndexError:
+                raise IndexError('Count function did not return any result.')           
+
         return (session.query(Dictionary)
                 .filter(Dictionary.kapampangan.
                         like(SEARCH_MODES[mode].format(keyword)))
                 .order_by(Dictionary.kapampangan.asc())
                 .all(), None)
     except SQLAlchemyError as e:
-        print("Error: {}".format(e))
+        Logger.error("Application: {}".format(traceback.format_exc()))
         return None, e
     except IndexError:
         raise IndexError("Invalid Search mode.")
@@ -76,7 +83,7 @@ def search_in_tagalog(keyword, mode):
                 .order_by(Dictionary.tagalog.asc())
                 .all(), None)
     except SQLAlchemyError as e:
-        Logger.info('Error: {}'.format(traceback.format_exc()))
+        Logger.error('Application: {}'.format(traceback.format_exc()))
         return None, e
     except IndexError:
         raise IndexError("Invalid Search mode.")
@@ -98,7 +105,7 @@ def search_in_english(keyword, mode):
                 .order_by(Dictionary.english.asc())
                 .all(), None)
     except SQLAlchemyError as e:
-        Logger.info('Error: {}'.format(traceback.format_exc()))
+        Logger.error('Application: {}'.format(traceback.format_exc()))
         return None, e
     except IndexError:
         raise IndexError("Invalid Search mode.")
@@ -113,11 +120,32 @@ def search_entry(kapampangan, english, tagalog):
                 .order_by(Dictionary.english.asc())
                 .one(), None)
     except SQLAlchemyError as e:
-        Logger.info('Error: {}'.format(traceback.format_exc()))
+        Logger.error('Error: {}'.format(traceback.format_exc()))
         return None, e
 
-def has_dictionary_entries():
-    pass
+def add_dictionary(entry):
+    kapampangan, english, tagalog = entry
+    session.add(Dictionary(
+        tagalog=tagalog,
+        kapampangan=kapampangan,
+        english=english
+    ))
+    session.commit()
 
-def load_dictionary_entries():
-    pass
+def add_screen(screen):
+    name, description = screen
+    session.add(Screens(
+        name=name,
+        description=description
+    ))
+    session.commit()
+
+def count_dictionary_entries():
+    try:
+        count = session.query(func.count(Dictionary.kapampangan)).all()
+        Logger.info('Application: There are {} entries' \
+                ' in the dictionary table.'.format(count[0][0]))
+        return count.pop()[0]
+    except Exception:
+        Logger.error('Error: {}'.format(traceback.format_exc()))
+        raise
