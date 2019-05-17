@@ -1,7 +1,8 @@
 from sqlalchemy import create_engine, asc, inspect, func
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from sqlalchemy.orm import sessionmaker
-from model.database_setup import Dictionary, Screens, Base
+from model.database_setup import Dictionary, Screens, \
+    QueryResultMaintainer, Base
 from kivy.logger import Logger
 from tools.const import SEARCH_MODES
 
@@ -124,21 +125,42 @@ def search_entry(kapampangan, english, tagalog):
         return None, e
 
 def add_dictionary(entry):
-    kapampangan, english, tagalog = entry
-    session.add(Dictionary(
-        tagalog=tagalog,
-        kapampangan=kapampangan,
-        english=english
-    ))
-    session.commit()
+    try:
+        kapampangan, english, tagalog = entry
+        session.add(Dictionary(
+            tagalog=tagalog,
+            kapampangan=kapampangan,
+            english=english
+        ))
+        session.commit()
+    except ValueError:
+        raise ValueError(f'Number of columns from dictionary data' \
+            f'and table does not match. (expected 3, got {len(entry)})')
 
 def add_screen(screen):
-    name, description = screen
-    session.add(Screens(
-        name=name,
-        description=description
-    ))
-    session.commit()
+    try:
+        name, description = screen
+        session.add(Screens(
+            name=name,
+            description=description
+        ))
+        session.commit()
+    except ValueError:
+        raise ValueError(f'Number of columns from screen data' \
+            f'and table does not match. (expected 2, got {len(screen)})')
+
+def add_query_result(qrm):
+    try:
+        screen_id, current_row, total_rows = qrm
+        session.add(QueryResultMaintainer(
+            screen_id=screen_id,
+            current_row=current_row,
+            total_rows=total_rows
+        ))
+        session.commit()
+    except ValueError:
+        raise ValueError(f'Number of columns from screen data' \
+            f'and table does not match. (expected 2, got {len(qrm)})')
 
 def count_dictionary_entries():
     try:
