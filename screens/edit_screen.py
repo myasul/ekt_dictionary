@@ -25,13 +25,16 @@ class EditScreen(Screen):
         self.db_object = None
 
     def on_pre_enter(self):
-        Logger.info('Application: Entering Edit Screen')
-        Logger.info('Application: Editing: K: {} - E: {} - T: {}'.format(
-            self.kapampangan, self.english, self.tagalog))
+        Logger.info("Application: Entering Edit Screen")
+        Logger.info(
+            "Application: Editing: K: {} - E: {} - T: {}".format(
+                self.kapampangan, self.english, self.tagalog
+            )
+        )
         self.set_text_from_dict_val()
 
     def on_pre_leave(self):
-        Logger.info('Application: Leaving Edit Screen')
+        Logger.info("Application: Leaving Edit Screen")
 
     def set_text_from_dict_val(self):
         self.ids.kapampangan_es.text = self.kapampangan
@@ -44,8 +47,7 @@ class EditScreen(Screen):
         self.english = self.ids.english_es.text
 
     def on_save(self):
-        Logger.info(
-            'Application: Saving changes for {}'.format(self.kapampangan))
+        Logger.info("Application: Saving changes for {}".format(self.kapampangan))
         if self.db_object:
             try:
                 # Extract new values from text fields
@@ -60,31 +62,30 @@ class EditScreen(Screen):
                 db_helper.session.commit()
 
                 Logger.info(
-                    'Application: Changes for {} is now saved'.format(
-                        self.kapampangan))
+                    "Application: Changes for {} is now saved".format(self.kapampangan)
+                )
 
                 # Multiple delays are in place to display
                 # all information needed simultaneously
-                self.popup('Confirmation Message',
-                           'Changes saved!')
+                self.popup("Confirmation Message", "Changes saved!")
                 Clock.schedule_once(self.go_to_dict_screen, 1.5)
             except SQLAlchemyError as e:
-                Logger.error('Application: Error Stack: {}'.format(e))
+                Logger.error("Application: Error Stack: {}".format(e))
                 db_helper.session.rollback()
-                Logger.error('Dictionary entry\'s object is missing')
-                self.popup('Error Message', 'Error occured. Please report.')
+                Logger.error("Dictionary entry's object is missing")
+                self.popup("Error Message", "Error occured. Please report.")
         else:
-            Logger.error('Dictionary entry\'s object is missing')
-            self.popup('Error Message', 'Error occured. Please report.')
+            Logger.error("Dictionary entry's object is missing")
+            self.popup("Error Message", "Error occured. Please report.")
 
     def go_to_dict_screen(self, *args):
         self.update_dict_screen()
-        self.manager.current = 'dict_entry'
+        self.manager.current = "dict_entry"
 
     def update_dict_screen(self):
         # Dicionary screen's text fields should be up-to-date
         screen_manager = App.get_running_app().root
-        dict_entry = screen_manager.get_screen('dict_entry')
+        dict_entry = screen_manager.get_screen("dict_entry")
         dict_entry.kapampangan = self.kapampangan
         dict_entry.tagalog = self.tagalog
         dict_entry.english = self.english
@@ -93,22 +94,17 @@ class EditScreen(Screen):
         # Get dictionary data using the word selected
         # by the user from the List Screen
         entries, error = db_helper.search_entry(
-            kapampangan=self.kapampangan,
-            english=self.english,
-            tagalog=self.tagalog)
+            kapampangan=self.kapampangan, english=self.english, tagalog=self.tagalog
+        )
         if error:
-            Logger.error('Application: Error Stack: {}'.format(error))
+            Logger.error("Application: Error Stack: {}".format(error))
             return None
         return entries
 
     def popup(self, title, message):
         # Generic popup for error and confirmation messages
-        content = Label(text=message,
-                        font_size=20,
-                        color=[1, 1, 1, 1])
-        popup = AutoDismissPopup(title=title,
-                                 content=content,
-                                 size_hint=(0.4, 0.2))
+        content = Label(text=message, font_size=20, color=[1, 1, 1, 1])
+        popup = AutoDismissPopup(title=title, content=content, size_hint=(0.4, 0.2))
         popup.open()
 
 

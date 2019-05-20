@@ -1,0 +1,6 @@
+add,Screen where you can add dictionary entries.
+dict,Dictionary screen where details of the entry is displayed.
+edit,Screen to modify a dictionary entry.
+home,Screen to navigate through other screens.
+search,Search your preferred entry using filters.
+list,All of the dictionary entries are displayed in this screen.

@@ -20,7 +20,7 @@ from kivy.lang import Builder
 from kivy.app import App
 from kivy.config import Config
 from kivy.logger import Logger
-from borderbehaviour import BorderBehavior
+from components.borderbehaviour import BorderBehavior
 Config.set('graphics', 'width', '700')
 Config.set('graphics', 'height', '800')
 Config.set('graphics', 'fullscreen', 0)
