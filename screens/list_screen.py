@@ -21,6 +21,10 @@ ekt = Builder.load_file(path + '/../kv/list_screen.kv')
 # when error is encountered
 # TODO #2 :: Find a way to make sure that QueryResultMaintainer
 # only has one entry in the table
+# TODO #3 :: Set the cursor to the first word (or first added word)
+# in the list screen when searching
+# TODO #4 :: Add the scroll functionality on the first load of words
+# during entering the screen.
 
 
 class ListScreen(Screen):
