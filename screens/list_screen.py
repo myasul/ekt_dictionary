@@ -5,16 +5,17 @@ from kivy.uix.label import Label
 from kivy.uix.scrollview import ScrollView
 from kivy.lang import Builder
 from kivy.logger import Logger
+from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
 import os
 
+# Internal imports
 from components.borderbehaviour import BorderBehavior
 from components.components import DictTextInput, DictEntry
 import model.database_helper as db_helper
+from tools.const import MAX_ENTRIES, ROW_DEFAULT_HEIGHT
 
 path = os.path.dirname(os.path.abspath(__file__))
 ekt = Builder.load_file(path + '/../kv/list_screen.kv')
-
-MAX_ENTRIES = 30
 
 # TODO #1 :: Refactor error pop-up. Create one method to be called
 # when error is encountered
@@ -27,7 +28,7 @@ class ListScreen(Screen):
         # Show all entries upon entering the list
         # screen for the first time.
         # Logger.info('Application: Entering List screen.')
-        self.show_all_entries()
+        # self.show_all_entries()
         Logger.info('Application: Entering List screen.')
 
     def on_leave(self):
@@ -35,6 +36,8 @@ class ListScreen(Screen):
         # This would ensure that the list that the users
         # see is always up-to-date.
         Logger.info('Application: Leaving List screen.')
+        # Clear text field
+        self.ids.search_text.text = ''
         self.clear_entries()
 
     def clear_entries(self):
@@ -51,33 +54,38 @@ class ListScreen(Screen):
             self.ids.list_grid.remove_widget(widget)
 
     def show_all_entries(self):
-        Logger.info('Application: Listing all dictionary entries')
-        entries, error = db_helper.get_all_entries()
-        if error:
-            Logger.error('Application: Error Stack: {}'.format(error))
-            self.popup('Error Message', 'Error Occured. Please report.')
-            return
-        if entries:
-            self.add_entry_widgets(entries)
+        pass
+        # Logger.info('Application: Listing all dictionary entries')
+        # entries, error = db_helper.get_all_entries()
+        # if error:
+        #     Logger.error('Application: Error Stack: {}'.format(error))
+        #     self.popup('Error Message', 'Error Occured. Please report.')
+        #     return
+        # if entries:
+        #     self.add_entry_widgets(entries)
 
     def do_search(self, search_str, next_row=MAX_ENTRIES, scroll=False):
         Logger.info('Application: Search start.')
-        self.clear_entries()
+        if not scroll:
+            self.clear_entries()
         entries = self.search_text_kapampangan(search_str, next_row, scroll)
         if entries and len(entries) > 0:
-            self.add_entry_widgets(entries)
+            row_count = next_row + MAX_ENTRIES if scroll else MAX_ENTRIES
+            self.add_entry_widgets(entries, row_count)
         Logger.info('Application: Search complete.')
 
     def search_text_kapampangan(self, search_str, next_row, scroll):
         # TODO :: Add meaningful comment
         # TODO :: Add meaningful logging statements
         if not scroll:
-            count, error = db_helper.search_in_kapampangan(search_str, 1, count=True)
+            count, error = db_helper.search_in_kapampangan(
+                search_str, 1, count=True)
 
             if isinstance(count, int) and count > MAX_ENTRIES:
                 success, error = db_helper.clean_query_result()
                 if success:
-                    success, error = db_helper.add_query_result(6, next_row, count)
+                    success, error = db_helper.add_query_result(
+                        6, next_row, count)
 
             if not error:
                 entries, error = db_helper.search_in_kapampangan(search_str, 1)
@@ -86,7 +94,8 @@ class ListScreen(Screen):
                 search_str, 1, offset=next_row
             )
             if entries:
-                success, error = db_helper.update_query_result(next_row + MAX_ENTRIES)
+                success, error = db_helper.update_query_result(
+                    next_row + MAX_ENTRIES)
 
         if error:
             Logger.error(f'Application: Error Stack: {error}')
@@ -95,13 +104,12 @@ class ListScreen(Screen):
 
         return entries
 
-    def add_entry_widgets(self, entries):
+    def add_entry_widgets(self, entries, row_count):
         # Depending on the results from the database,
         # this method will add Dictionary widgets on
         # the screen.
-        row_num = len(entries)
 
-        self.ids.list_grid.rows = row_num
+        self.ids.list_grid.rows = row_count
         for entry in entries:
             Logger.debug('Application: Adding {}'.format(entry.kapampangan))
             dict_entry = DictEntry(
@@ -145,7 +153,8 @@ class SearchTextInput(DictTextInput):
 class ListScroll(ScrollView, BorderBehavior):
     def on_touch_up(self, touch):
         Logger.info('Application: Scroll Y: {}'.format(self.scroll_y))
-        self.populate_with_additional_entries()
+        if self.scroll_y <= 0:
+            self.populate_with_additional_entries()
         return super().on_touch_up(touch)
 
     def populate_with_additional_entries(self):
@@ -155,12 +164,25 @@ class ListScroll(ScrollView, BorderBehavior):
         list_screen = screen_manager.get_screen('list')
 
         qr, error = db_helper.get_query_result()
-        if error:
+        if isinstance(error, NoResultFound):
+            return
+        elif isinstance(error, MultipleResultsFound):
+            db_helper.clean_query_result()
+            return
+        elif error:
             Logger.error(f'Application: Error Stack: {error}')
             list_screen.popup('Error Message', 'Error Occured. Please report.')
 
-        list_screen.do_search(
-            list_screen.ids.search_text.text,
-            next_row=qr.next_row,
-            scroll=True
-        )
+        if qr.next_row != qr.total_rows:
+            list_screen.do_search(
+                list_screen.ids.search_text.text,
+                next_row=qr.next_row,
+                scroll=True
+            )
+
+            self.scroll_y += self.recalculate_scroll_y(qr.next_row)
+
+    def recalculate_scroll_y(self, next_row):
+        y = (MAX_ENTRIES * ROW_DEFAULT_HEIGHT) / \
+            (ROW_DEFAULT_HEIGHT * next_row)
+        return float(y)

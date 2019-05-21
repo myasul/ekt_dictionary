@@ -7,6 +7,7 @@ from sqlalchemy.exc import SQLAlchemyError
 # Internal imports
 import model.database_helper as db_helper
 
+
 def load_data(csv_path, table_name):
     # TODO :: Add docstring
     Logger.info(f'Application: Data migration for {table_name} started.')
@@ -16,7 +17,7 @@ def load_data(csv_path, table_name):
             csv_reader = csv.reader(f, delimiter=',')
             count = 0
             for row in csv_reader:
-                if count == 10:
+                if count == 150:
                     break
 
                 try:
@@ -38,5 +39,5 @@ def load_data(csv_path, table_name):
         Logger.error(f'Application: {traceback.format_exc()}')
         raise
     end = timer()
-    Logger.info(f'Application: Data migration for {table_name} '\
-        f'completed in {end-start:.2f} secs.')
+    Logger.info(f'Application: Data migration for {table_name} '
+                f'completed in {end-start:.2f} secs.')

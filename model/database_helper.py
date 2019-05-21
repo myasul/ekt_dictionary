@@ -2,7 +2,8 @@ from sqlalchemy import create_engine, asc, inspect, func
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
 from sqlalchemy.orm import sessionmaker
-from model.database_setup import Dictionary, Screens, QueryResultMaintainer, Base
+from model.database_setup import Dictionary, Screens, \
+    QueryResultMaintainer, Base
 from kivy.logger import Logger
 from tools.const import SEARCH_MODES
 
@@ -21,13 +22,15 @@ session = DBSession()
 
 
 def object_as_dict(obj):
-    return {c.key: getattr(obj, c.key) for c in inspect(obj).mapper.column_attrs}
+    return {c.key: getattr(obj, c.key)
+            for c in inspect(obj).mapper.column_attrs}
 
 
 def get_all_entries():
     try:
         return (
-            session.query(Dictionary).order_by(Dictionary.kapampangan.asc()).all(),
+            session.query(Dictionary).order_by(
+                Dictionary.kapampangan.asc()).all(),
             None,
         )
     except SQLAlchemyError as e:
@@ -58,7 +61,8 @@ def search_in_kapampangan(keyword, mode, count=False, limit=30, offset=0):
 
         return (
             session.query(Dictionary)
-            .filter(Dictionary.kapampangan.like(SEARCH_MODES[mode].format(keyword)))
+            .filter(Dictionary.kapampangan.like(
+                SEARCH_MODES[mode].format(keyword)))
             .order_by(Dictionary.kapampangan.asc())
             .slice(offset, limit + offset)
             .all(),
@@ -140,7 +144,8 @@ def add_dictionary(entry):
     try:
         kapampangan, english, tagalog = entry
         session.add(
-            Dictionary(tagalog=tagalog, kapampangan=kapampangan, english=english)
+            Dictionary(tagalog=tagalog,
+                       kapampangan=kapampangan, english=english)
         )
         session.commit()
     except ValueError:
@@ -152,19 +157,21 @@ def add_dictionary(entry):
 
 def add_screen(screen):
     # TODO :: Incorporate confirmation pop ups when adding entries
-    try: 
+    try:
         name, description = screen
         session.add(Screens(name=name, description=description))
         session.commit()
     except ValueError:
         raise ValueError(
-        f"Number of columns from screen data"
+            f"Number of columns from screen data"
             f"and table does not match. (expected 2, got {len(screen)})"
         )
+
 
 def delete_dictionary(entry):
     session.delete(entry)
     session.commit()
+
 
 def add_query_result(screen_id, next_row, total_rows):
     try:
@@ -177,6 +184,7 @@ def add_query_result(screen_id, next_row, total_rows):
         return (True, None)
     except SQLAlchemyError as e:
         return (False, e)
+
 
 def update_query_result(next_row):
     qr, error = get_query_result()
@@ -191,13 +199,15 @@ def update_query_result(next_row):
     except SQLAlchemyError as e:
         return (False, e)
 
-def clean_query_result(screen_id, next_row, total_rows):
+
+def clean_query_result():
     try:
         session.query(QueryResultMaintainer).delete()
         session.commit()
         return (True, None)
     except SQLAlchemyError as e:
         return (False, e)
+
 
 def get_query_result():
     try:
@@ -206,6 +216,7 @@ def get_query_result():
         return (None, e)
     else:
         return (qr, None)
+
 
 def count_dictionary_entries():
     try:
