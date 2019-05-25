@@ -2,10 +2,9 @@ from sqlalchemy import create_engine, asc, inspect, func
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
 from sqlalchemy.orm import sessionmaker
-from model.database_setup import Dictionary, Screens, \
-    QueryResultMaintainer, Base
+from model.database_setup import Dictionary, Screens, QueryResultMaintainer, Base
 from kivy.logger import Logger
-from tools.const import SEARCH_MODES
+from tools.const import SEARCH_MODES, MAX_ENTRIES
 
 import traceback
 import csv
@@ -20,17 +19,21 @@ session = DBSession()
 # TODO ::  #1 Add logging
 # TODO ::  #2 Add docstring
 
+DICT = {
+    "kapampangan": Dictionary.kapampangan,
+    "tagalog": Dictionary.tagalog,
+    "english": Dictionary.english,
+}
+
 
 def object_as_dict(obj):
-    return {c.key: getattr(obj, c.key)
-            for c in inspect(obj).mapper.column_attrs}
+    return {c.key: getattr(obj, c.key) for c in inspect(obj).mapper.column_attrs}
 
 
 def get_all_entries():
     try:
         return (
-            session.query(Dictionary).order_by(
-                Dictionary.kapampangan.asc()).all(),
+            session.query(Dictionary).order_by(Dictionary.kapampangan.asc()).all(),
             None,
         )
     except SQLAlchemyError as e:
@@ -38,7 +41,7 @@ def get_all_entries():
         return None, e
 
 
-def search_in_kapampangan(keyword, mode, count=False, limit=30, offset=0):
+def dictionary_search(keyword, mode, language, limit, offset):
     """
     Searches the given Kapampangan word through dictionary.
 
@@ -48,22 +51,10 @@ def search_in_kapampangan(keyword, mode, count=False, limit=30, offset=0):
     2 - Contains
     """
     try:
-        if count:
-            entry_count = (
-                session.query(func.count(Dictionary.kapampangan))
-                .filter(Dictionary.kapampangan.like(SEARCH_MODES[mode].format(keyword)))
-                .all()
-            )
-            try:
-                return (entry_count[0][0], None)
-            except IndexError:
-                raise IndexError("Count function did not return any result.")
-
         return (
             session.query(Dictionary)
-            .filter(Dictionary.kapampangan.like(
-                SEARCH_MODES[mode].format(keyword)))
-            .order_by(Dictionary.kapampangan.asc())
+            .filter(DICT.get(language).like(SEARCH_MODES[mode].format(keyword)))
+            .order_by(DICT.get(language).asc())
             .slice(offset, limit + offset)
             .all(),
             None,
@@ -72,58 +63,50 @@ def search_in_kapampangan(keyword, mode, count=False, limit=30, offset=0):
         Logger.error(f"Application: {traceback.format_exc()}")
         return None, e
     except IndexError:
-        raise IndexError("Invalid Search mode.")
+        return None, IndexError("Invalid Search mode.")
 
 
-def search_in_tagalog(keyword, mode):
-    """
-    Searches the given Tagalog word through dictionary.
-
-    Search Mode:
-    0 - Exact Match
-    1 - Starts With
-    2 - Contains
-    """
+def dictionary_count(keyword, mode, language):
     try:
-        return (
-            session.query(Dictionary)
-            .filter(Dictionary.tagalog.like(SEARCH_MODES[mode].format(keyword)))
-            .order_by(Dictionary.tagalog.asc())
-            .all(),
-            None,
+        entry_count = (
+            session.query(func.count(DICT.get(language)))
+            .filter(DICT.get(language).like(SEARCH_MODES[mode].format(keyword)))
+            .all()
         )
+        try:
+            return (entry_count[0][0], None)
+        except IndexError:
+            return None, IndexError("Count function did not return any result.")
+    except IndexError:
+        return None, IndexError("Invalid Search mode.")
     except SQLAlchemyError as e:
         Logger.error(f"Application: {traceback.format_exc()}")
         return None, e
-    except IndexError:
-        raise IndexError("Invalid Search mode.")
 
 
-def search_in_english(keyword, mode):
-    """
-    Searches the given English word through dictionary.
+def search_in_kapampangan(keyword, mode, *, count=False, limit=MAX_ENTRIES, offset=0):
+    if count:
+        return dictionary_count(keyword, mode, "kapampangan")
+    else:
+        return dictionary_search(keyword, mode, "kapampangan", limit, offset)
 
-    Search Mode:
-    0 - Exact Match
-    1 - Starts With
-    2 - Contains
-    """
-    try:
-        return (
-            session.query(Dictionary)
-            .filter(Dictionary.english.like(SEARCH_MODES[mode].format(keyword)))
-            .order_by(Dictionary.english.asc())
-            .all(),
-            None,
-        )
-    except SQLAlchemyError as e:
-        Logger.error(f"Application: {traceback.format_exc()}")
-        return None, e
-    except IndexError:
-        raise IndexError("Invalid Search mode.")
+
+def search_in_tagalog(keyword, mode, *, count=False, limit=MAX_ENTRIES, offset=0):
+    if count:
+        return dictionary_count(keyword, mode, "tagalog")
+    else:
+        return dictionary_search(keyword, mode, "tagalog", limit, offset)
+
+
+def search_in_english(keyword, mode, *, count=False, limit=MAX_ENTRIES, offset=0):
+    if count:
+        return dictionary_count(keyword, mode, "english")
+    else:
+        return dictionary_search(keyword, mode, "english", limit, offset)
 
 
 def search_entry(kapampangan, english, tagalog):
+    # TODO :: Check how this method is used
     try:
         return (
             session.query(Dictionary)
@@ -144,8 +127,7 @@ def add_dictionary(entry):
     try:
         kapampangan, english, tagalog = entry
         session.add(
-            Dictionary(tagalog=tagalog,
-                       kapampangan=kapampangan, english=english)
+            Dictionary(tagalog=tagalog, kapampangan=kapampangan, english=english)
         )
         session.commit()
     except ValueError:
@@ -175,11 +157,11 @@ def delete_dictionary(entry):
 
 def add_query_result(screen_id, next_row, total_rows):
     try:
-        session.add(QueryResultMaintainer(
-            screen_id=screen_id,
-            next_row=next_row,
-            total_rows=total_rows
-        ))
+        session.add(
+            QueryResultMaintainer(
+                screen_id=screen_id, next_row=next_row, total_rows=total_rows
+            )
+        )
         session.commit()
         return (True, None)
     except SQLAlchemyError as e:
