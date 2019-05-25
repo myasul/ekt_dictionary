@@ -1,6 +1,9 @@
 
 #:import BorderBehavior components.borderbehaviour
 
+<SearchScroll>:
+    borders: 2, 'solid', (1, 1, 1, 1)
+
 <SearchInput@TextInput>:
     size_hint_x: 0.8
     size_hint_y: None
@@ -32,12 +35,12 @@
                         on_release: root.show_filter_popup()
                     Button:
                         text: 'Search'
-                        on_release: root.on_search()
+                        on_release: root.on_click_search()
             Widget:
                 size_hint_y: 0.1
         AnchorLayout:
             size_hint_y: 0.7
-            ListScroll:
+            SearchScroll:
                 size_hint_x: 0.8
                 GridLayout:
                     padding: 15, 0

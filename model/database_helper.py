@@ -41,7 +41,7 @@ def get_all_entries():
         return None, e
 
 
-def dictionary_search(keyword, mode, language, limit, offset):
+def dictionary_search(keyword, mode, language, *, limit=MAX_ENTRIES, offset=0):
     """
     Searches the given Kapampangan word through dictionary.
 
@@ -91,18 +91,18 @@ def search_in_kapampangan(keyword, mode, *, count=False, limit=MAX_ENTRIES, offs
         return dictionary_search(keyword, mode, "kapampangan", limit, offset)
 
 
-def search_in_tagalog(keyword, mode, *, count=False, limit=MAX_ENTRIES, offset=0):
-    if count:
-        return dictionary_count(keyword, mode, "tagalog")
-    else:
-        return dictionary_search(keyword, mode, "tagalog", limit, offset)
+# def search_in_tagalog(keyword, mode, *, count=False, limit=MAX_ENTRIES, offset=0):
+#     if count:
+#         return dictionary_count(keyword, mode, "tagalog")
+#     else:
+#         return dictionary_search(keyword, mode, "tagalog", limit, offset)
 
 
-def search_in_english(keyword, mode, *, count=False, limit=MAX_ENTRIES, offset=0):
-    if count:
-        return dictionary_count(keyword, mode, "english")
-    else:
-        return dictionary_search(keyword, mode, "english", limit, offset)
+# def search_in_english(keyword, mode, *, count=False, limit=MAX_ENTRIES, offset=0):
+#     if count:
+#         return dictionary_count(keyword, mode, "english")
+#     else:
+#         return dictionary_search(keyword, mode, "english", limit, offset)
 
 
 def search_entry(kapampangan, english, tagalog):
