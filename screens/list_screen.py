@@ -24,16 +24,15 @@ ekt = Builder.load_file(path + '/../kv/list_screen.kv')
 # TODO #3 :: Set the cursor to the first word (or first added word)
 # in the list screen when searching
 # TODO #4 :: Add the scroll functionality on the first load of words
-# during entering the screen.
+# during entering the screen. - Done
 
 
 class ListScreen(Screen):
     def on_pre_enter(self):
         # Show all entries upon entering the list
         # screen for the first time.
-        # Logger.info('Application: Entering List screen.')
-        # self.show_all_entries()
         Logger.info('Application: Entering List screen.')
+        self.do_search('')
 
     def on_leave(self):
         # Remove all widgets before leaving the List screen.
@@ -57,42 +56,39 @@ class ListScreen(Screen):
             Logger.debug('Application: Removing {}'.format(widget.text))
             self.ids.list_grid.remove_widget(widget)
 
-    def show_all_entries(self):
-        pass
-        # Logger.info('Application: Listing all dictionary entries')
-        # entries, error = db_helper.get_all_entries()
-        # if error:
-        #     Logger.error('Application: Error Stack: {}'.format(error))
-        #     self.popup('Error Message', 'Error Occured. Please report.')
-        #     return
-        # if entries:
-        #     self.add_entry_widgets(entries)
-
     def do_search(self, search_str, next_row=MAX_ENTRIES, scroll=False):
         Logger.info('Application: Search start.')
+
         if not scroll:
             self.clear_entries()
+
         entries = self.search_text_kapampangan(search_str, next_row, scroll)
-        if entries and len(entries) > 0:
-            row_count = next_row + MAX_ENTRIES if scroll else MAX_ENTRIES
+        entries_count = len(entries)
+
+        if entries and entries_count > 0:
+            row_count = next_row + entries_count if scroll else entries_count
             self.add_entry_widgets(entries, row_count)
         Logger.info('Application: Search complete.')
 
     def search_text_kapampangan(self, search_str, next_row, scroll):
         # TODO :: Add meaningful comment
         # TODO :: Add meaningful logging statements
-        if not scroll:
-            count, error = db_helper.search_in_kapampangan(
-                search_str, 1, count=True)
 
-            if isinstance(count, int) and count > MAX_ENTRIES:
-                success, error = db_helper.clean_query_result()
-                if success:
+        if not scroll:
+            success, error = db_helper.clean_query_result()
+
+            if not error:
+                count, error = db_helper.search_in_kapampangan(
+                    search_str, 1, count=True)
+
+                if isinstance(count, int) and count > MAX_ENTRIES:
                     success, error = db_helper.add_query_result(
                         6, next_row, count)
 
-            if not error:
-                entries, error = db_helper.search_in_kapampangan(search_str, 1)
+                if not error:
+                    entries, error = db_helper.search_in_kapampangan(
+                        search_str, 1)
+
         else:
             entries, error = db_helper.search_in_kapampangan(
                 search_str, 1, offset=next_row
