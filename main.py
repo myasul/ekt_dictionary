@@ -21,27 +21,28 @@ from kivy.app import App
 from kivy.config import Config
 from kivy.logger import Logger
 from components.borderbehaviour import BorderBehavior
-Config.set('graphics', 'width', '700')
-Config.set('graphics', 'height', '800')
-Config.set('graphics', 'fullscreen', 0)
+
+Config.set("graphics", "width", "700")
+Config.set("graphics", "height", "800")
+Config.set("graphics", "fullscreen", 0)
 
 
 class HomeScreen(Screen):
     def on_enter(self):
-        Logger.info('Application: Entering Home Screen')
+        Logger.info("Application: Entering Home Screen")
         if db_helper.count_dictionary_entries() == 0:
             # TODO :: Add pop-up to inform that the app is
             # populating database.
-            helper.load_data(CSV_PATH + SCREENS_CSV, 'screens')
-            helper.load_data(CSV_PATH + DICTIONARY_CSV, 'dictionary')
+            helper.load_data(CSV_PATH + SCREENS_CSV, "screens")
+            helper.load_data(CSV_PATH + DICTIONARY_CSV, "dictionary")
         else:
-            Logger.info('Application: Dictionary database is loaded.')
+            Logger.info("Application: Dictionary database is loaded.")
 
 
 class MyScreenManager(ScreenManager):
     def __init__(self, **kwargs):
         super(MyScreenManager, self).__init__(**kwargs)
-        self.id = 'dict_sm'
+        self.id = "dict_sm"
 
 
 path = os.path.dirname(os.path.abspath(__file__))
@@ -49,7 +50,7 @@ ekt = Builder.load_file(path + "/kv/ekt.kv")
 
 
 class MainApp(App):
-    title = 'EKT Dictionary'
+    title = "EKT Dictionary"
 
     def build(self):
         return ekt
