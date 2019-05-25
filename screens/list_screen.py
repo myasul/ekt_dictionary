@@ -17,14 +17,8 @@ from tools.const import MAX_ENTRIES, ROW_DEFAULT_HEIGHT
 path = os.path.dirname(os.path.abspath(__file__))
 ekt = Builder.load_file(path + '/../kv/list_screen.kv')
 
-# TODO #1 :: Refactor error pop-up. Create one method to be called
-# when error is encountered - Done
-# TODO #2 :: Find a way to make sure that QueryResultMaintainer
-# only has one entry in the table
-# TODO #3 :: Set the cursor to the first word (or first added word)
-# in the list screen when searching - Done
-# TODO #4 :: Add the scroll functionality on the first load of words
-# during entering the screen. - Done
+# TODO #1 :: Add meaningful comments
+# TODO #2 :: Add meaningful logging statements
 
 
 class ListScreen(Screen):
@@ -157,14 +151,14 @@ class SearchTextInput(DictTextInput):
 
 class ListScroll(ScrollView, BorderBehavior):
     def on_touch_up(self, touch):
+        # TODO :: Add meaningful comments
         Logger.info('Application: Scroll Y: {}'.format(self.scroll_y))
         if self.scroll_y <= 0:
             self.populate_with_additional_entries()
         return super().on_touch_up(touch)
 
     def populate_with_additional_entries(self):
-        # TODO :: Handle scenario when list screen
-        # gets all entries upon entering the screen.
+        # TODO :: Add meaningful comments
         screen_manager = App.get_running_app().root
         list_screen = screen_manager.get_screen('list')
 
@@ -179,7 +173,7 @@ class ListScroll(ScrollView, BorderBehavior):
             list_screen.popup(
                 'Error Message', 'Error Occured. Please report.')
 
-        if qr.next_row != qr.total_rows:
+        if qr.next_row <= qr.total_rows:
             list_screen.do_search(
                 list_screen.ids.search_text.text,
                 next_row=qr.next_row,
