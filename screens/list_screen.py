@@ -18,11 +18,11 @@ path = os.path.dirname(os.path.abspath(__file__))
 ekt = Builder.load_file(path + '/../kv/list_screen.kv')
 
 # TODO #1 :: Refactor error pop-up. Create one method to be called
-# when error is encountered
+# when error is encountered - Done
 # TODO #2 :: Find a way to make sure that QueryResultMaintainer
 # only has one entry in the table
 # TODO #3 :: Set the cursor to the first word (or first added word)
-# in the list screen when searching
+# in the list screen when searching - Done
 # TODO #4 :: Add the scroll functionality on the first load of words
 # during entering the screen. - Done
 
@@ -75,14 +75,14 @@ class ListScreen(Screen):
         # TODO :: Add meaningful logging statements
 
         if not scroll:
-            success, error = db_helper.clean_query_result()
+            _, error = db_helper.clean_query_result()
 
             if not error:
                 count, error = db_helper.search_in_kapampangan(
                     search_str, 1, count=True)
 
                 if isinstance(count, int) and count > MAX_ENTRIES:
-                    success, error = db_helper.add_query_result(
+                    _, error = db_helper.add_query_result(
                         6, next_row, count)
 
                 if not error:
@@ -94,7 +94,7 @@ class ListScreen(Screen):
                 search_str, 1, offset=next_row
             )
             if entries:
-                success, error = db_helper.update_query_result(
+                _, error = db_helper.update_query_result(
                     next_row + MAX_ENTRIES)
 
         if error:
@@ -145,8 +145,13 @@ class SearchTextInput(DictTextInput):
         return super(SearchTextInput, self).keyboard_on_key_up(window, keycode)
 
     def search_matched_entries(self):
+        # Retrieve List Screen object
         screen_manager = App.get_running_app().root
         list_screen = screen_manager.get_screen('list')
+
+        # Set the cursor at the top of the scroll view.
+        list_screen.ids.list_scroll.scroll_y = 1
+
         list_screen.do_search(self.text)
 
 
@@ -171,7 +176,8 @@ class ListScroll(ScrollView, BorderBehavior):
             return
         elif error:
             Logger.error(f'Application: Error Stack: {error}')
-            list_screen.popup('Error Message', 'Error Occured. Please report.')
+            list_screen.popup(
+                'Error Message', 'Error Occured. Please report.')
 
         if qr.next_row != qr.total_rows:
             list_screen.do_search(
