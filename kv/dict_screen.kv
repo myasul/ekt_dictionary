@@ -1,23 +1,24 @@
 #:import BorderBehavior components.borderbehaviour
 
 <DSLabel@Label>:
-    padding: 5, 5
+    padding: 30, 30
     color: 1, 1, 1, 1
-    font_size: 25
+    font_size: 40
     size: self.texture_size
     size_hint_y: None
 
 <DictScreenBtn@Button>:
     size_hint: None, None
     height: 50
-    font_size: 20
+    font_size: 40
+    size_hint: 1, 1
 
 <BorderLabel@Label+BorderBehavior>:
     borders: 2, 'solid', (1, 1, 1, 1)
     size_hint: None, None
-    height: 70
-    width: 600
-    font_size: 20
+    height: 100
+    width: 1000
+    font_size: 50
     canvas.before:
         Color:
             rgba: 0, 0, 0, 1
@@ -30,31 +31,40 @@
     name: 'dict_entry'
     BoxLayout:
         orientation: 'vertical'
-        GridLayout:
-            orientation: 'vertical'
-            size_hint: 1, .9
-            row_default_height: 100
-            cols: 1
-            rows: 6
-            DSLabel:
-                text: 'Kapampangan'
-            AnchorLayout:
-                BorderLabel:
-                    id: kapampangan_ds
-            DSLabel:
-                text: 'Tagalog'
-            AnchorLayout:
-                BorderLabel:
-                    id: tagalog_ds
-            DSLabel:
-                text: 'English'
-            AnchorLayout:
-                BorderLabel:
-                    id: english_ds
-
+        Widget:
+            size_hint_y: 0.05
+        AnchorLayout:
+            size_hint_y: 0.85
+            GridLayout:
+                orientation: 'vertical'
+                size_hint_y: 1
+                cols: 1
+                rows: 7
+                padding: 50, 0
+                DSLabel:
+                    text: 'Kapampangan'
+                AnchorLayout:
+                    height: 150
+                    BorderLabel:
+                        id: kapampangan_ds
+                DSLabel:
+                    text: 'Tagalog'
+                AnchorLayout:
+                    height: 150
+                    BorderLabel:
+                        id: tagalog_ds
+                DSLabel:
+                    text: 'English'
+                AnchorLayout:
+                    height: 150
+                    BorderLabel:
+                        id: english_ds
+                AnchorLayout:
+                    size_hint_y: 0.3
+                    Widget:
         BoxLayout:
-            size_hint: 1, .1
             orientation: 'horizontal'
+            size_hint_y: 0.08
             DictScreenBtn:
                 text: 'Back'
                 on_release: root.on_back()

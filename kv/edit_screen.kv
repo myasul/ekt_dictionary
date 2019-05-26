@@ -4,34 +4,46 @@
     name: 'edit_entry'
     BoxLayout:
         orientation: 'vertical'
-        GridLayout:
-            orientation: 'vertical'
-            size_hint: 1, .9
-            row_default_height: 100
-            cols: 1
-            rows: 6
-            DSLabel:
-                text: 'Kapampangan'
-            AnchorLayout:
-                EditInput:
-                    id: kapampangan_es
-            DSLabel:
-                text: 'Tagalog'
-            AnchorLayout:
-                EditInput:
-                    id: tagalog_es
-            DSLabel:
-                text: 'English'
-            AnchorLayout:
-                EditInput:
-                    id: english_es
+        Widget:
+            size_hint_y: 0.05
+        AnchorLayout:
+            size_hint_y: 0.85
+            GridLayout:
+                size_hint_y: 1
+                orientation: 'vertical'
+                cols: 1
+                rows: 7
+                padding: 50, 0
+                DSLabel:
+                    text: 'Kapampangan'
+                AnchorLayout:
+                    height: 150
+                    EditInput:
+                        id: kapampangan_es
+                DSLabel:
+                    text: 'Tagalog'
+                AnchorLayout:
+                    height: 150
+                    EditInput:
+                        id: tagalog_es
+                DSLabel:
+                    text: 'English'
+                AnchorLayout:
+                    height: 150
+                    EditInput:
+                        id: english_es
+                AnchorLayout:
+                    size_hint_y: 0.3
+                    Widget:
 
         BoxLayout:
-            size_hint: 1, .1
+            size_hint_y: 0.08
             orientation: 'horizontal'
             DictScreenBtn:
                 text: 'Back'
                 on_release: root.manager.current = 'dict_entry'
+            Widget:
+            Widget:
             Widget:
             DictScreenBtn:
                 text: 'Save'
@@ -39,7 +51,7 @@
 
 <EditInput>:
     size_hint: None, None
-    height: 70
-    width: 600
-    font_size: 20
+    height: 100
+    width: 1000
+    font_size: 50
     write_tab: False
