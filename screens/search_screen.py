@@ -44,6 +44,7 @@ class SearchScreen(Screen):
         self.filter_popup.open()
 
     def set_language(self, language):
+        # TODO :: Test every langu
         if language in VALID_LANGUAGES:
             self.language = language
         else:
@@ -52,11 +53,11 @@ class SearchScreen(Screen):
 
     def set_search_mode(self, mode):
         match = self.search_codes.get(mode)
-        if match:
+        if isinstance(match, int):
             self.search_mode = match
         else:
             Logger.error(f"Application: Search mode {mode} is invalid.")
-            self.popup("Error message", "Invalid language. Please report.")
+            self.popup("Error message", "Invalid search mode. Please report.")
 
     def get_search_text(self):
         return self.ids.search_input.text
@@ -64,6 +65,10 @@ class SearchScreen(Screen):
     def on_click_search(self):
         Logger.info("Application: Search start.")
         self.clear_results()
+
+        # Set the cursor at the top of the scroll view.
+        self.ids.list_scroll.scroll_y = 1
+
         self.do_search()
 
     def do_search(self, next_row=MAX_ENTRIES, scroll=False):
@@ -113,6 +118,9 @@ class SearchScreen(Screen):
                 self.get_search_text(), self.search_mode, self.language, offset=next_row
             )
 
+            if entries:
+                _, error = db_helper.update_query_result(next_row + len(entries))
+
         if error:
             return None, error
 
@@ -135,6 +143,8 @@ class SearchScreen(Screen):
         # this method will add Dictionary widgets on
         # the screen.
         Logger.info("Application: Displaying search results.")
+
+        Logger.info(f"Application: ADDING {row_count} ROWS")
 
         self.ids.list_grid.rows = row_count
         for entry in entries:
@@ -193,7 +203,7 @@ class SearchScroll(ScrollView, BorderBehavior):
             Logger.error(f"Application: Error Stack: {error}")
             screen.popup("Error Message", "Error Occured. Please report.")
 
-        if qr.next_row <= qr.total_rows:
+        if qr.next_row < qr.total_rows:
             screen.do_search(next_row=qr.next_row, scroll=True)
 
             self.scroll_y += self.recalculate_scroll_y(qr.next_row)

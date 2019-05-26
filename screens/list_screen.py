@@ -107,7 +107,7 @@ class ListScreen(Screen):
             Logger.debug("Application: Adding {}".format(entry.kapampangan))
             dict_entry = DictEntry(
                 text=entry.kapampangan,
-                font_size=25,
+                font_size=40,
                 halign="left",
                 valign="middle",
                 screen="list",
@@ -170,7 +170,7 @@ class ListScroll(ScrollView, BorderBehavior):
             Logger.error(f"Application: Error Stack: {error}")
             list_screen.popup("Error Message", "Error Occured. Please report.")
 
-        if qr.next_row <= qr.total_rows:
+        if qr.next_row < qr.total_rows:
             list_screen.do_search(
                 search_str=list_screen.ids.search_text.text,
                 next_row=qr.next_row,
