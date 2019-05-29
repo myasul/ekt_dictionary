@@ -16,16 +16,16 @@ def load_data(csv_path, table_name):
     try:
         with open(csv_path) as f:
             csv_reader = csv.reader(f, delimiter=",")
-            count = 0
+
             for row in csv_reader:
-                if count == 150:
-                    break
 
                 try:
                     if table_name == "dictionary":
                         db_helper.add_dictionary(row)
                     elif table_name == "screens":
                         db_helper.add_screen(row)
+                    elif table_name == "scroll_direction":
+                        db_helper.add_scroll_direction(row)
                     else:
                         raise ValueError(f"Invalid table name: {table_name}.")
                 except SQLAlchemyError:
@@ -35,7 +35,6 @@ def load_data(csv_path, table_name):
                     Logger.error(f"Application: {traceback.format_exc()}")
                     raise
 
-                count += 1
     except Exception:
         Logger.error(f"Application: {traceback.format_exc()}")
         raise

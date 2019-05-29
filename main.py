@@ -7,7 +7,7 @@ from screens.list_screen import ListScreen
 from screens.dict_screen import DictScreen
 from screens.edit_screen import EditScreen
 from model import database_helper as db_helper
-from tools.const import CSV_PATH, SCREENS_CSV, DICTIONARY_CSV
+from tools.const import CSV_PATH, SCREENS_CSV, DICTIONARY_CSV, SCROLL_DIRECTION
 from tools import helper
 
 import re
@@ -35,6 +35,7 @@ class HomeScreen(Screen):
             # populating database.
             helper.load_data(CSV_PATH + SCREENS_CSV, "screens")
             helper.load_data(CSV_PATH + DICTIONARY_CSV, "dictionary")
+            helper.load_data(CSV_PATH + SCROLL_DIRECTION, "scroll_direction")
         else:
             Logger.info("Application: Dictionary database is loaded.")
 

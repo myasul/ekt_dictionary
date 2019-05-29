@@ -22,6 +22,9 @@ ekt = Builder.load_file(path + "/../kv/search_screen.kv")
 
 SEARCH_MODES = ["exact_match", "starts with", "contains"]
 
+# TODO: Add feature to go back to the "current state" when you are coming from
+# Dict screen going back to the Search screen
+
 
 class SearchScreen(Screen):
     def __init__(self, **kwargs):
