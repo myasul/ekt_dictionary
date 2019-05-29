@@ -162,6 +162,11 @@ class SearchScreen(Screen):
                 kapampangan=entry.kapampangan,
                 tagalog=entry.tagalog,
                 english=entry.english,
+                search_filter=helper.create_search_filter_dict(
+                    self.get_search_text(),
+                    search_mode=self.search_mode,
+                    language=self.language
+                )
             )
             dict_entry.bind(size=dict_entry.setter("text_size"))
             self.ids.list_grid.add_widget(dict_entry)

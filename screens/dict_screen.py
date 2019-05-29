@@ -18,12 +18,12 @@ ekt = Builder.load_file(path + "/../kv/dict_screen.kv")
 
 class DictScreen(Screen):
     def __init__(self, **kwargs):
-        super(DictScreen, self).__init__(**kwargs)
         self.kapampangan = StringProperty()
         self.tagalog = StringProperty()
         self.english = StringProperty()
         self.back_screen = StringProperty()
         self.db_object = None
+        super(DictScreen, self).__init__(**kwargs)
 
     def set_dict_entry(self, entry):
         self.db_object = entry

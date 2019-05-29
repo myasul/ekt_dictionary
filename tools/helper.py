@@ -45,6 +45,14 @@ def load_data(csv_path, table_name):
     )
 
 
+def create_search_filter_dict(search_str, search_mode=0, language="kapampangan"):
+    return {
+        "search_str": search_str,
+        "search_mode": search_mode,
+        "language": language
+    }
+
+
 def get_screen(screen_name):
     screen_manager = App.get_running_app().root
     return screen_manager.get_screen(screen_name)

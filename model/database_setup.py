@@ -31,6 +31,15 @@ class ScrollDirection(Base):
     description = Column(String(50), nullable=False)
 
 
+class SearchFilter(Base):
+    __tablename__ = "search_filter"
+
+    screen_id = Column(Integer, ForeignKey("screens.id"), primary_key=True)
+    search_str = Column(String(250), nullable=False)
+    search_mode = Column()
+    language = Column()
+
+
 class Screens(Base):
     __tablename__ = "screens"
 

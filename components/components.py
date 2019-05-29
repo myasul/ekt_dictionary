@@ -6,7 +6,7 @@ from kivy.uix.popup import Popup
 from kivy.uix.label import Label
 from kivy.clock import Clock
 from kivy.uix.textinput import TextInput
-from kivy.properties import StringProperty
+from kivy.properties import StringProperty, DictProperty
 
 
 class AutoDismissPopup(Popup):
@@ -26,6 +26,7 @@ class DictEntry(Label):
     tagalog = StringProperty()
     english = StringProperty()
     screen = StringProperty()
+    search_filter = DictProperty()
 
     def on_touch_down(self, touch):
         if self.collide_point(touch.x, touch.y):
