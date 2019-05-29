@@ -12,6 +12,7 @@ import os
 # Internal imports
 from components.borderbehaviour import BorderBehavior
 from components.components import DictEntry, AutoDismissPopup
+from components.scroll_border import ScrollBorder
 from tools.const import MAX_ENTRIES, ROW_DEFAULT_HEIGHT, VALID_LANGUAGES
 from tools import helper
 import model.database_helper as db_helper
@@ -74,7 +75,7 @@ class SearchScreen(Screen):
     def do_search(self, next_row=MAX_ENTRIES, scroll=False):
         results, error = self.database_search(next_row, scroll)
 
-        if error:
+        if error: 
             Logger.error("Application: Error Stack: {}".format(error))
             self.popup("Error Message", "Error Occured. Please report.")
             return
@@ -182,37 +183,6 @@ class FilterCheckBox(CheckBox):
         super(FilterCheckBox, self).__init__(**kwargs)
 
 
-class SearchScroll(ScrollView, BorderBehavior):
-    def on_touch_up(self, touch):
-        # TODO : Add meaningful comments
-        if self.scroll_y <= 0:
-            self.populate_with_additional_entries()
-        return super().on_touch_up(touch)
-
-    def populate_with_additional_entries(self):
-        Logger.info("Application: Adding additional rows")
-        screen = helper.get_screen("search")
-
-        qr, error = db_helper.get_query_result()
-        if isinstance(error, NoResultFound):
-            return
-        elif isinstance(error, MultipleResultsFound):
-            db_helper.clean_query_result()
-            return
-        elif error:
-            Logger.error(f"Application: Error Stack: {error}")
-            screen.popup("Error Message", "Error Occured. Please report.")
-
-        if qr.next_row < qr.total_rows:
-            screen.do_search(next_row=qr.next_row, scroll=True)
-
-            self.scroll_y += self.recalculate_scroll_y(qr.next_row)
-
-            new_qr, error = db_helper.get_query_result()
-            Logger.info(
-                f"Application: Added {new_qr.next_row - qr.next_row} additional rows"
-            )
-
-    def recalculate_scroll_y(self, next_row):
-        y = (MAX_ENTRIES * ROW_DEFAULT_HEIGHT) / (ROW_DEFAULT_HEIGHT * next_row)
-        return float(y)
+class SearchScroll(ScrollBorder):
+    def __init__(self, **kwargs):
+        super(SearchScroll, self).__init__("search", **kwargs)

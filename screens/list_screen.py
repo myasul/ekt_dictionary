@@ -11,6 +11,7 @@ import os
 # Internal imports
 from components.borderbehaviour import BorderBehavior
 from components.components import DictTextInput, DictEntry
+from components.scroll_border import ScrollBorder
 from tools.const import MAX_ENTRIES, ROW_DEFAULT_HEIGHT
 import model.database_helper as db_helper
 
@@ -26,7 +27,7 @@ class ListScreen(Screen):
         # Show all entries upon entering the list
         # screen for the first time.
         Logger.info("Application: Entering List screen.")
-        self.do_search("")
+        self.do_search(search_str="")
 
     def on_leave(self):
         # Remove all widgets before leaving the List screen.
@@ -52,6 +53,9 @@ class ListScreen(Screen):
 
     def do_search(self, search_str=None, next_row=MAX_ENTRIES, scroll=False):
         Logger.info("Application: Search start.")
+
+        if not search_str:
+            search_str = self.ids.search_text.text
 
         if not scroll:
             self.clear_entries()
@@ -148,37 +152,7 @@ class SearchTextInput(DictTextInput):
         list_screen.do_search(search_str=self.text)
 
 
-class ListScroll(ScrollView, BorderBehavior):
-    def on_touch_up(self, touch):
-        # TODO :: Add meaningful comments
-        if self.scroll_y <= 0:
-            self.populate_with_additional_entries()
-        return super().on_touch_up(touch)
+class ListScroll(ScrollBorder):
+    def __init__(self, **kwargs):
+        super(ListScroll, self).__init__('list', **kwargs)
 
-    def populate_with_additional_entries(self):
-        # TODO :: Add meaningful comments
-        screen_manager = App.get_running_app().root
-        list_screen = screen_manager.get_screen("list")
-
-        qr, error = db_helper.get_query_result()
-        if isinstance(error, NoResultFound):
-            return
-        elif isinstance(error, MultipleResultsFound):
-            db_helper.clean_query_result()
-            return
-        elif error:
-            Logger.error(f"Application: Error Stack: {error}")
-            list_screen.popup("Error Message", "Error Occured. Please report.")
-
-        if qr.next_row < qr.total_rows:
-            list_screen.do_search(
-                search_str=list_screen.ids.search_text.text,
-                next_row=qr.next_row,
-                scroll=True,
-            )
-
-            self.scroll_y += self.recalculate_scroll_y(qr.next_row)
-
-    def recalculate_scroll_y(self, next_row):
-        y = (MAX_ENTRIES * ROW_DEFAULT_HEIGHT) / (ROW_DEFAULT_HEIGHT * next_row)
-        return float(y)
