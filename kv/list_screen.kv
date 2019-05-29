@@ -12,7 +12,7 @@
             size_hint_y: .1
             SearchTextInput:
                 id: search_text
-                font_size: 25 
+                font_size: 40 
                 size_hint: .8, .5
         AnchorLayout:
             size_hint_y: .8
@@ -30,10 +30,11 @@
                     cols: 1
         BoxLayout:
             orientation: 'vertical'
-            size_hint: 1, .1
+            size_hint_y: 0.1
+            Widget:
+                size_hint_y: 0.3
             Button:
-                size_hint: None, None
-                height: 50
+                size_hint_x: 0.2
                 text: 'Back'
-                font_size: 20
+                font_size: 40
                 on_release: root.manager.current = 'home'
