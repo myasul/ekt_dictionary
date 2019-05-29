@@ -2,7 +2,7 @@ from sqlalchemy import create_engine, asc, inspect, func
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
 from sqlalchemy.orm import sessionmaker
-from model.database_setup import Dictionary, Screens, QueryResultMaintainer, Base
+from model.database_setup import Dictionary, Screens, QueryResultMaintainer, ScrollDirection, Base
 from kivy.logger import Logger
 from tools.const import SEARCH_MODES, MAX_ENTRIES
 
@@ -147,6 +147,18 @@ def add_screen(screen):
         raise ValueError(
             f"Number of columns from screen data"
             f"and table does not match. (expected 2, got {len(screen)})"
+        )
+
+
+def add_scroll_direction(scroll_dir):
+    try:
+        description = scroll_dir.pop()
+        session.add(ScrollDirection(description=description))
+        session.commit()
+    except ValueError:
+        raise ValueError(
+            f"Number of columns from scroll direction data"
+            f"and table does not match. (expected 1 got {len(scroll_dir)})"
         )
 
 

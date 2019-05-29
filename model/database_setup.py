@@ -18,10 +18,26 @@ class Dictionary(Base):
 class QueryResultMaintainer(Base):
     __tablename__ = "query_result_maintainer"
 
-    id = Column(Integer, primary_key=True)
-    screen_id = Column(Integer, ForeignKey("screens.id"))
+    screen_id = Column(Integer, ForeignKey("screens.id"), primary_key=True)
+    direction = Column(Integer, ForeignKey("scroll_direction.id"), primary_key=True)
     next_row = Column(Integer, nullable=False)
     total_rows = Column(Integer, nullable=False)
+
+
+class ScrollDirection(Base):
+    __tablename__ = "scroll_direction"
+
+    id = Column(Integer, primary_key=True)
+    description = Column(String(50), nullable=False)
+
+
+class SearchFilter(Base):
+    __tablename__ = "search_filter"
+
+    screen_id = Column(Integer, ForeignKey("screens.id"), primary_key=True)
+    search_str = Column(String(250), nullable=False)
+    search_mode = Column()
+    language = Column()
 
 
 class Screens(Base):
